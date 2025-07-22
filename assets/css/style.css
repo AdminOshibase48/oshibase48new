@@ -268,3 +268,23 @@ footer {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.berita-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: 0 2rem;
+}
+.berita-card {
+  background: #2f3a5a;
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.berita-card:hover {
+  transform: translateY(-5px);
+}
+.berita-card h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
