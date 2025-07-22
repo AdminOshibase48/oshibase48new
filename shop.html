@@ -4,18 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop | Coming Soon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #242D4C;
       color: #F1EAD8;
+      font-family: 'Press Start 2P', monospace;
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
+
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -28,66 +31,71 @@
       right: 0;
       z-index: 10;
     }
+
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
+      font-weight: bold;
     }
+
     .logo img {
       height: 32px;
+      margin-right: 10px;
     }
+
     .nav-right a {
       margin-left: 1rem;
       text-decoration: none;
       color: #F1EAD8;
-      font-weight: 600;
+      font-weight: bold;
     }
+
     .nav-right a.active {
       color: #f5d38c;
     }
 
-    .construction-section {
-      text-align: center;
-      padding: 7rem 2rem 4rem;
+    .pixel-section {
+      padding: 100px 20px 40px;
+      flex: 1;
     }
-    .construction-animation {
-      width: 320px;
-      height: 320px;
+
+    .pixel-animation {
+      width: 300px;
+      max-width: 100%;
       margin: 0 auto 2rem;
+      image-rendering: pixelated;
     }
-    .construction-section h1 {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
-    }
-    .construction-section p {
+
+    .pixel-text {
       font-size: 1rem;
+      color: #F1EAD8;
+      margin-top: 1rem;
+    }
+
+    .blinking {
+      animation: blink 1s infinite;
       color: #f5d38c;
-      opacity: 0.85;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     footer {
       background: #1e2540;
       padding: 2rem;
+      color: #F1EAD8;
+      font-size: 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      color: #F1EAD8;
-      font-size: 0.9rem;
     }
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+
     .footer-left img {
-      height: 40px;
-    }
-    .footer-right a {
-      margin-left: 1rem;
-      color: #F1EAD8;
-      text-decoration: none;
+      height: 32px;
+      margin-right: 10px;
     }
 
     @media (max-width: 768px) {
@@ -95,15 +103,18 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
       .nav-right {
         display: flex;
         flex-direction: column;
         width: 100%;
         padding-top: 1rem;
       }
+
       .nav-right a {
         margin: 0.5rem 0;
       }
+
       footer {
         flex-direction: column;
         text-align: center;
@@ -117,7 +128,7 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo" class="logo-img">
+      <img src="img/logo.png" alt="Logo">
       Oshibase48
     </div>
     <nav class="nav-right">
@@ -130,13 +141,11 @@
     </nav>
   </header>
 
-  <!-- Proyek Pembangunan -->
-  <main>
-    <section class="construction-section">
-      <div id="construction-animation" class="construction-animation"></div>
-      <h1>Toko OSB48 Sedang Dibangun</h1>
-      <p>Stay tuned! Fitur belanja akan segera tersedia.</p>
-    </section>
+  <!-- Pixel Proyek Retro -->
+  <main class="pixel-section">
+    <img src="https://i.ibb.co/nL8NwKn/pixel-crane.gif" alt="Pixel Construction" class="pixel-animation">
+    <h1 class="blinking">COMING SOON</h1>
+    <p class="pixel-text">Toko OSB48 sedang dibangun dalam dunia 8-bit!</p>
   </main>
 
   <!-- Footer -->
@@ -151,24 +160,6 @@
       <a href="#">X (Twitter)</a>
     </div>
   </footer>
-
-  <!-- Lottie + GSAP -->
-  <script>
-    lottie.loadAnimation({
-      container: document.getElementById('construction-animation'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json' // Animasi proyek kerja & crane
-    });
-
-    gsap.from(".construction-section", {
-      opacity: 0,
-      y: 50,
-      duration: 1.5,
-      ease: "power2.out"
-    });
-  </script>
 
 </body>
 </html>
