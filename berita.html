@@ -3,12 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berita | Oshibase48</title>
+  <title>Shop | Coming Soon</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" href="img/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <style>
+    body {
+      background-color: #242D4C;
+      color: #F1EAD8;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #242D4C;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+    .logo img {
+      height: 32px;
+    }
+    .nav-right a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #F1EAD8;
+      font-weight: 600;
+    }
+    .nav-right a.active {
+      color: #f5d38c;
+    }
+
+    .construction-section {
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+    }
+    .construction-animation {
+      width: 320px;
+      height: 320px;
+      margin: 0 auto 2rem;
+    }
+    .construction-section h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .construction-section p {
+      font-size: 1rem;
+      color: #f5d38c;
+      opacity: 0.85;
+    }
+
+    footer {
+      background: #1e2540;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #F1EAD8;
+      font-size: 0.9rem;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-left img {
+      height: 40px;
+    }
+    .footer-right a {
+      margin-left: 1rem;
+      color: #F1EAD8;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-right {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 1rem;
+      }
+      .nav-right a {
+        margin: 0.5rem 0;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -18,34 +120,22 @@
       <img src="img/logo.png" alt="Logo" class="logo-img">
       Oshibase48
     </div>
-    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
-      &#9776;
-    </div>
     <nav class="nav-right">
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
-      <a href="berita.html" class="active">Berita</a>
-      <a href="galeri.html#galeri">Galeri</a>
-      <a href="jadwal.html#jadwal">Jadwal</a>
-      <a href="shop.html#shop">Shop</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html" class="active">Shop</a>
     </nav>
   </header>
 
-  <!-- Berita -->
-  <main style="padding-top: 100px;">
-    <section id="berita" class="berita-page">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Berita Terbaru</h2>
-      <div id="berita-container" class="berita-grid">
-        <!-- Konten berita dari Supabase akan dimasukkan via JS -->
-        <article class="berita-card">
-          <h3>JKT48 Summer Festival</h3>
-          <p>Event musim panas penuh warna kembali hadir bersama Oshibase48 di tahun ini.</p>
-        </article>
-        <article class="berita-card">
-          <h3>Pengumuman Event Akhir Tahun</h3>
-          <p>Siapkan dirimu untuk mini showcase akhir tahun dari komunitas OSB48.</p>
-        </article>
-      </div>
+  <!-- Proyek Pembangunan -->
+  <main>
+    <section class="construction-section">
+      <div id="construction-animation" class="construction-animation"></div>
+      <h1>Toko OSB48 Sedang Dibangun</h1>
+      <p>Stay tuned! Fitur belanja akan segera tersedia.</p>
     </section>
   </main>
 
@@ -62,18 +152,20 @@
     </div>
   </footer>
 
+  <!-- Lottie + GSAP -->
   <script>
-    // Animasi Scroll untuk berita
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from(".berita-card", {
-      scrollTrigger: {
-        trigger: ".berita-page",
-        start: "top 80%",
-      },
+    lottie.loadAnimation({
+      container: document.getElementById('construction-animation'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json' // Animasi proyek kerja & crane
+    });
+
+    gsap.from(".construction-section", {
       opacity: 0,
-      y: 30,
-      duration: 1,
-      stagger: 0.2,
+      y: 50,
+      duration: 1.5,
       ease: "power2.out"
     });
   </script>
