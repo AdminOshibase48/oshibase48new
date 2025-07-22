@@ -31,12 +31,12 @@
     </nav>
   </header>
 
-  <!-- Coming Soon Animation Section -->
+  <!-- Proyek Pembangunan -->
   <main style="padding-top: 100px;">
     <section class="construction-section">
       <div id="construction-animation" class="construction-animation"></div>
       <h1>Toko OSB48 Sedang Dibangun</h1>
-      <p>Mohon bersabar ya, toko resmi komunitas akan segera dibuka ✨</p>
+      <p class="subtle-text">Stay tuned! Fitur belanja akan segera tersedia.</p>
     </section>
   </main>
 
@@ -53,21 +53,21 @@
     </div>
   </footer>
 
-  <!-- Lottie + GSAP Script -->
+  <!-- Lottie & GSAP Script -->
   <script>
-    // Lottie Animasi (bangun toko)
+    // Lottie - Animasi bangunan & crane
     lottie.loadAnimation({
       container: document.getElementById('construction-animation'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'https://assets5.lottiefiles.com/packages/lf20_h4th9ofg.json' // Animasi orang kerja
+      path: 'https://assets10.lottiefiles.com/packages/lf20_gsflhxtc.json' // Crane + Construction animation
     });
 
-    // GSAP Fade-in
+    // GSAP Muncul Pelan
     gsap.from(".construction-section", {
       opacity: 0,
-      y: 40,
+      y: 50,
       duration: 1.5,
       ease: "power2.out"
     });
