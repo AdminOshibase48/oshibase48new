@@ -416,3 +416,10 @@ footer {
     }
   }
 </style>
+
+.version-tag {
+  color: #f5b860;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+}
