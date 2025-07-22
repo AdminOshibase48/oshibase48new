@@ -359,3 +359,21 @@ footer {
 .btn-shop:hover {
   background-color: var(--text-light);
 }
+
+.coming-soon {
+  text-align: center;
+  padding: 6rem 2rem;
+  font-family: 'Press Start 2P', monospace;
+  color: var(--text-light);
+}
+.coming-soon h1 {
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+.coming-soon .sub {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-shadow: 0 0 10px #f5d38c;
+}
