@@ -9,44 +9,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Hero Section with Navbar -->
-  <section id="home" class="hero-section">
-    <header class="navbar">
-      <div class="logo">
-        <img src="img/logo.png" alt="Logo" class="logo-img">
-        Oshibase48
-      </div>
-      <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
-        &#9776;
-      </div>
-      <nav class="nav-right">
-        <a href="#home">Home</a>
-        <a href="#tentang">Tentang</a>
-        <a href="#berita">Berita</a>
-        <a href="#galeri">Galeri</a>
-        <a href="#jadwal">Jadwal</a>
-      </nav>
-    </header>
-    <div class="hero-content">
-      <img src="img/logo.png" alt="Logo" class="hero-logo">
-      <h1>Selamat Datang di Oshibase48</h1>
-      <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo" class="logo-img">
+      Oshibase48
     </div>
-  </section>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      &#9776;
+    </div>
+    <nav class="nav-right">
+      <a href="#home">Home</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#berita">Berita</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#jadwal">Jadwal</a>
+    </nav>
+  </header>
 
-  <!-- Hero Section: Gabung Logo + Slider -->
-<section class="hero-slider">
-  <div class="slide show">
-    <img src="img/aboutosb.png" alt="Slide 1" />
-    <div class="hero-overlay">
-      <img src="img/logo.png" class="hero-logo" alt="Logo">
-      <h1>Selamat Datang di Oshibase48</h1>
-      <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+  <!-- Hero Slider -->
+  <section id="home" class="hero-slider">
+    <div class="slide show" style="background-image: url('img/aboutosb.png');">
+      <div class="hero-overlay">
+        <h1>Selamat Datang di Oshibase48</h1>
+        <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+      </div>
     </div>
-  </div>
-  <div class="slide"><img src="img/event.jpg" alt="Slide 2"></div>
-  <div class="slide"><img src="img/semarang.jpg" alt="Slide 3"></div>
-</section>
+    <div class="slide" style="background-image: url('img/event.jpg');"></div>
+    <div class="slide" style="background-image: url('img/housejkt48.jpg');"></div>
+  </section>
 
   <!-- Tentang Section -->
   <section id="tentang" class="intro">
