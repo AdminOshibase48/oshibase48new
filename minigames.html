@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minigame Quiz | Oshibase48</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="img/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #242D4C;
+      color: #F1EAD8;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 6rem auto;
+      padding: 2rem;
+      background-color: #1e2540;
+      border-radius: 12px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #F1EAD8;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: none;
+      margin-top: 0.3rem;
+      background-color: #2f3658;
+      color: #F1EAD8;
+    }
+
+    .question {
+      margin-top: 1.5rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #f5d38c;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #2c3254;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .result h2 {
+      margin-bottom: 0.5rem;
+      color: #f5d38c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Seberapa Cinta Kamu Sama Member JKT48?</h1>
+    <form id="quizForm">
+      <label for="nama">Nama Kamu</label>
+      <input type="text" id="nama" required>
+
+      <label for="oshi">Nama Member Favorit (Oshi)</label>
+      <input type="text" id="oshi" required>
+
+      <div class="question">
+        <label>1. Apa warna official JKT48?</label>
+        <select required>
+          <option value="">Pilih</option>
+          <option value="1">Merah & Putih</option>
+          <option value="0">Hitam & Biru</option>
+          <option value="0">Pink & Kuning</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label>2. Siapa generasi pertama JKT48?</label>
+        <select required>
+          <option value="">Pilih</option>
+          <option value="1">Melody, Nabilah, Gaby</option>
+          <option value="0">Freya, Zee, Muthe</option>
+          <option value="0">Sisca, Oniel, Gracia</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label>3. Apa nama teater JKT48?</label>
+        <select required>
+          <option value="">Pilih</option>
+          <option value="1">JKT48 Theater</option>
+          <option value="0">Theater Sakura</option>
+          <option value="0">Stage48</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label>4. Apa lagu debut JKT48?</label>
+        <select required>
+          <option value="">Pilih</option>
+          <option value="0">Rapsodi</option>
+          <option value="1">Heavy Rotation</option>
+          <option value="0">Flying High</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label>5. Apa arti “Oshi”?</label>
+        <select required>
+          <option value="">Pilih</option>
+          <option value="1">Member favorit</option>
+          <option value="0">Lagu spesial</option>
+          <option value="0">Teater panggung</option>
+        </select>
+      </div>
+
+      <button type="submit">Lihat Hasil</button>
+    </form>
+
+    <div class="result" id="resultBox">
+      <h2 id="score"></h2>
+      <p id="comment"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const oshi = document.getElementById("oshi").value;
+      const selects = document.querySelectorAll("select");
+      let score = 0;
+
+      selects.forEach(s => {
+        score += parseInt(s.value);
+      });
+
+      let komentar = "";
+      if (score === 5) komentar = `Kamu fan sejati ${oshi}! 🥇`;
+      else if (score >= 3) komentar = `Lumayan cinta nih sama ${oshi}! 💖`;
+      else komentar = `Belajar lagi ya tentang JKT48 dan ${oshi} 😅`;
+
+      document.getElementById("score").innerText = `${nama}, Skor kamu: ${score}/5`;
+      document.getElementById("comment").innerText = komentar;
+      document.getElementById("resultBox").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
