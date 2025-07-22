@@ -298,3 +298,20 @@ footer {
   font-size: 1rem;
   font-weight: 500;
 }
+
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+.galeri-item img {
+  border-radius: 10px;
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.galeri-item img:hover {
+  transform: scale(1.05);
+}
