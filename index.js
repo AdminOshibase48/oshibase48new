@@ -8,11 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Optional: auto slide hero
   const slides = document.querySelectorAll(".slide");
-  let index = 0;
+let current = 0;
 
-  setInterval(() => {
-    slides.forEach(s => s.classList.remove("show"));
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("show");
-  }, 4000);
-});
+setInterval(() => {
+  slides[current].classList.remove("show");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("show");
+}, 4000);
