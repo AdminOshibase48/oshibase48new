@@ -315,3 +315,47 @@ footer {
 .galeri-item img:hover {
   transform: scale(1.05);
 }
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+.shop-card {
+  background-color: #2a3552;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.shop-card:hover {
+  transform: translateY(-5px);
+}
+.shop-card img {
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 8px;
+}
+.shop-card h3 {
+  margin-top: 1rem;
+  color: var(--accent);
+}
+.shop-card p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+.btn-shop {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn-shop:hover {
+  background-color: var(--text-light);
+}
