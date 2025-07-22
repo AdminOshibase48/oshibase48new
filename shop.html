@@ -12,73 +12,61 @@
       background-color: #242D4C;
       color: #F1EAD8;
       font-family: 'Poppins', sans-serif;
-      margin: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      margin: 0;
       text-align: center;
     }
     .navbar {
-      background-color: #242D4C;
-      padding: 1rem 2rem;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
+      position: fixed; top: 0; left: 0; right: 0;
+      background: #242D4C; padding: 1rem 2rem;
+      display: flex; justify-content: space-between;
+      align-items: center; z-index: 10;
     }
     .logo { display: flex; align-items: center; font-weight: 600; }
-    .logo img { height: 32px; margin-right: 10px; }
+    .logo img { height: 32px; margin-right: 8px; }
     .nav-right a {
       margin-left: 1rem;
-      text-decoration: none;
       color: #F1EAD8;
+      text-decoration: none;
       font-weight: 600;
     }
     .nav-right a.active { color: #f5d38c; }
-    .pixel-section {
-      padding: 100px 20px 40px;
+    .construction {
       flex: 1;
+      padding: 100px 20px 40px;
     }
-    .pixel-animation {
-      width: 280px;
-      max-width: 100%;
+    .construction img {
+      width: 320px;
+      max-width: 90%;
       margin: 0 auto 2rem;
-      image-rendering: pixelated;
     }
     .blinking {
       animation: blink 1s infinite;
       color: #f5d38c;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
     }
     @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
+      0%,100% {opacity:1;}
+      50% {opacity:0.3;}
     }
-    .pixel-text { font-size: 0.9rem; margin-top: 1rem; }
+    .note { font-size: 1rem; margin-top: 1rem; }
     footer {
       background: #1e2540;
       padding: 2rem;
+      color: #F1EAD8;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      font-size: 0.8rem;
     }
-    .footer-left img { height: 32px; margin-right: 10px; }
+    .footer-left img { height: 32px; margin-right: 8px; }
     @media (max-width: 768px) {
       .navbar { flex-direction: column; align-items: flex-start; }
-      .nav-right {
-        display: flex; flex-direction: column;
-        width: 100%; padding-top: 1rem;
-      }
+      .nav-right { display: flex; flex-direction: column; width: 100%; padding: 1rem 0;}
       .nav-right a { margin: 0.5rem 0; }
-      footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-      }
+      footer { flex-direction: column; text-align: center; gap: 1rem; }
     }
   </style>
 </head>
@@ -100,11 +88,11 @@
     </nav>
   </header>
 
-  <!-- Pixel Construction Animation -->
-  <main class="pixel-section">
-    <img src="https://i.ibb.co/NYGqYzH/pixel-construction-crane.gif" alt="Pixel Construction" class="pixel-animation">
+  <!-- Construction Animation -->
+  <main class="construction">
+    <img src="https://cdn.dribbble.com/users/1588237/screenshots/2169052/armfield-crane.gif" alt="Crane Construction Animation">
     <div class="blinking">COMING SOON</div>
-    <div class="pixel-text">Toko OSB48 sedang dibangun !</div>
+    <div class="note">Toko OSB48 sedang dibangun — tunggu peluncuran segera!</div>
   </main>
 
   <!-- Footer -->
