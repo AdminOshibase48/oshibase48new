@@ -28,3 +28,9 @@ gsap.from(".galeri-slide", {
   stagger: 0.2,
   ease: "power2.out"
 });
+
+                          <script>
+  function toggleMenu() {
+    document.querySelector('.nav-right').classList.toggle('show');
+  }
+</script>
