@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seberapa Cinta Kamu Sama Member | Oshibase48</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #242D4C;
+      color: #F1EAD8;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: #f5b860;
+    }
+
+    input, button {
+      padding: 0.6rem;
+      margin: 1rem 0.5rem;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #f5b860;
+      color: #242D4C;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #hasil {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Seberapa Cinta Kamu Sama Member?</h1>
+  <p>Masukkan namamu dan nama member favoritmu!</p>
+
+  <input type="text" id="namaKamu" placeholder="Namamu">
+  <input type="text" id="namaMember" placeholder="Nama member favorit">
+  <button onclick="cekCinta()">Cek Hasil</button>
+
+  <div id="hasil"></div>
+
+  <script>
+    const hasilLucu = [
+      "Wah kalian 99% cocok! Udah kayak oshi dan wota sejati 😍",
+      "Kamu terlalu cinta... sampai dia nyanyi pun kamu ikut gerak! 💃",
+      "Kamu dan dia adalah duet impian panggung theater 💫",
+      "Sayang kamu 3000% ❤️ Tapi inget, jangan halu ya 🤭",
+      "Jodoh kalian kayak MC dan encore – gak bisa dipisahin 🎤",
+      "Sepertinya kamu fans garis keras... tapi dia belum tau 🥲"
+    ];
+
+    function cekCinta() {
+      const nama = document.getElementById('namaKamu').value.trim();
+      const member = document.getElementById('namaMember').value.trim();
+
+      if (nama === '' || member === '') {
+        document.getElementById('hasil').innerText = 'Isi dulu dong dua-duanya 🥺';
+        return;
+      }
+
+      const random = hasilLucu[Math.floor(Math.random() * hasilLucu.length)];
+      document.getElementById('hasil').innerHTML = `<p>${nama} ❤️ ${member}<br>${random}</p>`;
+    }
+  </script>
+</body>
+</html>
