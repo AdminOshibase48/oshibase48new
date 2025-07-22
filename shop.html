@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop | Coming Soon</title>
-  <link rel="icon" href="img/logo.png" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #242D4C;
       color: #F1EAD8;
-      font-family: 'Press Start 2P', monospace;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       text-align: center;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
-
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -31,95 +30,66 @@
       right: 0;
       z-index: 10;
     }
-
     .logo {
       display: flex;
       align-items: center;
-      font-weight: bold;
+      font-weight: 600;
     }
-
     .logo img {
       height: 32px;
       margin-right: 10px;
     }
-
     .nav-right a {
       margin-left: 1rem;
       text-decoration: none;
       color: #F1EAD8;
-      font-weight: bold;
+      font-weight: 600;
     }
-
     .nav-right a.active {
       color: #f5d38c;
     }
-
     .pixel-section {
       padding: 100px 20px 40px;
       flex: 1;
     }
-
     .pixel-animation {
-      width: 300px;
+      width: 240px;
       max-width: 100%;
       margin: 0 auto 2rem;
       image-rendering: pixelated;
     }
-
-    .pixel-text {
-      font-size: 1rem;
-      color: #F1EAD8;
-      margin-top: 1rem;
-    }
-
     .blinking {
       animation: blink 1s infinite;
       color: #f5d38c;
+      font-size: 1.2rem;
     }
-
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+      50% { opacity: 0.2; }
     }
-
+    .pixel-text {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
     footer {
       background: #1e2540;
       padding: 2rem;
       color: #F1EAD8;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
     }
-
     .footer-left img {
       height: 32px;
       margin-right: 10px;
     }
-
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-right {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-top: 1rem;
-      }
-
-      .nav-right a {
-        margin: 0.5rem 0;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-      }
+      .navbar { flex-direction: column; align-items: flex-start; }
+      .nav-right { display: flex; flex-direction: column; width: 100%; padding-top: 1rem; }
+      .nav-right a { margin: 0.5rem 0; }
+      footer { flex-direction: column; text-align: center; gap: 1rem; }
     }
   </style>
 </head>
@@ -141,11 +111,11 @@
     </nav>
   </header>
 
-  <!-- Pixel Proyek Retro -->
+  <!-- Pixel Construction Animation -->
   <main class="pixel-section">
-    <img src="https://i.ibb.co/nL8NwKn/pixel-crane.gif" alt="Pixel Construction" class="pixel-animation">
-    <h1 class="blinking">COMING SOON</h1>
-    <p class="pixel-text">Toko OSB48 sedang dibangun dalam dunia 8-bit!</p>
+    <img src="https://i.ibb.co/NYGqYzH/pixel-construction-crane.gif" alt="Pixel Construction" class="pixel-animation">
+    <div class="blinking">COMING SOON</div>
+    <div class="pixel-text">Toko OSB48 sedang dibangun di dunia pixel!</div>
   </main>
 
   <!-- Footer -->
