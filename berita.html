@@ -3,107 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop | Coming Soon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Berita | Oshibase48</title>
   <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
     body {
       background-color: #242D4C;
       color: #F1EAD8;
-      margin: 0;
       font-family: 'Poppins', sans-serif;
+      margin: 0;
     }
-    .navbar {
+
+    header.navbar {
+      background-color: #242D4C;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #242D4C;
-      padding: 1rem 2rem;
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      z-index: 1000;
     }
+
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
       font-weight: 600;
     }
+
     .logo img {
       height: 32px;
+      margin-right: 10px;
     }
+
     .nav-right a {
-      margin-left: 1rem;
-      text-decoration: none;
       color: #F1EAD8;
+      text-decoration: none;
+      margin-left: 1rem;
       font-weight: 600;
     }
+
     .nav-right a.active {
       color: #f5d38c;
     }
 
-    .construction-section {
+    .berita-section {
+      padding: 120px 20px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .berita-section h2 {
       text-align: center;
-      padding: 7rem 2rem 4rem;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #F1EAD8;
     }
-    .construction-animation {
-      width: 320px;
-      height: 320px;
-      margin: 0 auto 2rem;
+
+    .berita-card {
+      background-color: #2f395a;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s;
     }
-    .construction-section h1 {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
+
+    .berita-card:hover {
+      transform: scale(1.02);
     }
-    .construction-section p {
-      font-size: 1rem;
+
+    .berita-card h3 {
+      margin: 0 0 10px;
       color: #f5d38c;
-      opacity: 0.85;
+    }
+
+    .berita-card p {
+      margin: 0;
+      line-height: 1.6;
+      color: #e2dccc;
     }
 
     footer {
       background: #1e2540;
       padding: 2rem;
+      color: #F1EAD8;
+      font-size: 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      color: #F1EAD8;
-      font-size: 0.9rem;
     }
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+
     .footer-left img {
-      height: 40px;
-    }
-    .footer-right a {
-      margin-left: 1rem;
-      color: #F1EAD8;
-      text-decoration: none;
+      height: 32px;
+      margin-right: 10px;
     }
 
     @media (max-width: 768px) {
-      .navbar {
+      header.navbar {
         flex-direction: column;
         align-items: flex-start;
       }
+
       .nav-right {
         display: flex;
         flex-direction: column;
         width: 100%;
         padding-top: 1rem;
       }
+
       .nav-right a {
         margin: 0.5rem 0;
       }
+
       footer {
         flex-direction: column;
         text-align: center;
@@ -117,27 +131,40 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo" class="logo-img">
+      <img src="img/logo.png" alt="Logo" />
       Oshibase48
     </div>
     <nav class="nav-right">
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
-      <a href="berita.html">Berita</a>
+      <a href="berita.html" class="active">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
-      <a href="shop.html" class="active">Shop</a>
+      <a href="shop.html">Shop</a>
     </nav>
   </header>
 
-  <!-- Proyek Pembangunan -->
-  <main>
-    <section class="construction-section">
-      <div id="construction-animation" class="construction-animation"></div>
-      <h1>Toko OSB48 Sedang Dibangun</h1>
-      <p>Stay tuned! Fitur belanja akan segera tersedia.</p>
-    </section>
-  </main>
+  <!-- Berita Section -->
+  <section class="berita-section">
+    <h2 data-aos="fade-up">Berita Terbaru</h2>
+
+    <div class="berita-card" data-aos="fade-up" data-aos-delay="100">
+      <h3>🎤 JKT48 Rilis Single Baru "Melodi Cinta"</h3>
+      <p>Grup idola JKT48 resmi merilis single terbarunya yang bertajuk "Melodi Cinta" dalam konser spesial musim panas kemarin.</p>
+    </div>
+
+    <div class="berita-card" data-aos="fade-up" data-aos-delay="200">
+      <h3>📷 Galeri Eksklusif Behind the Stage</h3>
+      <p>Foto-foto di balik layar selama persiapan konser tersedia sekarang di halaman galeri Oshibase48!</p>
+    </div>
+
+    <div class="berita-card" data-aos="fade-up" data-aos-delay="300">
+      <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
+      <p>Oshibase48 hadir di acara komunitas JKT48 fans Semarang dan Bandung. Jangan lewatkan kesempatan bergabung!</p>
+    </div>
+
+    <!-- Tambahan konten berita dari Supabase akan muncul di sini -->
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -152,23 +179,9 @@
     </div>
   </footer>
 
-  <!-- Lottie + GSAP -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    lottie.loadAnimation({
-      container: document.getElementById('construction-animation'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json' // Animasi proyek kerja & crane
-    });
-
-    gsap.from(".construction-section", {
-      opacity: 0,
-      y: 50,
-      duration: 1.5,
-      ease: "power2.out"
-    });
+    AOS.init();
   </script>
-
 </body>
 </html>
