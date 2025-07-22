@@ -16,6 +16,7 @@
       margin: 0;
       font-family: 'Poppins', sans-serif;
     }
+
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -28,42 +29,67 @@
       right: 0;
       z-index: 10;
     }
+
     .logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       font-weight: 600;
     }
+
     .logo img {
       height: 32px;
     }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+    }
+
     .nav-right a {
-      margin-left: 1rem;
       text-decoration: none;
       color: #F1EAD8;
       font-weight: 600;
     }
+
     .nav-right a.active {
       color: #f5d38c;
     }
 
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #F1EAD8;
+    }
+
+    /* Construction Section */
     .construction-section {
       text-align: center;
-      padding: 7rem 2rem 4rem;
+      padding: 8rem 2rem 4rem;
     }
+
     .construction-animation {
-      width: 320px;
-      height: 320px;
+      width: 300px;
+      height: 300px;
       margin: 0 auto 2rem;
     }
+
     .construction-section h1 {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       margin-bottom: 0.5rem;
     }
+
     .construction-section p {
       font-size: 1rem;
       color: #f5d38c;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     footer {
@@ -76,14 +102,17 @@
       color: #F1EAD8;
       font-size: 0.9rem;
     }
+
     .footer-left {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
+
     .footer-left img {
       height: 40px;
     }
+
     .footer-right a {
       margin-left: 1rem;
       color: #F1EAD8;
@@ -91,19 +120,29 @@
     }
 
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-right {
+      .burger {
         display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-top: 1rem;
       }
+
+      .nav-right {
+        display: none;
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        background-color: #1e2540;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .nav-right.show {
+        display: flex;
+      }
+
       .nav-right a {
         margin: 0.5rem 0;
       }
+
       footer {
         flex-direction: column;
         text-align: center;
@@ -117,13 +156,16 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo" class="logo-img">
+      <img src="img/logo.png" alt="Logo" />
       Oshibase48
-      <div class="burger" onclick="toggleMenu()">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
+    </div>
+
+    <div class="burger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
     <nav class="nav-right">
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
@@ -134,7 +176,7 @@
     </nav>
   </header>
 
-  <!-- Proyek Pembangunan -->
+  <!-- Section Construction -->
   <main>
     <section class="construction-section">
       <div id="construction-animation" class="construction-animation"></div>
@@ -156,14 +198,18 @@
     </div>
   </footer>
 
-  <!-- Lottie + GSAP -->
+  <!-- Script -->
   <script>
+    function toggleMenu() {
+      document.querySelector('.nav-right').classList.toggle('show');
+    }
+
     lottie.loadAnimation({
       container: document.getElementById('construction-animation'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json' // Animasi proyek kerja & crane
+      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json'
     });
 
     gsap.from(".construction-section", {
@@ -173,6 +219,5 @@
       ease: "power2.out"
     });
   </script>
-
 </body>
 </html>
