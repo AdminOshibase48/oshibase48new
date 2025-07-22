@@ -1,60 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minigame Quiz | Oshibase48</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minigame | Oshibase48</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" href="img/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
       background-color: #242D4C;
       color: #F1EAD8;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
     }
 
-    .container {
-      max-width: 700px;
-      margin: 6rem auto;
-      padding: 2rem;
-      background-color: #1e2540;
-      border-radius: 12px;
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #242D4C;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
     }
 
-    h1 {
-      text-align: center;
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 32px;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-right a {
       color: #F1EAD8;
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
+      text-decoration: none;
       font-weight: 600;
     }
 
-    input, select {
+    .nav-right a:hover {
+      color: #f5d38c;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #F1EAD8;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 7rem auto 3rem;
+      background: #1e2540;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    input {
       width: 100%;
-      padding: 0.6rem;
-      border-radius: 6px;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      border-radius: 8px;
       border: none;
-      margin-top: 0.3rem;
-      background-color: #2f3658;
+      background: #2f3658;
       color: #F1EAD8;
     }
 
-    .question {
-      margin-top: 1.5rem;
-    }
-
     button {
-      margin-top: 2rem;
       padding: 0.8rem 1.5rem;
+      background-color: #f5d38c;
       border: none;
       border-radius: 8px;
-      background-color: #f5d38c;
       font-weight: bold;
       cursor: pointer;
     }
@@ -63,108 +97,94 @@
       margin-top: 2rem;
       padding: 1rem;
       background-color: #2c3254;
-      border-radius: 8px;
+      border-radius: 10px;
       display: none;
     }
 
-    .result h2 {
-      margin-bottom: 0.5rem;
-      color: #f5d38c;
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #1e2540;
+        padding: 1rem;
+        position: absolute;
+        top: 60px;
+        left: 0;
+      }
+
+      .nav-right.open {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Seberapa Cinta Kamu Sama Member JKT48?</h1>
-    <form id="quizForm">
-      <label for="nama">Nama Kamu</label>
-      <input type="text" id="nama" required>
-
-      <label for="oshi">Nama Member Favorit (Oshi)</label>
-      <input type="text" id="oshi" required>
-
-      <div class="question">
-        <label>1. Apa warna official JKT48?</label>
-        <select required>
-          <option value="">Pilih</option>
-          <option value="1">Merah & Putih</option>
-          <option value="0">Hitam & Biru</option>
-          <option value="0">Pink & Kuning</option>
-        </select>
-      </div>
-
-      <div class="question">
-        <label>2. Siapa generasi pertama JKT48?</label>
-        <select required>
-          <option value="">Pilih</option>
-          <option value="1">Melody, Nabilah, Gaby</option>
-          <option value="0">Freya, Zee, Muthe</option>
-          <option value="0">Sisca, Oniel, Gracia</option>
-        </select>
-      </div>
-
-      <div class="question">
-        <label>3. Apa nama teater JKT48?</label>
-        <select required>
-          <option value="">Pilih</option>
-          <option value="1">JKT48 Theater</option>
-          <option value="0">Theater Sakura</option>
-          <option value="0">Stage48</option>
-        </select>
-      </div>
-
-      <div class="question">
-        <label>4. Apa lagu debut JKT48?</label>
-        <select required>
-          <option value="">Pilih</option>
-          <option value="0">Rapsodi</option>
-          <option value="1">Heavy Rotation</option>
-          <option value="0">Flying High</option>
-        </select>
-      </div>
-
-      <div class="question">
-        <label>5. Apa arti “Oshi”?</label>
-        <select required>
-          <option value="">Pilih</option>
-          <option value="1">Member favorit</option>
-          <option value="0">Lagu spesial</option>
-          <option value="0">Teater panggung</option>
-        </select>
-      </div>
-
-      <button type="submit">Lihat Hasil</button>
-    </form>
-
-    <div class="result" id="resultBox">
-      <h2 id="score"></h2>
-      <p id="comment"></p>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo">
+      Oshibase48
     </div>
-  </div>
+    <div class="burger" onclick="toggleBurger()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="nav-right" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="index.html#tentang">Tentang</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
+
+  <!-- Minigame Form -->
+  <main>
+    <div class="form-container">
+      <h1>Seberapa Cinta Kamu Sama Oshi-mu?</h1>
+      <input type="text" id="nama" placeholder="Nama Kamu" required>
+      <input type="text" id="member" placeholder="Nama Member Favorit" required>
+      <button onclick="tampilkanHasil()">Lihat Hasil</button>
+
+      <div class="result" id="hasil">
+        <h2 id="teksHasil"></h2>
+      </div>
+    </div>
+  </main>
 
   <script>
-    document.getElementById("quizForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+    const hasilLucu = [
+      "Kamu cinta banget sama OSHImu, sampai mimpiin dia tiap malam 😍",
+      "Kamu 100% wota sejati! Siap jadi fans baris depan! 🔥",
+      "Hmm... kayaknya kamu harus nonton teater lebih sering 🤭",
+      "OSHImu pasti bangga banget sama kamu 💖",
+      "Wah kamu kayak staff JOT, tahu semua info member! 🔍",
+      "Kamu tipe wota kalem tapi setia 🐣",
+      "OSHImu udah hafal wajah kamu dari atas panggung loh!",
+    ];
 
-      const nama = document.getElementById("nama").value;
-      const oshi = document.getElementById("oshi").value;
-      const selects = document.querySelectorAll("select");
-      let score = 0;
+    function tampilkanHasil() {
+      const nama = document.getElementById("nama").value.trim();
+      const member = document.getElementById("member").value.trim();
+      if (!nama || !member) return alert("Isi dulu namanya dong!");
 
-      selects.forEach(s => {
-        score += parseInt(s.value);
-      });
+      const random = hasilLucu[Math.floor(Math.random() * hasilLucu.length)];
+      document.getElementById("teksHasil").innerText = `${nama}, kamu dan ${member}? ${random}`;
+      document.getElementById("hasil").style.display = "block";
+    }
 
-      let komentar = "";
-      if (score === 5) komentar = `Kamu fan sejati ${oshi}! 🥇`;
-      else if (score >= 3) komentar = `Lumayan cinta nih sama ${oshi}! 💖`;
-      else komentar = `Belajar lagi ya tentang JKT48 dan ${oshi} 😅`;
-
-      document.getElementById("score").innerText = `${nama}, Skor kamu: ${score}/5`;
-      document.getElementById("comment").innerText = komentar;
-      document.getElementById("resultBox").style.display = "block";
-    });
+    function toggleBurger() {
+      const menu = document.getElementById("navMenu");
+      menu.classList.toggle("open");
+    }
   </script>
 
 </body>
