@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flying Oshi | Oshibase48 Minigames</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #242D4C;
+      color: #F1EAD8;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background: url('img/bg-pixel.png') repeat-x;
+      background-size: cover;
+    }
+    .navbar {
+      background: #1e2540;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #F1EAD8;
+      font-weight: 600;
+    }
+    .logo img {
+      height: 30px;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-links a {
+      color: #F1EAD8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav-links a:hover {
+      color: #f5d38c;
+    }
+
+    footer {
+      background: #1e2540;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #F1EAD8;
+    }
+    footer img {
+      height: 40px;
+      display: block;
+      margin: 0 auto 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo"> Oshibase48
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html">Shop</a>
+      <a href="minigames.html">Minigames</a>
+    </div>
+  </header>
+
+  <!-- Canvas Game -->
+  <canvas id="gameCanvas" width="480" height="640"></canvas>
+
+  <!-- Footer -->
+  <footer>
+    <img src="img/logo.png" alt="Logo">
+    <div>Oshibase48</div>
+    <div>Komunitas fans idol penuh semangat dan solidaritas</div>
+  </footer>
+
+  <!-- Game Script -->
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const gravity = 0.5;
+    let score = 0;
+
+    const player = {
+      x: 50,
+      y: 150,
+      width: 40,
+      height: 40,
+      dy: 0,
+      img: new Image()
+    };
+    player.img.src = "img/pixel-girl.png"; // Ganti dengan gambar pixel member kamu
+
+    const pipes = [];
+    const pipeWidth = 60;
+    const gap = 140;
+
+    function drawPlayer() {
+      ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
+    }
+
+    function createPipe() {
+      const topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 50;
+      pipes.push({ x: canvas.width, top: topHeight });
+    }
+
+    function drawPipes() {
+      ctx.fillStyle = "#9ACD32";
+      pipes.forEach(pipe => {
+        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+        ctx.fillRect(pipe.x, pipe.top + gap, pipeWidth, canvas.height - pipe.top - gap);
+      });
+    }
+
+    function checkCollision(pipe) {
+      if (
+        player.x + player.width > pipe.x &&
+        player.x < pipe.x + pipeWidth &&
+        (
+          player.y < pipe.top ||
+          player.y + player.height > pipe.top + gap
+        )
+      ) {
+        return true;
+      }
+      return false;
+    }
+
+    function drawScore() {
+      ctx.fillStyle = "#F1EAD8";
+      ctx.font = "20px Poppins";
+      ctx.fillText("Skor: " + score, 20, 30);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      player.dy += gravity;
+      player.y += player.dy;
+
+      drawPlayer();
+
+      if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
+        createPipe();
+      }
+
+      pipes.forEach(pipe => {
+        pipe.x -= 2;
+
+        if (checkCollision(pipe)) {
+          alert("Game Over!\nSkor kamu: " + score);
+          document.location.reload();
+        }
+
+        if (pipe.x + pipeWidth === player.x) {
+          score++;
+        }
+      });
+
+      drawPipes();
+      drawScore();
+
+      requestAnimationFrame(update);
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.code === "Space") {
+        player.dy = -8;
+      }
+    });
+
+    document.addEventListener("click", function () {
+      player.dy = -8;
+    });
+
+    update();
+  </script>
+
+</body>
+</html>
