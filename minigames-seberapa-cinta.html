@@ -5,16 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seberapa Cinta Kamu Sama Member | Oshibase48</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png" />
   <style>
     body {
       background-color: #242D4C;
       color: #F1EAD8;
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 2rem;
+      padding-top: 80px;
       text-align: center;
     }
 
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #242D4C;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      gap: 0.5rem;
+      color: #F1EAD8;
+    }
+
+    .logo img {
+      height: 32px;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-right a {
+      color: #F1EAD8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-right a.active {
+      color: #f5d38c;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #F1EAD8;
+    }
+
+    /* Konten */
     h1 {
       color: #f5b860;
     }
@@ -25,6 +76,11 @@
       border-radius: 5px;
       border: none;
       font-size: 1rem;
+    }
+
+    input {
+      width: 200px;
+      max-width: 80%;
     }
 
     button {
@@ -39,19 +95,103 @@
       font-size: 1.2rem;
       font-weight: bold;
     }
+
+    /* Footer */
+    footer {
+      background-color: #1e2540;
+      color: #F1EAD8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    .footer-left img {
+      height: 40px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-right a {
+      color: #F1EAD8;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        background-color: #1e2540;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 1rem 2rem;
+        border-radius: 0 0 0 10px;
+      }
+
+      .nav-right.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      input {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo">
+      Oshibase48
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      &#9776;
+    </div>
+    <nav class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="index.html#tentang">Tentang</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html">Shop</a>
+      <a href="minigames.html" class="active">Minigames</a>
+    </nav>
+  </header>
+
+  <!-- Konten -->
   <h1>💖 Seberapa Cinta Kamu Sama Member?</h1>
   <p>Masukkan namamu dan nama member favoritmu!</p>
 
   <input type="text" id="namaKamu" placeholder="Namamu">
   <input type="text" id="namaMember" placeholder="Nama member favorit">
+  <br>
   <button onclick="cekCinta()">Cek Hasil</button>
 
   <div id="hasil"></div>
 
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      <img src="img/logo.png" alt="Logo">
+      <div><strong>Oshibase48</strong></div>
+      <div>Komunitas fans idol penuh semangat dan solidaritas</div>
+    </div>
+    <div class="footer-right">
+      <a href="https://www.instagram.com/oshibase48._/" target="_blank">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">X (Twitter)</a>
+    </div>
+  </footer>
+
+  <!-- Script -->
   <script>
     const hasilLucu = [
       "Wah kalian 99% cocok! Udah kayak oshi dan wota sejati 😍",
