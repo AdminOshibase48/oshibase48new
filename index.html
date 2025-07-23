@@ -105,14 +105,32 @@
   </footer>
 
   <script src="index.js"></script>
+  
   <!-- Mini Music Player -->
 <div class="music-player" id="musicPlayer">
   <button id="toggleMusic">🎵</button>
   <audio id="bgMusic" loop>
-    <source src="assets/sound/bgm.mp3" type="audio/mp3">
-    Browser tidak mendukung audio.
+    <source src="audio/bgm.mp3" type="audio/mp3">
+    Browser kamu tidak mendukung pemutar musik.
   </audio>
 </div>
+
+<script>
+  const bgMusic = document.getElementById('bgMusic');
+  const toggleBtn = document.getElementById('toggleMusic');
+  let isPlaying = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      bgMusic.pause();
+      toggleBtn.textContent = '🎵';
+    } else {
+      bgMusic.play();
+      toggleBtn.textContent = '⏸️';
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
   
 </body>
 </html>
