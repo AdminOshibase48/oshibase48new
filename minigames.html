@@ -14,55 +14,56 @@
       color: #F1EAD8;
     }
 
-     <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="img/logo.png" alt="Logo" class="logo-img">
-      Oshibase48
-    </div>
-    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
-      &#9776;
-    </div>
-    <nav class="nav-right">
-      <a href="#home">Home</a>
-      <a href="#tentang">Tentang</a>
-      <a href="berita.html">Berita</a>
-      <a href="#galeri">Galeri</a>
-      <a href="jadwal.html">Jadwal</a>
-      <a href="shop.html">shop</a>
-      <a href="minigames.html">Minigames</a>
-    </nav>
-  </header>
-    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #242D4C;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
     .logo {
       display: flex;
       align-items: center;
       font-weight: 600;
+      font-size: 1.1rem;
+      gap: 0.5rem;
     }
 
     .logo img {
       height: 32px;
-      margin-right: 10px;
     }
 
-    .nav-links {
+    .nav-right {
       display: flex;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
-    .nav-links a {
+    .nav-right a {
       color: #F1EAD8;
       text-decoration: none;
       font-weight: 600;
     }
 
-    .nav-links a.active {
+    .nav-right a.active {
       color: #f5d38c;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #F1EAD8;
     }
 
     .container {
       text-align: center;
-      padding: 4rem 2rem 2rem;
+      padding: 6rem 2rem 2rem;
     }
 
     .container h1 {
@@ -89,6 +90,8 @@
       border-radius: 8px;
       width: 200px;
       padding: 1rem;
+      text-decoration: none;
+      color: inherit;
       transition: transform 0.3s ease;
     }
 
@@ -118,15 +121,36 @@
       font-size: 0.9rem;
     }
 
-    footer img {
+    .footer-left img {
       height: 40px;
       margin-bottom: 1rem;
     }
 
-    @media (max-width: 600px) {
-      .minigames-list {
+    .footer-right a {
+      color: #F1EAD8;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
         flex-direction: column;
-        align-items: center;
+        background-color: #1e2540;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 1rem 2rem;
+        border-radius: 0 0 0 10px;
+      }
+
+      .nav-right.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
       }
     }
   </style>
@@ -134,12 +158,15 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar">
+  <header class="navbar">
     <div class="logo">
       <img src="img/logo.png" alt="Logo">
       Oshibase48
     </div>
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      &#9776;
+    </div>
+    <nav class="nav-right">
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
@@ -147,38 +174,38 @@
       <a href="jadwal.html">Jadwal</a>
       <a href="shop.html">Shop</a>
       <a href="minigames.html" class="active">Minigames</a>
+    </nav>
+  </header>
+
+  <!-- Header -->
+  <section class="container">
+    <h1>Oshibase48 v.01</h1>
+    <p class="version">Pilih Minigame Favoritmu 🎮</p>
+
+    <div class="minigames-list">
+      <a href="minigames-seberapa-cinta.html" class="game-card">
+        <img src="img/love.png" alt="Game 1">
+        <h3>Seberapa Cinta Kamu?</h3>
+      </a>
+      
+      <a href="minigames-tebak-member.html" class="game-card">
+        <img src="img/tebak member.png" alt="Game 2">
+        <h3>Tebak Member JKT48</h3>
+      </a>
+      
+      <a href="minigames-kepribadian-oshi.html" class="game-card">
+        <img src="img/quiz.png" alt="Game 3">
+        <h3>Quiz Kepribadian Oshi</h3>
+      </a>
     </div>
-  </nav>
+  </section>
 
- <!-- Header -->
-<section class="container">
-  <h1>Oshibase48 v.01</h1>
-  <p class="version">Pilih Minigame Favoritmu 🎮</p>
-
-  <div class="minigames-list">
-    <a href="minigames-seberapa-cinta.html" class="game-card">
-      <img src="img/love.png" alt="Game 1">
-      <h3>Seberapa Cinta Kamu?</h3>
-    </a>
-    
-    <a href="minigames-tebak-member.html" class="game-card">
-      <img src="img/tebak member.png" alt="Game 2">
-      <h3>Tebak Member JKT48</h3>
-    </a>
-    
-    <a href="minigames-kepribadian-oshi.html" class="game-card">
-      <img src="img/quiz.png" alt="Game 3">
-      <h3>Quiz Kepribadian Oshi</h3>
-    </a>
-  </div>
-</section>
-
-   <!-- Footer -->
+  <!-- Footer -->
   <footer>
     <div class="footer-left">
       <img src="img/logo.png" alt="Logo">
-      <span>Oshibase48</span>
-      <div>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</div>
+      <div><strong>Oshibase48</strong></div>
+      <div>Komunitas fans idol penuh semangat dan solidaritas</div>
     </div>
     <div class="footer-right">
       <a href="https://www.instagram.com/oshibase48._/" target="_blank">Instagram</a>
