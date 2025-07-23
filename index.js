@@ -34,3 +34,20 @@ gsap.from(".galeri-slide", {
     document.querySelector('.nav-right').classList.toggle('show');
   }
 </script>
+
+                          <script>
+  const bgMusic = document.getElementById('bgMusic');
+  const toggleBtn = document.getElementById('toggleMusic');
+  let isPlaying = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      bgMusic.pause();
+      toggleBtn.textContent = '🎵';
+    } else {
+      bgMusic.play();
+      toggleBtn.textContent = '⏸️';
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
