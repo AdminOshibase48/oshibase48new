@@ -423,3 +423,22 @@ footer {
   font-size: 1rem;
   margin: 0;
 }
+
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1e2540;
+  border: 2px solid #f5b860;
+  border-radius: 50%;
+  padding: 12px;
+  z-index: 999;
+}
+
+.music-player button {
+  background: none;
+  border: none;
+  color: #f5b860;
+  font-size: 20px;
+  cursor: pointer;
+}
