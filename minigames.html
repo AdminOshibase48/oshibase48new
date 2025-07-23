@@ -14,17 +14,13 @@
       color: #F1EAD8;
     }
 
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #242D4C;
       padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 10;
+      background-color: #1e2540;
     }
 
     .logo {
@@ -32,11 +28,11 @@
       align-items: center;
       font-weight: 600;
       font-size: 1.1rem;
-      gap: 0.5rem;
     }
 
     .logo img {
-      height: 32px;
+      height: 30px;
+      margin-right: 10px;
     }
 
     .nav-right {
@@ -45,8 +41,8 @@
     }
 
     .nav-right a {
-      color: #F1EAD8;
       text-decoration: none;
+      color: #F1EAD8;
       font-weight: 600;
     }
 
@@ -61,9 +57,10 @@
       color: #F1EAD8;
     }
 
+    /* Container Header */
     .container {
       text-align: center;
-      padding: 6rem 2rem 2rem;
+      padding: 3rem 1rem;
     }
 
     .container h1 {
@@ -90,9 +87,9 @@
       border-radius: 8px;
       width: 200px;
       padding: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.3s ease;
     }
 
     .game-card:hover {
@@ -113,6 +110,7 @@
       color: #F1EAD8;
     }
 
+    /* Footer */
     footer {
       background-color: #1e2540;
       color: #F1EAD8;
@@ -121,28 +119,36 @@
       font-size: 0.9rem;
     }
 
-    .footer-left img {
+    footer img {
       height: 40px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-left span {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
     }
 
     .footer-right a {
       color: #F1EAD8;
-      text-decoration: none;
       margin: 0 0.5rem;
+      text-decoration: none;
     }
 
-    /* Responsive */
+    /* Mobile Responsive */
     @media (max-width: 768px) {
       .nav-right {
         display: none;
         flex-direction: column;
-        background-color: #1e2540;
+        gap: 0.8rem;
+        background: #1e2540;
+        padding: 1rem;
         position: absolute;
         top: 60px;
-        right: 0;
-        padding: 1rem 2rem;
-        border-radius: 0 0 0 10px;
+        right: 10px;
+        border-radius: 8px;
+        z-index: 10;
       }
 
       .nav-right.active {
@@ -151,6 +157,11 @@
 
       .menu-toggle {
         display: block;
+      }
+
+      .minigames-list {
+        flex-direction: column;
+        align-items: center;
       }
     }
   </style>
@@ -187,12 +198,12 @@
         <img src="img/love.png" alt="Game 1">
         <h3>Seberapa Cinta Kamu?</h3>
       </a>
-      
+
       <a href="minigames-tebak-member.html" class="game-card">
         <img src="img/tebak member.png" alt="Game 2">
         <h3>Tebak Member JKT48</h3>
       </a>
-      
+
       <a href="minigames-kepribadian-oshi.html" class="game-card">
         <img src="img/quiz.png" alt="Game 3">
         <h3>Quiz Kepribadian Oshi</h3>
@@ -204,7 +215,7 @@
   <footer>
     <div class="footer-left">
       <img src="img/logo.png" alt="Logo">
-      <div><strong>Oshibase48</strong></div>
+      <span>Oshibase48</span>
       <div>Komunitas fans idol penuh semangat dan solidaritas</div>
     </div>
     <div class="footer-right">
