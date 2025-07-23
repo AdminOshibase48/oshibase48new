@@ -1,259 +1,113 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flying Oshi | Oshibase48</title>
-  <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #242D4C;
-      color: #F1EAD8;
-      overflow: hidden;
-    }
+<script>
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #242D4C;
-      padding: 1rem 2rem;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 10;
-    }
+  const oshi = { x: 50, y: 150, vy: 0, width: 30, height: 30 };
+  const pipes = [];
+  let gravity = 0.25; // Lebih ringan
+  let score = 0;
+  let lives = 3;
+  let gameRunning = false;
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
-      color: #F1EAD8;
-    }
+  const bgm = new Audio("assets/sound/bgm.mp3");
+  bgm.loop = true;
 
-    .logo img {
-      height: 32px;
-    }
+  document.getElementById('volumeSlider').addEventListener('input', e => {
+    bgm.volume = e.target.value;
+  });
 
-    .nav-right {
-      display: flex;
-      gap: 1rem;
-    }
+  document.addEventListener("keydown", function(e) {
+    if (e.code === "Space") jump();
+  });
 
-    .nav-right a {
-      text-decoration: none;
-      color: #F1EAD8;
-      font-weight: 600;
-    }
+  function jump() {
+    if (!gameRunning) return;
+    oshi.vy = -11; // Lompat lebih kuat
+  }
 
-    .volume-control {
-      position: fixed;
-      bottom: 1rem;
-      left: 1rem;
-      z-index: 10;
-    }
+  function startGame() {
+    gameRunning = false;
+    oshi.y = 150;
+    oshi.vy = 0;
+    pipes.length = 0;
+    score = 0;
+    lives = 3;
+    drawOshi();
+    ctx.font = "bold 16px Poppins";
+    ctx.fillStyle = "#fff";
+    ctx.fillText("Get Ready!", 110, 240);
+    bgm.play();
 
-    canvas {
-      display: block;
-      margin: 80px auto 0;
-      background: #1e2540;
-      border: 2px solid #f5b860;
-      border-radius: 8px;
-    }
-
-    .jump-button {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #f5b860;
-      color: #242D4C;
-      border: none;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2rem;
-      padding: 0.8rem 1.2rem;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    footer {
-      background-color: #1e2540;
-      color: #F1EAD8;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.8rem;
-      margin-top: 20px;
-    }
-
-    footer img {
-      height: 36px;
-      margin-bottom: 0.5rem;
-    }
-
-    @media (max-width: 600px) {
-      canvas {
-        width: 90vw;
-        height: auto;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="img/logo.png" alt="Logo">
-      Oshibase48
-    </div>
-    <nav class="nav-right">
-      <a href="index.html">Home</a>
-      <a href="berita.html">Berita</a>
-      <a href="shop.html">Shop</a>
-      <a href="minigames.html" class="active">Minigames</a>
-    </nav>
-  </header>
-
-  <!-- Volume Control -->
-  <div class="volume-control">
-    🔊 <input type="range" min="0" max="1" step="0.01" value="1" id="volumeSlider">
-  </div>
-
-  <!-- Game Canvas -->
-  <canvas id="gameCanvas" width="320" height="480"></canvas>
-  <button class="jump-button" onclick="jump()">⤴️ LONCAT</button>
-
-  <!-- Footer -->
-  <footer>
-    <img src="img/logo.png" alt="Logo"><br>
-    <strong>Oshibase48</strong><br>
-    Komunitas fans idol penuh semangat dan solidaritas
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const oshi = { x: 50, y: 150, vy: 0, width: 30, height: 30 };
-    const pipes = [];
-    let gravity = 0.35;
-    let score = 0;
-    let lives = 3;
-    let gameRunning = false;
-
-    const bgm = new Audio("assets/sound/bgm.mp3");
-    bgm.loop = true;
-
-    document.getElementById('volumeSlider').addEventListener('input', e => {
-      bgm.volume = e.target.value;
-    });
-
-    document.addEventListener("keydown", function(e) {
-      if (e.code === "Space") jump();
-    });
-
-    function jump() {
-      if (!gameRunning) return;
-      oshi.vy = -10;
-    }
-
-    function startGame() {
-      gameRunning = false;
-      oshi.y = 150;
-      oshi.vy = 0;
-      pipes.length = 0;
-      score = 0;
-      lives = 3;
-      drawOshi();
-      ctx.font = "bold 16px Poppins";
-      ctx.fillStyle = "#fff";
-      ctx.fillText("Get Ready!", 110, 240);
-      bgm.play();
-
-      setTimeout(() => {
-        gameRunning = true;
-        spawnPipes();
-        requestAnimationFrame(updateGame);
-      }, 1500);
-    }
-
-    function spawnPipes() {
-      setTimeout(() => {
-        setInterval(() => {
-          if (!gameRunning) return;
-          const gap = 130;
-          const top = Math.random() * 180 + 30;
-          const bottomY = top + gap;
-          pipes.push({ x: canvas.width, width: 40, top, bottomY });
-        }, 1700);
-      }, 2000);
-    }
-
-    function updateGame() {
-      if (!gameRunning) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      oshi.vy += gravity;
-      oshi.y += oshi.vy;
-
-      // Draw Oshi (replace with pixel image later)
-      ctx.fillStyle = "#f5b860";
-      ctx.fillRect(oshi.x, oshi.y, oshi.width, oshi.height);
-
-      for (let i = 0; i < pipes.length; i++) {
-        const pipe = pipes[i];
-        pipe.x -= 2;
-
-        // Top pipe
-        ctx.fillStyle = "#90caf9";
-        ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
-
-        // Bottom pipe
-        ctx.fillRect(pipe.x, pipe.bottomY, pipe.width, canvas.height - pipe.bottomY);
-
-        // Collision
-        if (
-          oshi.x < pipe.x + pipe.width &&
-          oshi.x + oshi.width > pipe.x &&
-          (oshi.y < pipe.top || oshi.y + oshi.height > pipe.bottomY)
-        ) {
-          pipes.splice(i, 1);
-          lives--;
-          if (lives <= 0) {
-            gameRunning = false;
-            alert("Game Over! Skor kamu: " + score);
-            location.reload();
-            return;
-          }
-        }
-
-        // Score
-        if (pipe.x + pipe.width === oshi.x) {
-          score++;
-        }
-      }
-
-      // Skor dan nyawa
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 14px Poppins";
-      ctx.fillText("Skor: " + score, 10, 20);
-      ctx.fillText("Nyawa: " + lives, 10, 40);
-
+    setTimeout(() => {
+      gameRunning = true;
+      spawnPipes();
       requestAnimationFrame(updateGame);
+    }, 1500);
+  }
+
+  function spawnPipes() {
+    setTimeout(() => {
+      setInterval(() => {
+        if (!gameRunning) return;
+        const gap = 170; // Lebih lebar
+        const top = Math.random() * 180 + 30;
+        const bottomY = top + gap;
+        pipes.push({ x: canvas.width, width: 40, top, bottomY });
+      }, 1900);
+    }, 2000);
+  }
+
+  function updateGame() {
+    if (!gameRunning) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    oshi.vy += gravity;
+    oshi.y += oshi.vy;
+
+    ctx.fillStyle = "#f5b860";
+    ctx.fillRect(oshi.x, oshi.y, oshi.width, oshi.height);
+
+    for (let i = 0; i < pipes.length; i++) {
+      const pipe = pipes[i];
+      pipe.x -= 1.5; // Lebih pelan
+
+      ctx.fillStyle = "#90caf9";
+      ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
+      ctx.fillRect(pipe.x, pipe.bottomY, pipe.width, canvas.height - pipe.bottomY);
+
+      if (
+        oshi.x < pipe.x + pipe.width &&
+        oshi.x + oshi.width > pipe.x &&
+        (oshi.y < pipe.top || oshi.y + oshi.height > pipe.bottomY)
+      ) {
+        pipes.splice(i, 1);
+        lives--;
+        if (lives <= 0) {
+          gameRunning = false;
+          alert("Game Over! Skor kamu: " + score);
+          location.reload();
+          return;
+        }
+      }
+
+      if (pipe.x + pipe.width === oshi.x) {
+        score++;
+      }
     }
 
-    function drawOshi() {
-      ctx.fillStyle = "#f5b860";
-      ctx.fillRect(oshi.x, oshi.y, oshi.width, oshi.height);
-    }
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 14px Poppins";
+    ctx.fillText("Skor: " + score, 10, 20);
+    ctx.fillText("Nyawa: " + lives, 10, 40);
 
-    startGame();
-  </script>
+    requestAnimationFrame(updateGame);
+  }
 
-</body>
-</html>
+  function drawOshi() {
+    ctx.fillStyle = "#f5b860";
+    ctx.fillRect(oshi.x, oshi.y, oshi.width, oshi.height);
+  }
+
+  startGame();
+</script>
