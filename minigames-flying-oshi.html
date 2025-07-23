@@ -1,266 +1,268 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flying Oshi | Oshibase48</title>
-  <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <style>
     body {
       margin: 0;
-      background: #242D4C;
       font-family: 'Poppins', sans-serif;
+      background-color: #242D4C;
       color: #F1EAD8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
-
-    header.navbar {
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem;
       background-color: #1e2540;
-      width: 100%;
-      box-sizing: border-box;
+      flex-wrap: wrap;
     }
-
-    .logo {
+    .navbar .logo {
       display: flex;
       align-items: center;
       font-weight: 600;
       color: #F1EAD8;
     }
-
-    .logo img {
+    .navbar .logo img {
       height: 32px;
       margin-right: 10px;
     }
-
-    nav a {
-      margin: 0 0.7rem;
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-right a {
+      color: #F1EAD8;
       text-decoration: none;
-      color: #F1EAD8;
-      font-weight: 600;
+      font-weight: bold;
     }
-
-    canvas {
-      background: url('img/bg-pixel.png') repeat-x;
-      background-size: cover;
-      border: 2px solid #F1EAD8;
-      margin-top: 20px;
-    }
-
-    #playButton {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 14px;
-      background: #f5b860;
-      border: none;
-      padding: 12px 20px;
-      color: #242D4C;
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
       cursor: pointer;
-      margin-top: 1rem;
-    }
-
-    #jumpButton {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      padding: 14px 16px;
-      background: #f5b860;
-      color: #242D4C;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      z-index: 10;
-    }
-
-    #volumeToggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      padding: 8px 10px;
-      background: #f5b860;
-      color: #242D4C;
-      font-weight: bold;
-      border-radius: 6px;
-      border: none;
-      z-index: 10;
-    }
-
-    footer {
-      text-align: center;
-      margin: 2rem 0 1rem;
-      font-size: 0.9rem;
       color: #F1EAD8;
     }
-
     @media (max-width: 768px) {
-      canvas {
-        width: 90vw !important;
-        height: 50vh !important;
+      .menu-toggle {
+        display: block;
       }
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+      .nav-right.active {
+        display: flex;
+        margin-top: 1rem;
+      }
+    }
+    #game-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem;
+    }
+    canvas {
+      background-color: #1e2540;
+      border: 2px solid #f5b860;
+      border-radius: 8px;
+    }
+    .btn-play {
+      margin-top: 1rem;
+      background-color: #f5b860;
+      color: #1e2540;
+      padding: 0.8rem 2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-jump {
+      margin-top: 1rem;
+      background-color: #f5b860;
+      color: #1e2540;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #volumeControl {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      z-index: 10;
+    }
+    footer {
+      background-color: #1e2540;
+      color: #F1EAD8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+    footer img {
+      height: 40px;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo">
-      Oshibase48
+      <img src="img/logo.png" alt="Logo"> Oshibase48
     </div>
-    <nav>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      ☰
+    </div>
+    <nav class="nav-right">
       <a href="index.html">Home</a>
+      <a href="index.html#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
       <a href="shop.html">Shop</a>
-      <a href="minigames.html">Minigames</a>
+      <a href="minigames.html" class="active">Minigames</a>
     </nav>
   </header>
 
-  <button id="playButton">PLAY</button>
-  <canvas id="gameCanvas" width="480" height="360"></canvas>
-  <button id="jumpButton">🕹️ LONCAT</button>
-  <button id="volumeToggle">🔊</button>
+  <div id="game-container">
+    <canvas id="gameCanvas" width="300" height="500"></canvas>
+    <button class="btn-play" onclick="startGame()">▶ Play</button>
+    <button class="btn-jump" onclick="jump()">⬆ Loncat</button>
+  </div>
+
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
 
   <footer>
-    <div>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</div>
+    <img src="img/logo.png" alt="Logo">
+    <div>Oshibase48</div>
+    <div>Komunitas fans idol penuh semangat dan solidaritas</div>
+    <div>
+      <a href="https://instagram.com/oshibase48._/" target="_blank" style="color:#F1EAD8;">Instagram</a> |
+      <a href="#" style="color:#F1EAD8;">YouTube</a> |
+      <a href="#" style="color:#F1EAD8;">X (Twitter)</a>
+    </div>
   </footer>
 
   <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const playBtn = document.getElementById('playButton');
-    const jumpBtn = document.getElementById('jumpButton');
-    const volumeBtn = document.getElementById('volumeToggle');
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-    let oshiY = canvas.height / 2;
-    let velocity = 0;
-    let gravity = 0.3;
-    let lift = -6;
-    let obstacles = [];
-    let score = 0;
-    let lives = 3;
+    let birdY = 200, gravity = 0.3, velocity = 0, score = 0, lives = 3, pipes = [];
     let isGameRunning = false;
-    let isMuted = false;
 
-    const jumpSound = new Audio('sound/jump.mp3');
-    const bgMusic = new Audio('assets/sound/bgm.mp3');
-    bgMusic.loop = true;
+    const bgMusic = new Audio("audio/bgm.mp3");
+    const jumpSound = new Audio("audio/jump.wav");
 
-    function drawOshi() {
-      const oshiImg = new Image();
-      oshiImg.src = 'img/oshipixel.png';
-      ctx.drawImage(oshiImg, 40, oshiY, 40, 40);
+    function setVolume(value) {
+      bgMusic.volume = value;
+      jumpSound.volume = value;
     }
 
-    function drawObstacle(obs) {
-      ctx.fillStyle = '#f5b860';
-      ctx.fillRect(obs.x, 0, obs.width, obs.top);
-      ctx.fillRect(obs.x, canvas.height - obs.bottom, obs.width, obs.bottom);
+    function startGame() {
+      isGameRunning = true;
+      birdY = 200; velocity = 0; score = 0; lives = 3; pipes = [];
+      bgMusic.loop = true;
+      bgMusic.play();
+      loop();
     }
 
-    function updateGame() {
+    function jump() {
+      if (!isGameRunning) return;
+      velocity = -6;
+      jumpSound.play();
+    }
+
+    function drawBird() {
+      ctx.fillStyle = "#f5b860";
+      ctx.fillRect(50, birdY, 30, 30); // diganti dengan gambar pixel kalau tersedia
+    }
+
+    function drawPipes() {
+      ctx.fillStyle = "#F1EAD8";
+      pipes.forEach(p => {
+        ctx.fillRect(p.x, 0, 40, p.top);
+        ctx.fillRect(p.x, p.top + 120, 40, canvas.height - p.top - 120);
+      });
+    }
+
+    function drawScoreAndLives() {
+      ctx.fillStyle = "#fff";
+      ctx.font = "16px Poppins";
+      ctx.fillText("Skor: " + score, 10, 20);
+      ctx.fillText("❤️ x" + lives, canvas.width - 80, 20);
+    }
+
+    function loop() {
       if (!isGameRunning) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       velocity += gravity;
-      oshiY += velocity;
+      birdY += velocity;
 
-      if (oshiY + 40 > canvas.height) {
+      if (birdY < 0) birdY = 0;
+      if (birdY + 30 > canvas.height) {
         lives--;
-        oshiY = canvas.height / 2;
-        velocity = 0;
         if (lives <= 0) {
           isGameRunning = false;
-          alert('Game Over! Skor: ' + score);
+          bgMusic.pause();
+          alert("Game Over!\nSkor kamu: " + score);
           return;
         }
+        birdY = 200;
+        velocity = 0;
+        return;
       }
 
-      if (oshiY < 0) oshiY = 0;
+      pipes.forEach((p, i) => {
+        p.x -= 2;
+        if (p.x + 40 < 0) {
+          pipes.splice(i, 1);
+          score++;
+        }
 
-      drawOshi();
-
-      if (Math.random() < 0.02) {
-        obstacles.push({
-          x: canvas.width,
-          width: 40,
-          top: Math.random() * 100 + 20,
-          bottom: Math.random() * 100 + 20
-        });
-      }
-
-      for (let i = obstacles.length - 1; i >= 0; i--) {
-        const obs = obstacles[i];
-        obs.x -= 2;
-
-        drawObstacle(obs);
-
-        // collision
         if (
-          40 + 40 > obs.x &&
-          40 < obs.x + obs.width &&
-          (oshiY < obs.top || oshiY + 40 > canvas.height - obs.bottom)
+          50 < p.x + 40 && 50 + 30 > p.x &&
+          (birdY < p.top || birdY + 30 > p.top + 120)
         ) {
           lives--;
-          obstacles.splice(i, 1);
-          if (lives <= 0) {
-            isGameRunning = false;
-            alert('Game Over! Skor: ' + score);
-            return;
-          }
+          pipes.splice(i, 1);
         }
+      });
 
-        if (obs.x + obs.width < 40) {
-          score++;
-          obstacles.splice(i, 1);
-        }
+      if (Math.random() < 0.02) {
+        let top = Math.floor(Math.random() * 200) + 50;
+        pipes.push({ x: canvas.width, top });
       }
 
-      // Score & lives
-      ctx.fillStyle = '#F1EAD8';
-      ctx.font = '16px Poppins';
-      ctx.fillText('Skor: ' + score, 10, 20);
-      ctx.fillText('❤️: ' + lives, 10, 40);
+      drawBird();
+      drawPipes();
+      drawScoreAndLives();
 
-      requestAnimationFrame(updateGame);
+      requestAnimationFrame(loop);
     }
 
-    function startGame() {
-      score = 0;
-      lives = 3;
-      oshiY = canvas.height / 2;
-      velocity = 0;
-      obstacles = [];
-      isGameRunning = true;
-      bgMusic.play();
-      updateGame();
-    }
-
-    function jump() {
-      velocity = lift;
-      if (!isMuted) jumpSound.play();
-    }
-
-    playBtn.addEventListener('click', startGame);
-    jumpBtn.addEventListener('click', jump);
-    document.addEventListener('keydown', e => {
-      if (e.code === 'Space') jump();
+    document.addEventListener("keydown", function(e) {
+      if (e.code === "Space") jump();
     });
 
-    volumeBtn.addEventListener('click', () => {
-      isMuted = !isMuted;
-      bgMusic.muted = isMuted;
-      jumpSound.muted = isMuted;
-      volumeBtn.innerText = isMuted ? '🔇' : '🔊';
-    });
+    // Resize canvas based on screen
+    function resizeCanvas() {
+      const width = Math.min(window.innerWidth - 20, 400);
+      canvas.width = width;
+      canvas.height = window.innerHeight < 600 ? 400 : 500;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("load", resizeCanvas);
   </script>
 </body>
 </html>
