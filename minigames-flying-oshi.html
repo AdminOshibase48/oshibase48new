@@ -2,267 +2,286 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flying Oshi | Oshibase48</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
       background-color: #242D4C;
+      font-family: 'Poppins', sans-serif;
       color: #F1EAD8;
     }
-    .navbar {
+
+    header, footer {
+      background: #1e2540;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
-      background-color: #1e2540;
-      flex-wrap: wrap;
     }
-    .navbar .logo {
+
+    .logo {
       display: flex;
       align-items: center;
-      font-weight: 600;
-      color: #F1EAD8;
-    }
-    .navbar .logo img {
-      height: 32px;
-      margin-right: 10px;
-    }
-    .nav-right {
-      display: flex;
-      gap: 1rem;
-    }
-    .nav-right a {
-      color: #F1EAD8;
-      text-decoration: none;
       font-weight: bold;
     }
-    .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #F1EAD8;
+
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
     }
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-      .nav-right {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-      }
-      .nav-right.active {
-        display: flex;
-        margin-top: 1rem;
-      }
-    }
-    #game-container {
+
+    nav {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 2rem;
+      flex-wrap: wrap;
+      gap: 10px;
     }
+
+    nav a {
+      color: #F1EAD8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
     canvas {
-      background-color: #1e2540;
-      border: 2px solid #f5b860;
+      display: block;
+      margin: 0 auto;
+      background: #88cdf6;
+      border: 4px solid #fff;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .volume-control {
+      position: absolute;
+      bottom: 100px;
+      left: 20px;
+      background: #1e2540;
+      padding: 10px;
       border-radius: 8px;
     }
-    .btn-play {
-      margin-top: 1rem;
-      background-color: #f5b860;
-      color: #1e2540;
-      padding: 0.8rem 2rem;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2rem;
+
+    .jump-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 20px;
+      background: #f5b860;
+      color: #242D4C;
       border: none;
-      border-radius: 5px;
+      padding: 15px 25px;
+      font-family: 'Press Start 2P', cursive;
+      border-radius: 10px;
+      font-size: 14px;
       cursor: pointer;
     }
-    .btn-jump {
-      margin-top: 1rem;
-      background-color: #f5b860;
-      color: #1e2540;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+
+    #score, #lives {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-weight: bold;
+      font-size: 18px;
     }
-    #volumeControl {
-      position: fixed;
-      left: 10px;
-      bottom: 10px;
-      z-index: 10;
+
+    #lives {
+      top: 50px;
     }
+
     footer {
-      background-color: #1e2540;
-      color: #F1EAD8;
+      flex-direction: column;
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      margin-top: 2rem;
+      gap: 0.5rem;
     }
-    footer img {
-      height: 40px;
-      margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+
+      .jump-btn {
+        bottom: 20px;
+        right: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <header class="navbar">
+  <header>
     <div class="logo">
       <img src="img/logo.png" alt="Logo"> Oshibase48
     </div>
-    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
-      ☰
-    </div>
-    <nav class="nav-right">
+    <nav>
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
       <a href="shop.html">Shop</a>
-      <a href="minigames.html" class="active">Minigames</a>
+      <a href="minigames.html">Minigames</a>
     </nav>
   </header>
 
-  <div id="game-container">
-    <canvas id="gameCanvas" width="300" height="500"></canvas>
-    <button class="btn-play" onclick="startGame()">▶ Play</button>
-    <button class="btn-jump" onclick="jump()">⬆ Loncat</button>
-  </div>
+  <canvas id="gameCanvas" width="360" height="500"></canvas>
+  <div id="score">Score: 0</div>
+  <div id="lives">Nyawa: 3</div>
+  <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-control" id="volumeSlider">
 
-  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
+  <button class="jump-btn" onclick="jump()">Play</button>
 
   <footer>
-    <img src="img/logo.png" alt="Logo">
+    <img src="img/logo.png" alt="Logo" height="40">
     <div>Oshibase48</div>
     <div>Komunitas fans idol penuh semangat dan solidaritas</div>
-    <div>
-      <a href="https://instagram.com/oshibase48._/" target="_blank" style="color:#F1EAD8;">Instagram</a> |
-      <a href="#" style="color:#F1EAD8;">YouTube</a> |
-      <a href="#" style="color:#F1EAD8;">X (Twitter)</a>
-    </div>
   </footer>
 
+  <audio id="bgm" loop>
+    <source src="assets/sound/bgm.mp3" type="audio/mp3">
+  </audio>
+  <audio id="jumpSound">
+    <source src="assets/audio/jump.wav" type="audio/wav">
+  </audio>
+
   <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-    let birdY = 200, gravity = 0.3, velocity = 0, score = 0, lives = 3, pipes = [];
-    let isGameRunning = false;
+    const bgm = document.getElementById('bgm');
+    const jumpSfx = document.getElementById('jumpSound');
+    const volumeSlider = document.getElementById('volumeSlider');
 
-    const bgMusic = new Audio("assets/sound/bgm.mp3");
-    const jumpSound = new Audio("audio/jump.wav");
+    let birdY = canvas.height / 2;
+    let birdX = 50;
+    let birdVelocity = 0;
+    let gravity = 0.3;
+    let jumpForce = -5;
+    let started = false;
+    let score = 0;
+    let lives = 3;
+    let obstacles = [];
 
-    function setVolume(value) {
-      bgMusic.volume = value;
-      jumpSound.volume = value;
+    volumeSlider.addEventListener('input', () => {
+      bgm.volume = volumeSlider.value;
+      jumpSfx.volume = volumeSlider.value;
+    });
+
+    function drawBird() {
+      ctx.fillStyle = "#ff69b4";
+      ctx.beginPath();
+      ctx.arc(birdX, birdY, 15, 0, Math.PI * 2);
+      ctx.fill();
     }
 
-    function startGame() {
-      isGameRunning = true;
-      birdY = 200; velocity = 0; score = 0; lives = 3; pipes = [];
-      bgMusic.loop = true;
-      bgMusic.play();
-      loop();
+    function drawObstacle(ob) {
+      ctx.fillStyle = "#2c3e50";
+      ctx.fillRect(ob.x, 0, ob.width, ob.topHeight);
+      ctx.fillRect(ob.x, ob.topHeight + ob.gap, ob.width, canvas.height);
+    }
+
+    function generateObstacle() {
+      const width = 40;
+      const gap = 120;
+      const topHeight = Math.random() * (canvas.height - gap - 100) + 20;
+      obstacles.push({
+        x: canvas.width,
+        width,
+        topHeight,
+        gap
+      });
     }
 
     function jump() {
-      if (!isGameRunning) return;
-      velocity = -6;
-      jumpSound.play();
+      if (!started) {
+        started = true;
+        bgm.play();
+      }
+      birdVelocity = jumpForce;
+      jumpSfx.play();
     }
 
-    function drawBird() {
-      ctx.fillStyle = "#f5b860";
-      ctx.fillRect(50, birdY, 30, 30); // diganti dengan gambar pixel kalau tersedia
-    }
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        jump();
+      }
+    });
 
-    function drawPipes() {
-      ctx.fillStyle = "#F1EAD8";
-      pipes.forEach(p => {
-        ctx.fillRect(p.x, 0, 40, p.top);
-        ctx.fillRect(p.x, p.top + 120, 40, canvas.height - p.top - 120);
-      });
-    }
-
-    function drawScoreAndLives() {
-      ctx.fillStyle = "#fff";
-      ctx.font = "16px Poppins";
-      ctx.fillText("Skor: " + score, 10, 20);
-      ctx.fillText("❤️ x" + lives, canvas.width - 80, 20);
-    }
-
-    function loop() {
-      if (!isGameRunning) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      velocity += gravity;
-      birdY += velocity;
-
-      if (birdY < 0) birdY = 0;
-      if (birdY + 30 > canvas.height) {
-        lives--;
-        if (lives <= 0) {
-          isGameRunning = false;
-          bgMusic.pause();
-          alert("Game Over!\nSkor kamu: " + score);
-          return;
-        }
-        birdY = 200;
-        velocity = 0;
+    function updateGame() {
+      if (!started) {
+        requestAnimationFrame(updateGame);
         return;
       }
 
-      pipes.forEach((p, i) => {
-        p.x -= 2;
-        if (p.x + 40 < 0) {
-          pipes.splice(i, 1);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      birdVelocity += gravity;
+      birdY += birdVelocity;
+
+      if (birdY + 15 > canvas.height || birdY - 15 < 0) {
+        lives--;
+        resetBird();
+        if (lives <= 0) {
+          alert('Game Over!');
+          resetGame();
+          return;
+        }
+      }
+
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        const ob = obstacles[i];
+        ob.x -= 2;
+
+        // Collision
+        if (
+          birdX + 15 > ob.x && birdX - 15 < ob.x + ob.width &&
+          (birdY - 15 < ob.topHeight || birdY + 15 > ob.topHeight + ob.gap)
+        ) {
+          lives--;
+          resetBird();
+          obstacles.splice(i, 1);
+          if (lives <= 0) {
+            alert('Game Over!');
+            resetGame();
+            return;
+          }
+        } else if (ob.x + ob.width < birdX && !ob.passed) {
+          ob.passed = true;
           score++;
         }
 
-        if (
-          50 < p.x + 40 && 50 + 30 > p.x &&
-          (birdY < p.top || birdY + 30 > p.top + 120)
-        ) {
-          lives--;
-          pipes.splice(i, 1);
-        }
-      });
-
-      if (Math.random() < 0.02) {
-        let top = Math.floor(Math.random() * 200) + 50;
-        pipes.push({ x: canvas.width, top });
+        drawObstacle(ob);
       }
 
       drawBird();
-      drawPipes();
-      drawScoreAndLives();
+      document.getElementById('score').innerText = 'Score: ' + score;
+      document.getElementById('lives').innerText = 'Nyawa: ' + lives;
 
-      requestAnimationFrame(loop);
+      if (frameCount % 100 === 0) {
+        generateObstacle();
+      }
+
+      frameCount++;
+      requestAnimationFrame(updateGame);
     }
 
-    document.addEventListener("keydown", function(e) {
-      if (e.code === "Space") jump();
-    });
-
-    // Resize canvas based on screen
-    function resizeCanvas() {
-      const width = Math.min(window.innerWidth - 20, 400);
-      canvas.width = width;
-      canvas.height = window.innerHeight < 600 ? 400 : 500;
+    function resetBird() {
+      birdY = canvas.height / 2;
+      birdVelocity = 0;
     }
 
-    window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("load", resizeCanvas);
+    function resetGame() {
+      score = 0;
+      lives = 3;
+      obstacles = [];
+      resetBird();
+      started = false;
+      bgm.pause();
+      bgm.currentTime = 0;
+    }
+
+    let frameCount = 0;
+    updateGame();
   </script>
+
 </body>
 </html>
