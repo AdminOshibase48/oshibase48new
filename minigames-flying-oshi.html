@@ -1,66 +1,154 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flying Oshi | Oshibase48 Minigames</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flying Oshi | Oshibase48</title>
+  <link rel="icon" href="img/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Pixel Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
       background-color: #242D4C;
       color: #F1EAD8;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background: url('img/bg-pixel.png') repeat-x;
-      background-size: cover;
-    }
+
+    /* Navbar */
     .navbar {
-      background: #1e2540;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background-color: #1e2540;
       padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
     }
+
     .logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: #F1EAD8;
       font-weight: 600;
-    }
-    .logo img {
-      height: 30px;
-    }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .nav-links a {
       color: #F1EAD8;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .nav-links a:hover {
-      color: #f5d38c;
     }
 
-    footer {
-      background: #1e2540;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #F1EAD8;
+    .logo img {
+      height: 32px;
     }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-right a {
+      color: #F1EAD8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        background-color: #1e2540;
+        width: 100%;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        padding: 1rem;
+      }
+
+      .nav-right.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        color: #F1EAD8;
+      }
+    }
+
+    /* Game Section */
+    .game-container {
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #gameCanvas {
+      background-color: #88c9f9;
+      border: 4px solid #F1EAD8;
+      max-width: 100%;
+    }
+
+    .play-button {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1rem;
+      background: #f5b860;
+      color: #242D4C;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .volume-control {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      z-index: 20;
+    }
+
+    .volume-control input[type=range] {
+      transform: rotate(-90deg);
+      width: 100px;
+    }
+
+    .jump-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #f5b860;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      color: #242D4C;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      background-color: #1e2540;
+      color: #F1EAD8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
     footer img {
       height: 40px;
-      display: block;
-      margin: 0 auto 0.5rem;
+      margin-bottom: 1rem;
     }
+
   </style>
 </head>
 <body>
@@ -68,20 +156,36 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo"> Oshibase48
+      <img src="img/logo.png" alt="Logo">
+      Oshibase48
     </div>
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      &#9776;
+    </div>
+    <nav class="nav-right">
       <a href="index.html">Home</a>
+      <a href="index.html#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
       <a href="shop.html">Shop</a>
       <a href="minigames.html">Minigames</a>
-    </div>
+    </nav>
   </header>
 
-  <!-- Canvas Game -->
-  <canvas id="gameCanvas" width="480" height="640"></canvas>
+  <!-- Game -->
+  <main class="game-container">
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <button class="play-button" onclick="startGame()">PLAY</button>
+  </main>
+
+  <!-- Volume -->
+  <div class="volume-control">
+    <input type="range" min="0" max="1" step="0.01" value="1" onchange="adjustVolume(this.value)">
+  </div>
+
+  <!-- Jump UI Mobile -->
+  <button class="jump-btn" onclick="jump()">↑</button>
 
   <!-- Footer -->
   <footer>
@@ -90,108 +194,66 @@
     <div>Komunitas fans idol penuh semangat dan solidaritas</div>
   </footer>
 
-  <!-- Game Script -->
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    const gravity = 0.5;
-    let score = 0;
+    let characterY = 150;
+    let velocity = 0;
+    let gravity = 0.5;
+    let isPlaying = false;
+    let jumpSound;
 
-    const player = {
-      x: 50,
-      y: 150,
-      width: 40,
-      height: 40,
-      dy: 0,
-      img: new Image()
-    };
-    player.img.src = "img/pixel-girl.png"; // Ganti dengan gambar pixel member kamu
-
-    const pipes = [];
-    const pipeWidth = 60;
-    const gap = 140;
-
-    function drawPlayer() {
-      ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
-    }
-
-    function createPipe() {
-      const topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 50;
-      pipes.push({ x: canvas.width, top: topHeight });
-    }
-
-    function drawPipes() {
-      ctx.fillStyle = "#9ACD32";
-      pipes.forEach(pipe => {
-        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-        ctx.fillRect(pipe.x, pipe.top + gap, pipeWidth, canvas.height - pipe.top - gap);
-      });
-    }
-
-    function checkCollision(pipe) {
-      if (
-        player.x + player.width > pipe.x &&
-        player.x < pipe.x + pipeWidth &&
-        (
-          player.y < pipe.top ||
-          player.y + player.height > pipe.top + gap
-        )
-      ) {
-        return true;
-      }
-      return false;
-    }
-
-    function drawScore() {
-      ctx.fillStyle = "#F1EAD8";
-      ctx.font = "20px Poppins";
-      ctx.fillText("Skor: " + score, 20, 30);
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#f5b860";
+      ctx.beginPath();
+      ctx.arc(80, characterY, 20, 0, Math.PI * 2);
+      ctx.fill();
     }
 
     function update() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      velocity += gravity;
+      characterY += velocity;
 
-      player.dy += gravity;
-      player.y += player.dy;
-
-      drawPlayer();
-
-      if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
-        createPipe();
+      if (characterY + 20 > canvas.height) {
+        characterY = canvas.height - 20;
+        velocity = 0;
       }
 
-      pipes.forEach(pipe => {
-        pipe.x -= 2;
-
-        if (checkCollision(pipe)) {
-          alert("Game Over!\nSkor kamu: " + score);
-          document.location.reload();
-        }
-
-        if (pipe.x + pipeWidth === player.x) {
-          score++;
-        }
-      });
-
-      drawPipes();
-      drawScore();
-
-      requestAnimationFrame(update);
+      draw();
+      if (isPlaying) requestAnimationFrame(update);
     }
 
-    document.addEventListener("keydown", function (e) {
-      if (e.code === "Space") {
-        player.dy = -8;
+    function jump() {
+      velocity = -8;
+      if (jumpSound) {
+        jumpSound.currentTime = 0;
+        jumpSound.play();
       }
+    }
+
+    function startGame() {
+      isPlaying = true;
+      velocity = 0;
+      characterY = 150;
+      update();
+    }
+
+    function adjustVolume(val) {
+      if (jumpSound) jumpSound.volume = val;
+    }
+
+    // Keyboard control
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space") jump();
     });
 
-    document.addEventListener("click", function () {
-      player.dy = -8;
-    });
-
-    update();
+    // Load jump sound
+    window.onload = () => {
+      jumpSound = new Audio("sfx/jump.mp3"); // ganti dengan path suara loncat
+      jumpSound.volume = 1;
+    };
   </script>
-
 </body>
 </html>
