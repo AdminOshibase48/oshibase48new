@@ -5,80 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Flying Oshi | Oshibase48</title>
   <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
       background-color: #242D4C;
+      font-family: 'Poppins', sans-serif;
       color: #F1EAD8;
-      overflow: hidden;
+      overflow-x: hidden;
     }
+
     .navbar {
+      background-color: #242D4C;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #242D4C;
-      padding: 1rem 2rem;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 10;
     }
+
     .logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-weight: 600;
     }
+
     .logo img {
       height: 32px;
     }
-    .nav-right a {
+
+    nav a {
       margin-left: 1rem;
       text-decoration: none;
       color: #F1EAD8;
       font-weight: 600;
     }
-    .nav-right a.active {
+
+    nav a.active {
       color: #f5d38c;
     }
-    #gameCanvas {
-      display: block;
-      margin: 80px auto 0;
-      background: url('img/bg-pixel.png') no-repeat center center;
-      background-size: cover;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2rem;
     }
+
+    canvas {
+      background: url('img/pixel-bg.png') repeat-x;
+      background-size: cover;
+      border-radius: 10px;
+      max-width: 100%;
+    }
+
+    .play-button {
+      font-family: 'Press Start 2P', cursive;
+      padding: 10px 20px;
+      background: #f5b860;
+      border: none;
+      color: #242D4C;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
     .jump-btn {
-      position: absolute;
-      bottom: 20px;
+      position: fixed;
+      bottom: 90px;
       right: 20px;
       background: #f5b860;
-      color: #242D4C;
       border: none;
-      padding: 1rem;
-      font-family: 'Press Start 2P', cursive;
-      border-radius: 10px;
-      cursor: pointer;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #242D4C;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
     }
+
     .volume-control {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       left: 20px;
+      z-index: 10;
     }
-    .play-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Press Start 2P', cursive;
-      background: #f5b860;
-      color: #242D4C;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 5;
+
+    footer {
+      background: #1e2540;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: #F1EAD8;
+      margin-top: 3rem;
+    }
+
+    footer img {
+      height: 40px;
+    }
+
+    footer .desc {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -90,128 +119,160 @@
       <img src="img/logo.png" alt="Logo">
       Oshibase48
     </div>
-    <nav class="nav-right">
+    <nav>
       <a href="index.html">Home</a>
-      <a href="shop.html" class="active">Shop</a>
-      <a href="minigames.html">Minigames</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html">Shop</a>
+      <a href="minigames.html" class="active">Minigames</a>
     </nav>
   </header>
 
   <!-- Game -->
-  <canvas id="gameCanvas" width="480" height="640"></canvas>
-  <button class="jump-btn" onclick="jump()">🕊️</button>
-  <div class="volume-control">
-    <input type="range" min="0" max="1" step="0.01" value="0.3" onchange="bgm.volume=this.value">
+  <div class="container">
+    <canvas id="gameCanvas" width="360" height="480"></canvas>
+    <button class="play-button" onclick="startGame()">PLAY</button>
   </div>
-  <button class="play-btn" onclick="startGame()">PLAY</button>
 
-  <!-- Script -->
+  <!-- Tombol Loncat HP -->
+  <button class="jump-btn" onclick="jump()">↑</button>
+
+  <!-- Volume -->
+  <div class="volume-control">
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" />
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <img src="img/logo.png" alt="Logo" />
+    <div>Oshibase48</div>
+    <div class="desc">Komunitas fans idol penuh semangat dan solidaritas</div>
+  </footer>
+
+  <!-- BGM -->
+  <audio id="bgm" src="assets/sound/bgm.mp3" loop autoplay></audio>
+  <audio id="jumpSound" src="audio/jump.wav"></audio>
+
+  <!-- Game Script -->
   <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-    const oshiImg = new Image();
-    oshiImg.src = 'img/pixel-member.png'; // gambar karakter
+    const playerImg = new Image();
+    playerImg.src = "img/member-pixel.png";
 
-    let x = 50, y = 200, vy = 0, gravity = 0.5, lift = -10;
+    const pipeWidth = 50;
+    const pipeGap = 180;
+    const gravity = 0.4;
+    const lift = -9;
+    const pipeSpeed = 1.5;
+    const pipeFrequency = 120;
+
+    let player = { x: 50, y: 150, velocity: 0 };
     let pipes = [];
     let frame = 0;
     let score = 0;
     let lives = 3;
-    let gameOver = false;
-    let started = false;
-
-    const bgm = new Audio('assets/sound/bgm.mp3');
-    bgm.loop = true;
-    bgm.volume = 0.3;
+    let playing = false;
 
     function startGame() {
-      document.querySelector('.play-btn').style.display = 'none';
-      started = true;
-      bgm.play();
-      animate();
+      playing = true;
+      pipes = [];
+      frame = 0;
+      score = 0;
+      lives = 3;
+      player.y = 150;
+      player.velocity = 0;
+      loop();
     }
 
-    function drawCharacter() {
-      ctx.drawImage(oshiImg, x, y, 40, 40);
+    function drawPlayer() {
+      ctx.drawImage(playerImg, player.x, player.y, 40, 40);
+    }
+
+    function drawPipes() {
+      for (let p of pipes) {
+        ctx.fillStyle = "#f5d38c";
+        ctx.fillRect(p.x, 0, pipeWidth, p.top);
+        ctx.fillRect(p.x, p.bottom, pipeWidth, canvas.height - p.bottom);
+      }
+    }
+
+    function updatePipes() {
+      for (let p of pipes) {
+        p.x -= pipeSpeed;
+
+        if (
+          player.x + 40 > p.x &&
+          player.x < p.x + pipeWidth &&
+          (player.y < p.top || player.y + 40 > p.bottom)
+        ) {
+          lives--;
+          player.y = 150;
+          player.velocity = 0;
+          if (lives <= 0) {
+            alert("Game Over! Skor: " + score);
+            playing = false;
+          }
+        }
+
+        if (p.x + pipeWidth === player.x) score++;
+      }
+
+      if (frame % pipeFrequency === 0) {
+        const top = Math.random() * (canvas.height / 2);
+        pipes.push({
+          x: canvas.width,
+          top: top,
+          bottom: top + pipeGap
+        });
+      }
+
+      pipes = pipes.filter(p => p.x + pipeWidth > 0);
+    }
+
+    function drawHUD() {
+      ctx.fillStyle = "#fff";
+      ctx.font = "16px Poppins";
+      ctx.fillText("Skor: " + score, 10, 20);
+      ctx.fillText("Nyawa: " + lives, 10, 40);
+    }
+
+    function loop() {
+      if (!playing) return;
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      player.velocity += gravity;
+      player.y += player.velocity;
+
+      drawPipes();
+      updatePipes();
+      drawPlayer();
+      drawHUD();
+
+      requestAnimationFrame(loop);
     }
 
     function jump() {
-      if (!gameOver && started) {
-        vy = lift;
-      }
+      const jumpSound = document.getElementById("jumpSound");
+      jumpSound.currentTime = 0;
+      jumpSound.play();
+      player.velocity = lift;
     }
 
-    function drawPipe(pipe) {
-      ctx.fillStyle = '#f5d38c';
-      ctx.fillRect(pipe.x, 0, pipe.w, pipe.top);
-      ctx.fillRect(pipe.x, pipe.bottom, pipe.w, canvas.height - pipe.bottom);
-    }
-
-    function animate() {
-      if (!started) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      vy += gravity;
-      y += vy;
-
-      if (y + 40 > canvas.height || y < 0) {
-        lives--;
-        y = 200;
-        vy = 0;
-        if (lives <= 0) {
-          gameOver = true;
-          alert('Game Over! Skor: ' + score);
-          window.location.reload();
-          return;
-        }
-      }
-
-      if (frame % 100 === 0) {
-        let top = Math.random() * 200 + 50;
-        let gap = 150;
-        pipes.push({ x: canvas.width, top, bottom: top + gap, w: 50 });
-      }
-
-      pipes.forEach((pipe, index) => {
-        pipe.x -= 2;
-        drawPipe(pipe);
-
-        if (pipe.x + pipe.w < x && !pipe.passed) {
-          score++;
-          pipe.passed = true;
-        }
-
-        if (
-          x < pipe.x + pipe.w &&
-          x + 40 > pipe.x &&
-          (y < pipe.top || y + 40 > pipe.bottom)
-        ) {
-          lives--;
-          pipes.splice(index, 1);
-          if (lives <= 0) {
-            gameOver = true;
-            alert('Game Over! Skor: ' + score);
-            window.location.reload();
-          }
-        }
-      });
-
-      drawCharacter();
-
-      ctx.fillStyle = '#fff';
-      ctx.font = '16px Poppins';
-      ctx.fillText(`Skor: ${score}`, 10, 30);
-      ctx.fillText(`Nyawa: ${lives}`, 10, 50);
-
-      frame++;
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') jump();
+    document.addEventListener("keydown", function (e) {
+      if (e.code === "Space") jump();
     });
+
+    document.getElementById("volume").addEventListener("input", function () {
+      document.getElementById("bgm").volume = this.value;
+    });
+
+    window.onload = () => {
+      document.getElementById("bgm").volume = 0.5;
+    };
   </script>
 </body>
 </html>
