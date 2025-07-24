@@ -1,278 +1,314 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flying Oshi | Oshibase48</title>
-  <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background-color: #242D4C;
+      padding: 0;
+    }
+    body {
       font-family: 'Poppins', sans-serif;
+      background-color: #242D4C;
       color: #F1EAD8;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .navbar {
-      background-color: #242D4C;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       padding: 1rem 2rem;
+      background-color: #1e2540;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 10;
     }
-
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      font-weight: 600;
+      color: #F1EAD8;
     }
-
     .logo img {
       height: 32px;
+      margin-right: 10px;
     }
 
-    nav a {
+    .nav-right a {
       margin-left: 1rem;
       text-decoration: none;
       color: #F1EAD8;
       font-weight: 600;
     }
 
-    nav a.active {
-      color: #f5d38c;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
     canvas {
-      background: url('img/pixel-bg.png') repeat-x;
+      display: block;
+      margin: 80px auto 0;
+      background: url('img/bg-custom.jpg') no-repeat center;
       background-size: cover;
+      border: 2px solid #F1EAD8;
       border-radius: 10px;
-      max-width: 100%;
     }
 
-    .play-button {
+    #playBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-family: 'Press Start 2P', cursive;
-      padding: 10px 20px;
-      background: #f5b860;
-      border: none;
+      font-size: 16px;
+      padding: 1rem 2rem;
+      background-color: #f5b860;
       color: #242D4C;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 1rem;
+      z-index: 5;
     }
 
-    .jump-btn {
+    #jumpBtn {
       position: fixed;
-      bottom: 90px;
+      bottom: 80px;
       right: 20px;
-      background: #f5b860;
+      padding: 1rem;
+      background-color: #f5b860;
       border: none;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 24px;
       color: #242D4C;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
+      display: none;
+      z-index: 5;
     }
 
-    .volume-control {
+    #volumeControl {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      z-index: 10;
+      z-index: 5;
+    }
+
+    #volumeControl input {
+      width: 100px;
     }
 
     footer {
-      background: #1e2540;
-      padding: 2rem 1rem;
-      text-align: center;
+      background-color: #1e2540;
       color: #F1EAD8;
-      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      margin-top: 1rem;
     }
 
-    footer img {
-      height: 40px;
-    }
-
-    footer .desc {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+      }
+      #jumpBtn {
+        display: block;
+      }
+      canvas {
+        width: 90vw;
+        height: 60vh;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo">
-      Oshibase48
+      <img src="img/logo.png" alt="Logo"> Oshibase48
     </div>
-    <nav>
+    <nav class="nav-right">
       <a href="index.html">Home</a>
       <a href="berita.html">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
       <a href="shop.html">Shop</a>
-      <a href="minigames.html" class="active">Minigames</a>
     </nav>
   </header>
 
-  <!-- Game -->
-  <div class="container">
-    <canvas id="gameCanvas" width="360" height="480"></canvas>
-    <button class="play-button" onclick="startGame()">PLAY</button>
+  <button id="playBtn">PLAY</button>
+  <canvas id="gameCanvas" width="480" height="640"></canvas>
+  <button id="jumpBtn">⬆️</button>
+
+  <div id="volumeControl">
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
   </div>
 
-  <!-- Tombol Loncat HP -->
-  <button class="jump-btn" onclick="jump()">↑</button>
-
-  <!-- Volume -->
-  <div class="volume-control">
-    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" />
-  </div>
-
-  <!-- Footer -->
   <footer>
-    <img src="img/logo.png" alt="Logo" />
-    <div>Oshibase48</div>
-    <div class="desc">Komunitas fans idol penuh semangat dan solidaritas</div>
+    <div>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</div>
   </footer>
 
-  <!-- BGM -->
-  <audio id="bgm" src="assets/sound/bgm.mp3" loop autoplay></audio>
-  <audio id="jumpSound" src="audio/jump.wav"></audio>
+  <audio id="bgMusic" loop autoplay>
+    <source src="assets/sound/bgm.mp3" type="audio/mp3">
+  </audio>
+  <audio id="jumpSound">
+    <source src="audio/jump.mp3" type="audio/mp3">
+  </audio>
 
-  <!-- Game Script -->
   <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('playBtn');
+    const jumpBtn = document.getElementById('jumpBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const jumpSound = document.getElementById('jumpSound');
+    const volumeSlider = document.getElementById('volume');
 
-    const playerImg = new Image();
-    playerImg.src = "img/member-pixel.png";
-
-    const pipeWidth = 50;
-    const pipeGap = 180;
-    const gravity = 0.4;
-    const lift = -9;
-    const pipeSpeed = 1.5;
-    const pipeFrequency = 120;
-
-    let player = { x: 50, y: 150, velocity: 0 };
+    let isPlaying = false;
+    let oshi;
     let pipes = [];
-    let frame = 0;
+    let gravity = 0.2;
+    let lift = -5.5;
     let score = 0;
     let lives = 3;
-    let playing = false;
 
-    function startGame() {
-      playing = true;
+    const oshiImg = new Image();
+    oshiImg.src = 'img/oshi-pixel.png'; // custom karakter
+
+    class Oshi {
+      constructor() {
+        this.x = 50;
+        this.y = canvas.height / 2;
+        this.width = 40;
+        this.height = 40;
+        this.velocity = 0;
+      }
+
+      draw() {
+        ctx.drawImage(oshiImg, this.x, this.y, this.width, this.height);
+      }
+
+      update() {
+        this.velocity += gravity;
+        this.y += this.velocity;
+
+        if (this.y + this.height > canvas.height) {
+          this.y = canvas.height - this.height;
+          this.velocity = 0;
+        }
+        if (this.y < 0) {
+          this.y = 0;
+          this.velocity = 0;
+        }
+      }
+
+      jump() {
+        this.velocity = lift;
+        jumpSound.currentTime = 0;
+        jumpSound.play();
+      }
+    }
+
+    class Pipe {
+      constructor() {
+        this.width = 60;
+        this.x = canvas.width;
+        this.top = Math.random() * (canvas.height / 2);
+        this.bottom = canvas.height - this.top - 150;
+        this.speed = 2;
+      }
+
+      draw() {
+        ctx.fillStyle = '#f5b860';
+        ctx.fillRect(this.x, 0, this.width, this.top);
+        ctx.fillRect(this.x, canvas.height - this.bottom, this.width, this.bottom);
+      }
+
+      update() {
+        this.x -= this.speed;
+      }
+
+      hits(player) {
+        return (
+          player.x < this.x + this.width &&
+          player.x + player.width > this.x &&
+          (player.y < this.top || player.y + player.height > canvas.height - this.bottom)
+        );
+      }
+    }
+
+    function resetGame() {
+      oshi = new Oshi();
       pipes = [];
-      frame = 0;
       score = 0;
       lives = 3;
-      player.y = 150;
-      player.velocity = 0;
-      loop();
     }
 
-    function drawPlayer() {
-      ctx.drawImage(playerImg, player.x, player.y, 40, 40);
-    }
+    function gameLoop() {
+      if (!isPlaying) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      oshi.update();
+      oshi.draw();
 
-    function drawPipes() {
-      for (let p of pipes) {
-        ctx.fillStyle = "#f5d38c";
-        ctx.fillRect(p.x, 0, pipeWidth, p.top);
-        ctx.fillRect(p.x, p.bottom, pipeWidth, canvas.height - p.bottom);
+      if (frames % 120 === 0) {
+        pipes.push(new Pipe());
       }
-    }
 
-    function updatePipes() {
-      for (let p of pipes) {
-        p.x -= pipeSpeed;
+      pipes.forEach((pipe, index) => {
+        pipe.update();
+        pipe.draw();
 
-        if (
-          player.x + 40 > p.x &&
-          player.x < p.x + pipeWidth &&
-          (player.y < p.top || player.y + 40 > p.bottom)
-        ) {
-          lives--;
-          player.y = 150;
-          player.velocity = 0;
-          if (lives <= 0) {
-            alert("Game Over! Skor: " + score);
-            playing = false;
-          }
+        if (pipe.x + pipe.width < 0) {
+          pipes.splice(index, 1);
+          score++;
         }
 
-        if (p.x + pipeWidth === player.x) score++;
-      }
+        if (pipe.hits(oshi)) {
+          lives--;
+          pipes.splice(index, 1);
+          if (lives <= 0) {
+            alert(`Game Over! Skormu: ${score}`);
+            isPlaying = false;
+            playBtn.style.display = 'block';
+          }
+        }
+      });
 
-      if (frame % pipeFrequency === 0) {
-        const top = Math.random() * (canvas.height / 2);
-        pipes.push({
-          x: canvas.width,
-          top: top,
-          bottom: top + pipeGap
-        });
-      }
-
-      pipes = pipes.filter(p => p.x + pipeWidth > 0);
-    }
-
-    function drawHUD() {
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = "#F1EAD8";
       ctx.font = "16px Poppins";
-      ctx.fillText("Skor: " + score, 10, 20);
-      ctx.fillText("Nyawa: " + lives, 10, 40);
+      ctx.fillText(`Score: ${score}`, 20, 30);
+      ctx.fillText(`Lives: ${lives}`, 20, 50);
+
+      frames++;
+      requestAnimationFrame(gameLoop);
     }
 
-    function loop() {
-      if (!playing) return;
-      frame++;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let frames = 0;
 
-      player.velocity += gravity;
-      player.y += player.velocity;
-
-      drawPipes();
-      updatePipes();
-      drawPlayer();
-      drawHUD();
-
-      requestAnimationFrame(loop);
-    }
-
-    function jump() {
-      const jumpSound = document.getElementById("jumpSound");
-      jumpSound.currentTime = 0;
-      jumpSound.play();
-      player.velocity = lift;
-    }
-
-    document.addEventListener("keydown", function (e) {
-      if (e.code === "Space") jump();
+    playBtn.addEventListener('click', () => {
+      playBtn.style.display = 'none';
+      resetGame();
+      isPlaying = true;
+      bgMusic.play();
+      gameLoop();
     });
 
-    document.getElementById("volume").addEventListener("input", function () {
-      document.getElementById("bgm").volume = this.value;
+    jumpBtn.addEventListener('click', () => {
+      if (isPlaying) oshi.jump();
     });
 
-    window.onload = () => {
-      document.getElementById("bgm").volume = 0.5;
-    };
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && isPlaying) {
+        e.preventDefault();
+        oshi.jump();
+      }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      bgMusic.volume = volumeSlider.value;
+      jumpSound.volume = volumeSlider.value;
+    });
   </script>
 </body>
 </html>
