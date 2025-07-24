@@ -2,48 +2,216 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Flying Oshi | Oshibase48</title>
-  <link rel="stylesheet" href="flying-oshi.css" />
+  <link rel="icon" href="img/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #242D4C;
+      color: #F1EAD8;
+      overflow: hidden;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #242D4C;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+    .logo img {
+      height: 32px;
+    }
+    .nav-right a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #F1EAD8;
+      font-weight: 600;
+    }
+    .nav-right a.active {
+      color: #f5d38c;
+    }
+    #gameCanvas {
+      display: block;
+      margin: 80px auto 0;
+      background: url('img/bg-pixel.png') no-repeat center center;
+      background-size: cover;
+    }
+    .jump-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: #f5b860;
+      color: #242D4C;
+      border: none;
+      padding: 1rem;
+      font-family: 'Press Start 2P', cursive;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .volume-control {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Press Start 2P', cursive;
+      background: #f5b860;
+      color: #242D4C;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 5;
+    }
+  </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo" />
+      <img src="img/logo.png" alt="Logo">
       Oshibase48
     </div>
-    <nav class="nav-links">
+    <nav class="nav-right">
       <a href="index.html">Home</a>
-      <a href="berita.html">Berita</a>
-      <a href="galeri.html">Galeri</a>
-      <a href="jadwal.html">Jadwal</a>
-      <a href="shop.html">Shop</a>
-      <a href="minigames.html" class="active">Minigames</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="minigames.html">Minigames</a>
     </nav>
   </header>
 
-  <!-- Canvas Game -->
-  <div class="game-container">
-    <canvas id="gameCanvas"></canvas>
-
-    <button class="jump-btn" onclick="jump()">🕊️ Loncat!</button>
-
-    <div class="volume-control">
-      🔊 <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)" />
-    </div>
+  <!-- Game -->
+  <canvas id="gameCanvas" width="480" height="640"></canvas>
+  <button class="jump-btn" onclick="jump()">🕊️</button>
+  <div class="volume-control">
+    <input type="range" min="0" max="1" step="0.01" value="0.3" onchange="bgm.volume=this.value">
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <img src="img/logo.png" alt="Logo">
-    <div>Oshibase48</div>
-    <div>Komunitas fans idol penuh semangat dan solidaritas</div>
-  </footer>
+  <button class="play-btn" onclick="startGame()">PLAY</button>
 
   <!-- Script -->
-  <audio id="bgm" src="assets/sound/bgm.mp3" loop autoplay></audio>
-  <script src="flying-oshi.js"></script>
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const oshiImg = new Image();
+    oshiImg.src = 'img/pixel-member.png'; // gambar karakter
+
+    let x = 50, y = 200, vy = 0, gravity = 0.5, lift = -10;
+    let pipes = [];
+    let frame = 0;
+    let score = 0;
+    let lives = 3;
+    let gameOver = false;
+    let started = false;
+
+    const bgm = new Audio('assets/sound/bgm.mp3');
+    bgm.loop = true;
+    bgm.volume = 0.3;
+
+    function startGame() {
+      document.querySelector('.play-btn').style.display = 'none';
+      started = true;
+      bgm.play();
+      animate();
+    }
+
+    function drawCharacter() {
+      ctx.drawImage(oshiImg, x, y, 40, 40);
+    }
+
+    function jump() {
+      if (!gameOver && started) {
+        vy = lift;
+      }
+    }
+
+    function drawPipe(pipe) {
+      ctx.fillStyle = '#f5d38c';
+      ctx.fillRect(pipe.x, 0, pipe.w, pipe.top);
+      ctx.fillRect(pipe.x, pipe.bottom, pipe.w, canvas.height - pipe.bottom);
+    }
+
+    function animate() {
+      if (!started) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      vy += gravity;
+      y += vy;
+
+      if (y + 40 > canvas.height || y < 0) {
+        lives--;
+        y = 200;
+        vy = 0;
+        if (lives <= 0) {
+          gameOver = true;
+          alert('Game Over! Skor: ' + score);
+          window.location.reload();
+          return;
+        }
+      }
+
+      if (frame % 100 === 0) {
+        let top = Math.random() * 200 + 50;
+        let gap = 150;
+        pipes.push({ x: canvas.width, top, bottom: top + gap, w: 50 });
+      }
+
+      pipes.forEach((pipe, index) => {
+        pipe.x -= 2;
+        drawPipe(pipe);
+
+        if (pipe.x + pipe.w < x && !pipe.passed) {
+          score++;
+          pipe.passed = true;
+        }
+
+        if (
+          x < pipe.x + pipe.w &&
+          x + 40 > pipe.x &&
+          (y < pipe.top || y + 40 > pipe.bottom)
+        ) {
+          lives--;
+          pipes.splice(index, 1);
+          if (lives <= 0) {
+            gameOver = true;
+            alert('Game Over! Skor: ' + score);
+            window.location.reload();
+          }
+        }
+      });
+
+      drawCharacter();
+
+      ctx.fillStyle = '#fff';
+      ctx.font = '16px Poppins';
+      ctx.fillText(`Skor: ${score}`, 10, 30);
+      ctx.fillText(`Nyawa: ${lives}`, 10, 50);
+
+      frame++;
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') jump();
+    });
+  </script>
 </body>
 </html>
