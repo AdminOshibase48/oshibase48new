@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #242D4C;
+  color: #F1EAD8;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1e2540;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #F1EAD8;
+}
+
+.logo img {
+  height: 32px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #F1EAD8;
+  font-weight: 600;
+}
+
+.nav-links a.active {
+  color: #f5d38c;
+}
+
+footer {
+  background-color: #1e2540;
+  color: #F1EAD8;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+footer img {
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.game-container {
+  position: relative;
+  text-align: center;
+}
+
+canvas {
+  background-color: #333;
+  border: 3px solid #f5b860;
+  border-radius: 10px;
+  margin: 1rem auto;
+  display: block;
+}
+
+.jump-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #f5b860;
+  color: #242D4C;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.volume-control {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
