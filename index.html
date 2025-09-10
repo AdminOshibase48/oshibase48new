@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oshibase48 | Seputar perjeketian</title>
@@ -34,12 +34,12 @@
   <!-- Hero Slider -->
   <section id="home" class="hero-slider">
     <div class="slide show" style="background-image: url('img/eventnew.jpg');">
-  <div class="hero-overlay">
-    <p style="color:#f5b860; font-weight:600; font-size: 1rem; margin: 0;">Oshibase48 v.1.0</p>
-    <h1>Selamat Datang di Oshibase48</h1>
-    <p>Komunitas fans idol penuh semangat dan solidaritas</p>
-  </div>
-</div>
+      <div class="hero-overlay">
+        <p style="color:#f5b860; font-weight:600; font-size: 1rem; margin: 0;">Oshibase48 v.1.0</p>
+        <h1>Selamat Datang di Oshibase48</h1>
+        <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+      </div>
+    </div>
     <div class="slide" style="background-image: url('img/event.jpg');"></div>
     <div class="slide" style="background-image: url('img/housejkt48.jpg');"></div>
   </section>
@@ -92,6 +92,28 @@
     </div>
   </section>
 
+  <!-- Partnership Section -->
+  <section id="partnership">
+    <h2>Partnership</h2>
+    <div class="partner-logos">
+      <div class="logo-track">
+        <!-- Isi logo (1x) -->
+        <img src="img/partner1.png" alt="Partner 1">
+        <img src="img/partner2.png" alt="Partner 2">
+        <img src="img/partner3.png" alt="Partner 3">
+        <img src="img/partner4.png" alt="Partner 4">
+        <img src="img/partner5.png" alt="Partner 5">
+
+        <!-- Isi logo digandakan lagi (2x) -->
+        <img src="img/partner1.png" alt="Partner 1">
+        <img src="img/partner2.png" alt="Partner 2">
+        <img src="img/partner3.png" alt="Partner 3">
+        <img src="img/partner4.png" alt="Partner 4">
+        <img src="img/partner5.png" alt="Partner 5">
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="footer-left">
@@ -106,33 +128,47 @@
     </div>
   </footer>
 
+  <!-- Mini Music Player -->
+  <div class="music-player" id="musicPlayer">
+    <button id="toggleMusic">🎵</button>
+    <audio id="bgMusic" loop>
+      <source src="assets/sound/bgm.mp3" type="audio/mp3">
+      Browser kamu tidak mendukung pemutar musik.
+    </audio>
+  </div>
+
   <script src="index.js"></script>
   
-  <!-- Mini Music Player -->
-<div class="music-player" id="musicPlayer">
-  <button id="toggleMusic">🎵</button>
-  <audio id="bgMusic" loop>
-    <source src="assets/sound/bgm.mp3" type="audio/mp3">
-    Browser kamu tidak mendukung pemutar musik.
-  </audio>
-</div>
+  <script>
+    // Music player
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleBtn = document.getElementById('toggleMusic');
+    let isPlaying = false;
 
-<script>
-  const bgMusic = document.getElementById('bgMusic');
-  const toggleBtn = document.getElementById('toggleMusic');
-  let isPlaying = false;
+    toggleBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        toggleBtn.textContent = '🎵';
+      } else {
+        bgMusic.play();
+        toggleBtn.textContent = '⏸️';
+      }
+      isPlaying = !isPlaying;
+    });
 
-  toggleBtn.addEventListener('click', () => {
-    if (isPlaying) {
-      bgMusic.pause();
-      toggleBtn.textContent = '🎵';
-    } else {
-      bgMusic.play();
-      toggleBtn.textContent = '⏸️';
-    }
-    isPlaying = !isPlaying;
-  });
-</script>
-  
+    // Scroll animation
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out"
+      });
+    });
+  </script>
 </body>
 </html>
