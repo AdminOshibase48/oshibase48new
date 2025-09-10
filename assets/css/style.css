@@ -472,12 +472,15 @@ footer {
 #partnership {
   padding: 50px 0;
   background: #1b2038;
-  text-align: center;
+  text-align: center; /* semua isi ke tengah */
 }
 
 #partnership h2 {
   color: #F1EAD8;
-  margin-bottom: 20px;
+  margin-bottom: 30px;   /* kasih jarak ke logo */
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;    /* pastikan tulisan h2 center */
 }
 
 .partner-logos {
