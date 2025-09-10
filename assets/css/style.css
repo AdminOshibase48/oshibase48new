@@ -21,48 +21,126 @@ img {
   display: block;
 }
 
-/* ========== NAVBAR ========== */
+/* Navbar utama */
 .navbar {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: var(--bg-dark);
-  padding: 1rem 2rem;
+  background: #242D4C; /* Midnight Indigo */
+  color: #F1EAD8;      /* Vanilla Cream */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px 30px;
   z-index: 1000;
+  animation: slideDown 0.8s ease-out; /* animasi muncul */
 }
-.logo {
+
+/* Logo */
+.navbar .logo {
   display: flex;
   align-items: center;
-  font-weight: 700;
   font-size: 1.2rem;
-  color: var(--text-light);
+  font-weight: 600;
 }
+
 .logo-img {
-  width: 40px;
   height: 40px;
   margin-right: 10px;
 }
-.nav-right {
+
+/* Menu utama */
+.navbar .nav-right {
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
 }
-.nav-right a {
-  color: var(--text-light);
+
+.navbar .nav-right a {
+  color: #F1EAD8;
   text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
 }
-.nav-right a:hover {
-  color: var(--accent);
+
+/* Animasi underline saat hover */
+.navbar .nav-right a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background: #f5b860;
+  transition: width 0.3s ease;
 }
+
+.navbar .nav-right a:hover {
+  color: #f5b860;
+}
+
+.navbar .nav-right a:hover::after {
+  width: 100%;
+}
+
+/* Tombol menu hamburger */
 .menu-toggle {
   display: none;
-  font-size: 1.5rem;
-  color: var(--text-light);
+  font-size: 1.8rem;
   cursor: pointer;
+  color: #F1EAD8;
+}
+
+/* ANIMASI muncul navbar */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar .nav-right {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    background: #1b2038;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  }
+
+  .navbar .nav-right.active {
+    display: flex;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-right a {
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+/* Animasi fade-in untuk menu mobile */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ========== HERO SLIDER ========== */
