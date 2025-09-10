@@ -4,11 +4,12 @@ body {
   color: #F1EAD8;
   font-family: 'Poppins', sans-serif;
   margin: 0;
+  padding-top: 70px; /* biar konten ga ketiban navbar */
 }
 
 /* Navbar */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -34,7 +35,8 @@ body {
 
 .nav-right {
   display: flex;
-  gap: 20px;
+  gap: 30px; /* jarak antar menu */
+  align-items: center;
 }
 
 .nav-right a {
@@ -76,13 +78,13 @@ body {
   color: #F1EAD8;
 }
 
-/* Animasi muncul navbar */
+/* Animasi navbar muncul */
 @keyframes slideDown {
   from { transform: translateY(-100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Berita */
+/* Berita Section */
 .berita-section {
   padding: 120px 20px 60px;
   max-width: 1000px;
@@ -190,13 +192,15 @@ footer {
   .nav-right {
     display: none;
     flex-direction: column;
+    gap: 15px;
     position: absolute;
     top: 60px;
     right: 0;
-    width: 200px;
+    width: 220px;
     background: #1b2038;
     border-radius: 0 0 8px 8px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    padding: 15px;
   }
 
   .nav-right.active {
