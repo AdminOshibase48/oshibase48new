@@ -5,126 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berita | Oshibase48</title>
   <link rel="icon" href="img/logo.png" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/berita.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #242D4C;
-      color: #F1EAD8;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-    }
-
-    header.navbar {
-      background-color: #242D4C;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-    }
-
-    .logo img {
-      height: 32px;
-      margin-right: 10px;
-    }
-
-    .nav-right a {
-      color: #F1EAD8;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-weight: 600;
-    }
-
-    .nav-right a.active {
-      color: #f5d38c;
-    }
-
-    .berita-section {
-      padding: 120px 20px 60px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .berita-section h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: #F1EAD8;
-    }
-
-    .berita-card {
-      background-color: #2f395a;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
-      transition: transform 0.3s;
-    }
-
-    .berita-card:hover {
-      transform: scale(1.02);
-    }
-
-    .berita-card h3 {
-      margin: 0 0 10px;
-      color: #f5d38c;
-    }
-
-    .berita-card p {
-      margin: 0;
-      line-height: 1.6;
-      color: #e2dccc;
-    }
-
-    footer {
-      background: #1e2540;
-      padding: 2rem;
-      color: #F1EAD8;
-      font-size: 0.8rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .footer-left img {
-      height: 32px;
-      margin-right: 10px;
-    }
-
-    @media (max-width: 768px) {
-      header.navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-right {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-top: 1rem;
-      }
-
-      .nav-right a {
-        margin: 0.5rem 0;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -133,6 +16,9 @@
     <div class="logo">
       <img src="img/logo.png" alt="Logo" />
       Oshibase48
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
+      &#9776;
     </div>
     <nav class="nav-right">
       <a href="index.html">Home</a>
@@ -163,11 +49,31 @@
       <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
       <p>Oshibase48 hadir di acara komunitas JKT48 fans Semarang dan Bandung. Jangan lewatkan kesempatan bergabung!</p>
     </div>
-
-    <!-- Tambahan konten berita dari Supabase akan muncul di sini -->
   </section>
 
- <footer>
+  <!-- Partnership Section -->
+  <section id="partnership">
+    <h2>Partnership</h2>
+    <div class="partner-logos">
+      <div class="logo-track">
+        <img src="img/logo.png" alt="Partner 1">
+        <img src="img/logo.png" alt="Partner 2">
+        <img src="img/logo.png" alt="Partner 3">
+        <img src="img/logo.png" alt="Partner 4">
+        <img src="img/logo.png" alt="Partner 5">
+
+        <!-- duplikat biar looping mulus -->
+        <img src="img/logo.png" alt="Partner 1">
+        <img src="img/logo.png" alt="Partner 2">
+        <img src="img/logo.png" alt="Partner 3">
+        <img src="img/logo.png" alt="Partner 4">
+        <img src="img/logo.png" alt="Partner 5">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
     <div class="footer-left">
       <img src="img/logo.png" alt="Logo">
       <span>Oshibase48</span>
