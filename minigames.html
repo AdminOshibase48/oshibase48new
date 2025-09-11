@@ -12,15 +12,22 @@
       font-family: 'Poppins', sans-serif;
       background-color: #242D4C;
       color: #F1EAD8;
+      padding-top: 70px; /* biar konten ga ketiban navbar */
     }
 
     /* Navbar */
     .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
       background-color: #1e2540;
+      z-index: 1000;
+      animation: slideDown 0.8s ease-out;
     }
 
     .logo {
@@ -37,13 +44,33 @@
 
     .nav-right {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
+      align-items: center;
     }
 
     .nav-right a {
       text-decoration: none;
       color: #F1EAD8;
       font-weight: 600;
+      position: relative;
+    }
+
+    .nav-right a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #f5b860;
+      transition: width 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      color: #f5b860;
+    }
+    .nav-right a:hover::after {
+      width: 100%;
     }
 
     .nav-right a.active {
@@ -55,6 +82,11 @@
       font-size: 1.5rem;
       cursor: pointer;
       color: #F1EAD8;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     /* Container Header */
@@ -110,13 +142,60 @@
       color: #F1EAD8;
     }
 
+    /* Partnership */
+    #partnership {
+      padding: 50px 0;
+      background: #1b2038;
+      text-align: center;
+    }
+
+    #partnership h2 {
+      color: #F1EAD8;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .partner-logos {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .logo-track {
+      display: flex;
+      gap: 50px;
+      width: max-content;
+      animation: scrollLeft 20s linear infinite;
+    }
+
+    .logo-track img {
+      max-height: 100px;
+      height: auto;
+      width: auto;
+      margin: 0 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-track img:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     /* Footer */
     footer {
       background-color: #1e2540;
       color: #F1EAD8;
-      text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     footer img {
@@ -153,6 +232,7 @@
 
       .nav-right.active {
         display: flex;
+        animation: fadeIn 0.4s ease-in-out;
       }
 
       .menu-toggle {
@@ -163,6 +243,17 @@
         flex-direction: column;
         align-items: center;
       }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -216,14 +307,13 @@
     <h2>Partnership</h2>
     <div class="partner-logos">
       <div class="logo-track">
-        <!-- Isi logo (1x) -->
         <img src="img/logo.png" alt="Partner 1">
         <img src="img/Sp2.png" alt="Partner 2">
         <img src="img/logo.png" alt="Partner 3">
         <img src="img/logo.png" alt="Partner 4">
         <img src="img/Sp2.png" alt="Partner 5">
 
-        <!-- Isi logo digandakan lagi (2x) -->
+        <!-- duplicate for looping -->
         <img src="img/logo.png" alt="Partner 1">
         <img src="img/Sp2.png" alt="Partner 2">
         <img src="img/logo.png" alt="Partner 3">
@@ -233,7 +323,7 @@
     </div>
   </section>
   
-   <!-- Footer -->
+  <!-- Footer -->
   <footer>
     <div class="footer-left">
       <img src="img/logo.png" alt="Logo">
@@ -246,26 +336,6 @@
       <a href="#">X (Twitter)</a>
     </div>
   </footer>
-  
- <!-- Script -->
-  <script>
-    function toggleMenu() {
-      document.querySelector('.nav-right').classList.toggle('show');
-    }
 
-    lottie.loadAnimation({
-      container: document.getElementById('construction-animation'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json'
-    });
-
-    gsap.from(".construction-section", {
-      opacity: 0,
-      y: 50,
-      duration: 1.5,
-      ease: "power2.out"
-    });
-  </script>
 </body>
+</html>
