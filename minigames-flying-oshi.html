@@ -1,261 +1,149 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flying Oshi | Oshibase48</title>
-  <link rel="icon" href="img/logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dance Tap Game | Oshibase48</title>
   <style>
     body {
       margin: 0;
+      background: #242D4C;
+      color: #F1EAD8;
       font-family: 'Poppins', sans-serif;
-      background-color: #242D4C;
-      color: #F1EAD8;
-    }
-    .navbar {
-      background-color: #1e2540;
-      padding: 10px 20px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .navbar .logo {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      color: #F1EAD8;
-    }
-    .navbar .logo img {
-      height: 32px;
-      margin-right: 10px;
-    }
-    .nav-right {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .nav-right a {
-      color: #F1EAD8;
-      text-decoration: none;
-      font-weight: 600;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background: url('assets/img/bg-custom.jpg') no-repeat center;
-      background-size: cover;
-      border: 3px solid #f5d38c;
+    h1 { margin-bottom: 20px; }
+
+    #game {
+      position: relative;
+      width: 300px;
+      height: 500px;
+      border: 3px solid #F1EAD8;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1e2540;
     }
 
-    #playBtn {
-      font-family: 'Press Start 2P', monospace;
-      background: #f5b860;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-    }
-
-    .volume-btn, .jump-btn {
-      position: fixed;
-      z-index: 999;
-      background: #f5b860;
-      border: none;
-      padding: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-
-    .volume-btn {
-      bottom: 20px;
-      left: 20px;
-    }
-
-    .jump-btn {
-      bottom: 20px;
-      right: 20px;
-    }
-
-    footer {
-      background-color: #1e2540;
-      color: #F1EAD8;
+    .arrow {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      left: calc(50% - 25px);
+      font-size: 2rem;
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
+      line-height: 50px;
     }
 
-    footer img {
-      height: 40px;
-      margin-bottom: 1rem;
+    .target-zone {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
     }
 
-    @media (max-width: 600px) {
-      canvas {
-        width: 100% !important;
-        height: auto !important;
-      }
+    .target {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #F1EAD8;
+      text-align: center;
+      line-height: 50px;
+      font-size: 2rem;
+      border-radius: 5px;
+    }
+
+    #controls {
+      margin-top: 20px;
+    }
+
+    button {
+      background: #f5d38c;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #score {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<header class="navbar">
-  <div class="logo">
-    <img src="img/logo.png" alt="Logo">
-    Oshibase48
+  <h1>Dance Tap Game 🎶</h1>
+  <div id="game">
+    <div class="target-zone">
+      <div class="target" id="left">←</div>
+      <div class="target" id="up">↑</div>
+      <div class="target" id="down">↓</div>
+      <div class="target" id="right">→</div>
+    </div>
   </div>
-  <nav class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="index.html#tentang">Tentang</a>
-    <a href="berita.html">Berita</a>
-    <a href="galeri.html">Galeri</a>
-    <a href="jadwal.html">Jadwal</a>
-    <a href="shop.html">Shop</a>
-    <a href="minigames.html" class="active">Minigames</a>
-  </nav>
-</header>
 
-<!-- Game -->
-<main>
-  <button id="playBtn">Play</button>
-  <canvas id="gameCanvas" width="360" height="480"></canvas>
-  <button class="volume-btn" onclick="toggleVolume()">🔊</button>
-  <button class="jump-btn" onclick="jump()">⤴️</button>
-</main>
+  <div id="controls">
+    <button onclick="pressKey('ArrowLeft')">←</button>
+    <button onclick="pressKey('ArrowUp')">↑</button>
+    <button onclick="pressKey('ArrowDown')">↓</button>
+    <button onclick="pressKey('ArrowRight')">→</button>
+  </div>
 
-<!-- Footer -->
-<footer>
-  <img src="img/logo.png" alt="Logo">
-  <div>Oshibase48</div>
-  <div>Komunitas fans idol penuh semangat dan solidaritas</div>
-</footer>
+  <div id="score">Score: 0</div>
 
-<audio id="bgm" loop autoplay>
-  <source src="assets/audio/bgm.mp3" type="audio/mp3">
-</audio>
-<audio id="jumpSound">
-  <source src="assets/audio/jump.mp3" type="audio/mp3">
-</audio>
+  <script>
+    const game = document.getElementById("game");
+    let score = 0;
 
-<script>
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-const bgm = document.getElementById("bgm");
-const jumpSound = document.getElementById("jumpSound");
+    function spawnArrow() {
+      const arrows = ["←", "↑", "↓", "→"];
+      const keys = ["ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"];
+      const index = Math.floor(Math.random() * arrows.length);
 
-let oshi = new Image();
-oshi.src = 'assets/img/oshi-pixel.png';
+      const arrow = document.createElement("div");
+      arrow.classList.add("arrow");
+      arrow.textContent = arrows[index];
+      arrow.dataset.key = keys[index];
+      arrow.style.left = `${25 + index * 70}px`;
+      arrow.style.top = "-50px";
+      game.appendChild(arrow);
 
-let gravity = 0.25;
-let lift = -6;
-let oshiY = canvas.height / 2;
-let velocity = 0;
-let playing = false;
-
-let pipes = [];
-let score = 0;
-let lives = 3;
-
-function drawOshi() {
-  ctx.drawImage(oshi, 50, oshiY, 40, 40);
-}
-
-function drawPipes() {
-  pipes.forEach(pipe => {
-    ctx.fillStyle = '#f5d38c';
-    ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
-    ctx.fillRect(pipe.x, canvas.height - pipe.bottom, pipe.width, pipe.bottom);
-  });
-}
-
-function updatePipes() {
-  pipes.forEach(pipe => {
-    pipe.x -= 2;
-    if (pipe.x + pipe.width < 0) {
-      pipe.x = canvas.width;
-      pipe.top = Math.random() * 200 + 50;
-      pipe.bottom = Math.random() * 200 + 50;
-      score++;
+      const fall = setInterval(() => {
+        arrow.style.top = parseInt(arrow.style.top) + 5 + "px";
+        if (parseInt(arrow.style.top) > 500) {
+          arrow.remove();
+          clearInterval(fall);
+        }
+      }, 50);
     }
 
-    // Collision
-    if (
-      50 < pipe.x + pipe.width &&
-      50 + 40 > pipe.x &&
-      (oshiY < pipe.top || oshiY + 40 > canvas.height - pipe.bottom)
-    ) {
-      lives--;
-      pipe.x = -pipe.width;
+    setInterval(spawnArrow, 1500);
+
+    function checkHit(key) {
+      const arrows = document.querySelectorAll(".arrow");
+      arrows.forEach(arrow => {
+        const arrowTop = parseInt(arrow.style.top);
+        if (arrow.dataset.key === key && arrowTop > 400 && arrowTop < 480) {
+          score += 10;
+          document.getElementById("score").textContent = "Score: " + score;
+          arrow.remove();
+        }
+      });
     }
-  });
-}
 
-function drawScore() {
-  ctx.fillStyle = "#F1EAD8";
-  ctx.font = "16px Poppins";
-  ctx.fillText("Skor: " + score, 10, 20);
-  ctx.fillText("Nyawa: " + lives, 10, 40);
-}
+    document.addEventListener("keydown", e => checkHit(e.key));
 
-function gameLoop() {
-  if (!playing) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  velocity += gravity;
-  oshiY += velocity;
-
-  if (oshiY + 40 > canvas.height) {
-    oshiY = canvas.height - 40;
-    velocity = 0;
-    lives--;
-  }
-
-  drawOshi();
-  updatePipes();
-  drawPipes();
-  drawScore();
-
-  if (lives > 0) {
-    requestAnimationFrame(gameLoop);
-  } else {
-    alert("Game Over! Skor kamu: " + score);
-    playing = false;
-  }
-}
-
-function jump() {
-  velocity = lift;
-  jumpSound.play();
-}
-
-document.getElementById("playBtn").onclick = () => {
-  oshiY = canvas.height / 2;
-  velocity = 0;
-  score = 0;
-  lives = 3;
-  pipes = [
-    { x: canvas.width, width: 40, top: 100, bottom: 100 },
-    { x: canvas.width + 200, width: 40, top: 150, bottom: 120 }
-  ];
-  playing = true;
-  bgm.play();
-  gameLoop();
-};
-
-function toggleVolume() {
-  bgm.muted = !bgm.muted;
-}
-
-window.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') jump();
-});
-</script>
+    function pressKey(key) {
+      checkHit(key); // buat HP (tombol UI)
+    }
+  </script>
 </body>
 </html>
