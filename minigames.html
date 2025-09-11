@@ -246,6 +246,28 @@
       <a href="#">X (Twitter)</a>
     </div>
   </footer>
-
 </body>
 </html>
+
+ <!-- Script -->
+  <script>
+    function toggleMenu() {
+      document.querySelector('.nav-right').classList.toggle('show');
+    }
+
+    lottie.loadAnimation({
+      container: document.getElementById('construction-animation'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://assets2.lottiefiles.com/packages/lf20_j1adxtyb.json'
+    });
+
+    gsap.from(".construction-section", {
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: "power2.out"
+    });
+  </script>
+</body>
