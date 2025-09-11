@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dance Tap Game | Oshibase48</title>
+  <title>Catch the Oshi 🎯</title>
   <style>
     body {
       margin: 0;
@@ -13,137 +13,139 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       height: 100vh;
       overflow: hidden;
     }
 
-    h1 { margin-bottom: 20px; }
+    h1 { margin: 10px; }
 
     #game {
       position: relative;
-      width: 300px;
-      height: 500px;
+      width: 100%;
+      max-width: 400px;
+      height: 600px;
       border: 3px solid #F1EAD8;
       border-radius: 10px;
-      overflow: hidden;
       background: #1e2540;
+      overflow: hidden;
     }
 
-    .arrow {
+    .oshi {
       position: absolute;
-      width: 50px;
-      height: 50px;
-      left: calc(50% - 25px);
-      font-size: 2rem;
-      text-align: center;
-      line-height: 50px;
-    }
-
-    .target-zone {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .target {
-      width: 50px;
-      height: 50px;
-      border: 2px solid #F1EAD8;
-      text-align: center;
-      line-height: 50px;
-      font-size: 2rem;
-      border-radius: 5px;
-    }
-
-    #controls {
-      margin-top: 20px;
-    }
-
-    button {
-      background: #f5d38c;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 8px;
-      font-weight: bold;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
+      transition: transform 0.1s;
     }
 
-    #score {
+    .oshi:active {
+      transform: scale(0.8);
+    }
+
+    #score, #lives {
       margin-top: 10px;
       font-size: 1.2rem;
       font-weight: bold;
     }
+
+    #game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #f5d38c;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h1>Dance Tap Game 🎶</h1>
+  <h1>Catch the Oshi 🎯</h1>
   <div id="game">
-    <div class="target-zone">
-      <div class="target" id="left">←</div>
-      <div class="target" id="up">↑</div>
-      <div class="target" id="down">↓</div>
-      <div class="target" id="right">→</div>
+    <div id="game-over">
+      <h2>Game Over!</h2>
+      <p id="final-score"></p>
+      <button onclick="restartGame()">Main Lagi</button>
     </div>
   </div>
-
-  <div id="controls">
-    <button onclick="pressKey('ArrowLeft')">←</button>
-    <button onclick="pressKey('ArrowUp')">↑</button>
-    <button onclick="pressKey('ArrowDown')">↓</button>
-    <button onclick="pressKey('ArrowRight')">→</button>
-  </div>
-
   <div id="score">Score: 0</div>
+  <div id="lives">Lives: 3</div>
 
   <script>
     const game = document.getElementById("game");
+    const scoreDisplay = document.getElementById("score");
+    const livesDisplay = document.getElementById("lives");
+    const gameOverScreen = document.getElementById("game-over");
+    const finalScore = document.getElementById("final-score");
+
     let score = 0;
+    let lives = 3;
+    let gameInterval;
 
-    function spawnArrow() {
-      const arrows = ["←", "↑", "↓", "→"];
-      const keys = ["ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"];
-      const index = Math.floor(Math.random() * arrows.length);
+    function spawnOshi() {
+      const oshi = document.createElement("img");
+      oshi.src = "img/logo.png"; // 👉 ganti ke gambar oshi (tanpa background)
+      oshi.classList.add("oshi");
+      oshi.style.left = Math.random() * (game.offsetWidth - 60) + "px";
+      oshi.style.top = "-60px";
 
-      const arrow = document.createElement("div");
-      arrow.classList.add("arrow");
-      arrow.textContent = arrows[index];
-      arrow.dataset.key = keys[index];
-      arrow.style.left = `${25 + index * 70}px`;
-      arrow.style.top = "-50px";
-      game.appendChild(arrow);
+      game.appendChild(oshi);
 
-      const fall = setInterval(() => {
-        arrow.style.top = parseInt(arrow.style.top) + 5 + "px";
-        if (parseInt(arrow.style.top) > 500) {
-          arrow.remove();
-          clearInterval(fall);
+      let fallInterval = setInterval(() => {
+        let top = parseInt(oshi.style.top);
+        oshi.style.top = top + 5 + "px";
+
+        if (top > game.offsetHeight - 60) {
+          clearInterval(fallInterval);
+          oshi.remove();
+          lives--;
+          livesDisplay.textContent = "Lives: " + lives;
+          if (lives <= 0) endGame();
         }
       }, 50);
-    }
 
-    setInterval(spawnArrow, 1500);
-
-    function checkHit(key) {
-      const arrows = document.querySelectorAll(".arrow");
-      arrows.forEach(arrow => {
-        const arrowTop = parseInt(arrow.style.top);
-        if (arrow.dataset.key === key && arrowTop > 400 && arrowTop < 480) {
-          score += 10;
-          document.getElementById("score").textContent = "Score: " + score;
-          arrow.remove();
-        }
+      oshi.addEventListener("click", () => {
+        score += 10;
+        scoreDisplay.textContent = "Score: " + score;
+        clearInterval(fallInterval);
+        oshi.remove();
       });
     }
 
-    document.addEventListener("keydown", e => checkHit(e.key));
+    function startGame() {
+      score = 0;
+      lives = 3;
+      scoreDisplay.textContent = "Score: " + score;
+      livesDisplay.textContent = "Lives: " + lives;
+      gameOverScreen.style.display = "none";
 
-    function pressKey(key) {
-      checkHit(key); // buat HP (tombol UI)
+      gameInterval = setInterval(spawnOshi, 1500);
     }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      finalScore.textContent = "Score Akhir: " + score;
+      gameOverScreen.style.display = "block";
+    }
+
+    function restartGame() {
+      startGame();
+    }
+
+    startGame();
   </script>
 </body>
 </html>
