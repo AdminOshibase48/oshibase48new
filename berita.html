@@ -21,44 +21,78 @@
       overflow-x: hidden;
     }
 
-    /* Navbar */
+   /* Navbar */
     .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 30px;
-      background: #1b223a;
-      position: sticky;
-      top: 0;
+      padding: 1rem 2rem;
+      background-color: #1e2540;
       z-index: 1000;
+      animation: slideDown 0.8s ease-out;
     }
-    .navbar .logo {
+
+    .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
       font-weight: 600;
+      font-size: 1.1rem;
     }
-    .navbar .logo img {
-      height: 35px;
+
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
     }
+
     .nav-right {
       display: flex;
-      gap: 20px;
+      gap: 1.5rem;
+      align-items: center;
     }
+
     .nav-right a {
-      color: var(--vanilla-cream);
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      color: #F1EAD8;
+      font-weight: 600;
+      position: relative;
     }
-    .nav-right a:hover,
+
+    .nav-right a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #f5b860;
+      transition: width 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      color: #f5b860;
+    }
+    .nav-right a:hover::after {
+      width: 100%;
+    }
+
     .nav-right a.active {
-      color: #ffd369;
+      color: #f5d38c;
     }
+
     .menu-toggle {
       display: none;
-      font-size: 24px;
+      font-size: 1.5rem;
       cursor: pointer;
+      color: #F1EAD8;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     /* Berita Section */
