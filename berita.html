@@ -112,22 +112,44 @@
 
     /* Partnership */
     #partnership {
-      padding: 40px 20px;
+      padding: 50px 0;
+      background: #1b2038;
       text-align: center;
     }
+
+    #partnership h2 {
+      color: #F1EAD8;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
     .partner-logos {
       overflow: hidden;
-      margin-top: 20px;
+      position: relative;
+      width: 100%;
     }
+
     .logo-track {
       display: flex;
       gap: 50px;
-      animation: scroll 15s linear infinite;
+      width: max-content;
+      animation: scrollLeft 20s linear infinite;
     }
+
     .logo-track img {
-      height: 50px;
+      max-height: 100px;
+      height: auto;
+      width: auto;
+      margin: 0 20px;
+      transition: transform 0.3s ease;
     }
-    @keyframes scroll {
+
+    .logo-track img:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes scrollLeft {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
