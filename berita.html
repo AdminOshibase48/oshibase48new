@@ -5,9 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berita | Oshibase48</title>
   <link rel="icon" href="img/logo.png" />
-  <link rel="stylesheet" href="assets/css/berita.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    :root {
+      --midnight-indigo: #242D4C;
+      --vanilla-cream: #F1EAD8;
+      --card-bg: #2f3860;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--midnight-indigo);
+      color: var(--vanilla-cream);
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: #1b223a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .navbar .logo img {
+      height: 35px;
+    }
+    .nav-right {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-right a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-right a:hover,
+    .nav-right a.active {
+      color: #ffd369;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Berita Section */
+    .berita-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .berita-section h2 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .berita-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .berita-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: left;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .berita-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .berita-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .berita-content {
+      padding: 15px;
+    }
+    .berita-content h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+    .berita-meta {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-bottom: 10px;
+    }
+    .berita-content p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Partnership */
+    #partnership {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .partner-logos {
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .logo-track {
+      display: flex;
+      gap: 50px;
+      animation: scroll 15s linear infinite;
+    }
+    .logo-track img {
+      height: 50px;
+    }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Footer */
+    footer {
+      background: #1b223a;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-left img {
+      height: 35px;
+    }
+    .footer-right {
+      display: flex;
+      gap: 15px;
+    }
+    .footer-right a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-right a:hover {
+      color: #ffd369;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        background: #1b223a;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 15px;
+        border-radius: 8px;
+      }
+      .nav-right.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        color: var(--vanilla-cream);
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -34,20 +209,33 @@
   <!-- Berita Section -->
   <section class="berita-section">
     <h2 data-aos="fade-up">Berita Terbaru</h2>
+    <div class="berita-list">
+      <div class="berita-card" data-aos="fade-up" data-aos-delay="100">
+        <img src="img/berita1.jpg" alt="JKT48 Rilis Single Baru">
+        <div class="berita-content">
+          <h3>🎤 JKT48 Rilis Single Baru "Melodi Cinta"</h3>
+          <div class="berita-meta">Ditulis oleh Admin | 13 Sept 2025</div>
+          <p>JKT48 resmi merilis single terbaru mereka bertajuk "Melodi Cinta" pada konser spesial musim panas kemarin...</p>
+        </div>
+      </div>
 
-    <div class="berita-card" data-aos="fade-up" data-aos-delay="100">
-      <h3>🎤 JKT48 Rilis Single Baru "Melodi Cinta"</h3>
-      <p>Grup idola JKT48 resmi merilis single terbarunya yang bertajuk "Melodi Cinta" dalam konser spesial musim panas kemarin.</p>
-    </div>
+      <div class="berita-card" data-aos="fade-up" data-aos-delay="200">
+        <img src="img/berita2.jpg" alt="Galeri Eksklusif Behind the Stage">
+        <div class="berita-content">
+          <h3>📷 Galeri Eksklusif Behind the Stage</h3>
+          <div class="berita-meta">Ditulis oleh Tim Oshibase | 12 Sept 2025</div>
+          <p>Foto-foto di balik layar persiapan konser kini sudah bisa dilihat di halaman galeri Oshibase48...</p>
+        </div>
+      </div>
 
-    <div class="berita-card" data-aos="fade-up" data-aos-delay="200">
-      <h3>📷 Galeri Eksklusif Behind the Stage</h3>
-      <p>Foto-foto di balik layar selama persiapan konser tersedia sekarang di halaman galeri Oshibase48!</p>
-    </div>
-
-    <div class="berita-card" data-aos="fade-up" data-aos-delay="300">
-      <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
-      <p>Oshibase48 hadir di acara komunitas JKT48 fans Semarang dan Bandung. Jangan lewatkan kesempatan bergabung!</p>
+      <div class="berita-card" data-aos="fade-up" data-aos-delay="300">
+        <img src="img/berita3.jpg" alt="Open Booth Event">
+        <div class="berita-content">
+          <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
+          <div class="berita-meta">Ditulis oleh Kontributor | 10 Sept 2025</div>
+          <p>Oshibase48 hadir di acara komunitas JKT48 fans di Semarang dan Bandung. Jangan lewatkan kesempatan bergabung...</p>
+        </div>
+      </div>
     </div>
   </section>
 
