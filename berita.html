@@ -147,8 +147,10 @@
       gap: 8px;
     }
     .footer-left img {
-      height: 35px;
-    }
+  max-height: 40px; /* atur tinggi maksimal */
+  width: auto;      /* biar proporsi tetap */
+  object-fit: contain; /* jaga biar nggak gepeng */
+   }
     .footer-right {
       display: flex;
       gap: 15px;
