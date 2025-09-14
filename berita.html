@@ -1,293 +1,156 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Berita | Oshibase48</title>
-  <link rel="icon" href="img/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oshibase48</title>
   <style>
-    :root{
-      --midnight-indigo:#242D4C;
-      --vanilla-cream:#F1EAD8;
-      --card-bg:#2f3860;
+    :root {
+      --midnight-indigo: #242D4C;
+      --vanilla-cream: #F1EAD8;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background:var(--midnight-indigo);
-      color:var(--vanilla-cream);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--midnight-indigo);
+      color: var(--vanilla-cream);
     }
 
-    /* NAVBAR */
-    .navbar{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:64px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      padding:0 20px;
-      background:#1e2540;
-      z-index:1200;
-      box-shadow:0 2px 8px rgba(0,0,0,0.2);
-      animation:slideDown .6s ease-out;
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1e2540;
+      z-index: 1000;
     }
-    .logo{display:flex;align-items:center;gap:10px;font-weight:600}
-    .logo img{height:34px; width:auto; display:block}
-
-    .nav-right{
-      margin-left:auto;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:nowrap; /* penting: jangan pecah baris */
-      overflow:hidden;  /* jika sempit, sembunyikan yang kelebihan */
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2rem;
     }
-    .nav-right a{
-      color:var(--vanilla-cream);
-      text-decoration:none;
-      font-weight:600;
-      padding:6px 8px;
-      white-space:nowrap;
-      font-size:0.95rem;
-      display:inline-block;
-    }
-    .nav-right a.active{color:#f5d38c}
-    .nav-right a:hover{color:#f5b860}
-
-    .menu-toggle{
-      display:none;
-      background:none;
-      border:0;
-      color:var(--vanilla-cream);
-      font-size:24px;
-      cursor:pointer;
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
     }
 
-    @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
-
-    /* BERITA - offset supaya tidak tertutup navbar */
-    .berita-section{padding:100px 18px 60px;text-align:center}
-    .berita-section h2{margin-bottom:22px;font-size:2rem}
-
-    .berita-list{
-      max-width:1100px;margin:0 auto;
-      display:grid;gap:22px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    /* Menu Desktop */
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
-    .berita-card{
-      background:var(--card-bg);
-      border-radius:12px;overflow:hidden;
-      text-align:left;transition:transform .25s,box-shadow .25s;
+    .nav-links a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      font-weight: 500;
     }
-    .berita-card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .berita-card img{width:100%;height:180px;object-fit:cover;display:block}
-    .berita-content{padding:14px}
-    .berita-content h3{margin:0 0 8px;font-size:1.05rem}
-    .berita-meta{font-size:.82rem;opacity:.85;margin-bottom:10px}
-    .berita-content p{margin:0;font-size:.92rem;line-height:1.45}
-    .berita-content button{margin-top:10px;padding:8px 12px;border:0;border-radius:8px;background:#f5b860;color:#111;font-weight:600;cursor:pointer}
-
-    /* PARTNERSHIP MARQUEE */
-    #partnership{padding:50px 0;background:#1b2038;text-align:center}
-    .partner-viewport{max-width:1100px;margin:0 auto;overflow:hidden;padding:8px 6px}
-    .logo-track{
-      display:flex;gap:36px;align-items:center;
-      width:max-content;
-      animation:marquee 18s linear infinite;
-      will-change:transform;
-    }
-    .logo-track img{height:70px;display:block;transition:transform .2s}
-    .logo-track img:hover{transform:scale(1.12)}
-    .logo-track:hover{animation-play-state:paused}
-
-    @keyframes marquee{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
+    .nav-links a:hover {
+      text-decoration: underline;
     }
 
-    /* FOOTER */
-    footer{
-      background:#1e2540;color:var(--vanilla-cream);
-      padding:20px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+    /* Burger button (mobile only) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
     }
-    footer img{height:40px;margin-right:12px}
-    .footer-left{display:flex;align-items:center;gap:12px}
-    .footer-left span{font-weight:700}
-    .footer-right a{color:var(--vanilla-cream);text-decoration:none;margin-left:10px}
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: var(--vanilla-cream);
+      margin: 4px 0;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px){
-      .menu-toggle{display:block}
-      .nav-right{
-        position:fixed;
-        top:64px;
-        right:12px;
-        width:220px;
-        max-width:72%;
-        background:#182033;
-        flex-direction:column;
-        gap:8px;
-        padding:10px;
-        border-radius:8px;
-        box-shadow:0 12px 30px rgba(0,0,0,.45);
-        transform:translateX(110%);
-        transition:transform .28s ease;
-        z-index:1300;
+    /* Mobile Menu */
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100%;
+      background: #1e2540;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      transition: right 0.4s ease;
+      z-index: 999;
+    }
+    .nav-mobile.active {
+      right: 0;
+    }
+    .nav-mobile a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      padding: 1rem 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(241,234,216,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
       }
-      .nav-right.active{transform:translateX(0)}
-      .nav-right a{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);width:100%}
-      .logo img{height:30px}
-      .logo-track img{height:50px}
-      .berita-section{padding-top:110px}
-    }
-
-    /* tiny screens */
-    @media (max-width:420px){
-      .nav-right{width:200px}
-      .logo-track{gap:18px}
-      .berita-section h2{font-size:1.6rem}
+      .menu-toggle {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="navbar" role="banner">
+  <!-- Navbar -->
+  <nav class="navbar">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo Oshibase48" />
-      <span>Oshibase48</span>
+      <img src="img/logo.png" alt="logo">
+      Oshibase48
     </div>
 
-    <nav class="nav-right" role="navigation" aria-label="Menu utama">
-      <a href="index.html">Home</a>
-      <a href="index.html#tentang">Tentang</a>
-      <a href="berita.html" class="active">Berita</a>
-      <a href="galeri.html">Galeri</a>
-      <a href="jadwal.html">Jadwal</a>
-      <a href="shop.html">Shop</a>
-      <a href="minigames.html">Minigames</a>
-    </nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tentang.html">Tentang</a></li>
+      <li><a href="berita.html">Berita</a></li>
+      <li><a href="galeri.html">Galeri</a></li>
+      <li><a href="jadwal.html">Jadwal</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="minigames.html">Minigames</a></li>
+    </ul>
 
-    <button class="menu-toggle" aria-label="Buka menu">☰</button>
-  </header>
-
-  <!-- BERITA -->
-  <main>
-    <section class="berita-section">
-      <h2 data-aos="fade-up">Berita Terbaru</h2>
-
-      <div class="berita-list">
-        <article class="berita-card" data-aos="fade-up" data-aos-delay="100">
-          <img src="img/eventnew.jpg" alt="Event">
-          <div class="berita-content">
-            <h3>🎤 Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival</h3>
-            <div class="berita-meta">Ditulis oleh Admin | 7 Sept 2025</div>
-            <p>JKT48 akan mengadakan Personal Meet and Greet Festival bertajuk “SISTER REUNION” — informasi lengkap dapat dibaca pada halaman pengumuman.</p>
-            <button onclick="location.href='pengumuman-sister-reunion-2025.html'">Lihat Selengkapnya</button>
-          </div>
-        </article>
-
-        <article class="berita-card" data-aos="fade-up" data-aos-delay="200">
-          <img src="img/eventnew.jpg" alt="Timetable">
-          <div class="berita-content">
-            <h3>Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION”</h3>
-            <div class="berita-meta">Ditulis oleh Tim Oshibase | 12 Sept 2025</div>
-            <p>Pengumuman jadwal penjualan dan timetable acara M&G "SISTER REUNION".</p>
-            <button onclick="location.href='pengumuman-1954.html'">Lihat Selengkapnya</button>
-          </div>
-        </article>
-
-        <article class="berita-card" data-aos="fade-up" data-aos-delay="300">
-          <img src="img/berita3.jpg" alt="Open Booth">
-          <div class="berita-content">
-            <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
-            <div class="berita-meta">Ditulis oleh Kontributor | 10 Sept 2025</div>
-            <p>Oshibase48 hadir di acara komunitas JKT48 fans di Semarang dan Bandung. Jangan lewatkan kesempatan bergabung...</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- PARTNERSHIP -->
-    <section id="partnership">
-      <h2>Partnership</h2>
-      <div class="partner-viewport" aria-hidden="false">
-        <div class="logo-track" aria-hidden="false">
-          <!-- set asli -->
-          <img src="img/logo.png" alt="Partner 1">
-          <img src="img/Sp2.png" alt="Partner 2">
-          <img src="img/logo.png" alt="Partner 3">
-          <img src="img/logosp3.svg" alt="Partner 4">
-          <img src="img/logo.png" alt="Partner 5">
-          <!-- duplikat agar loop mulus -->
-          <img src="img/logo.png" alt="Partner 1">
-          <img src="img/Sp2.png" alt="Partner 2">
-          <img src="img/logo.png" alt="Partner 3">
-          <img src="img/logosp3.svg" alt="Partner 4">
-          <img src="img/logo.png" alt="Partner 5">
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">
-      <img src="img/logo.png" alt="Logo">
-      <div>
-        <span>Oshibase48</span>
-        <div>Komunitas fans idol penuh semangat dan solidaritas</div>
-      </div>
+    <!-- Burger -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    <div class="footer-right">
-      <a href="https://www.instagram.com/oshibase48._/" target="_blank">Instagram</a>
-      <a href="#">YouTube</a>
-      <a href="#">X (Twitter)</a>
-    </div>
-  </footer>
+  </nav>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <!-- Mobile Menu -->
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="berita.html">Berita</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="jadwal.html">Jadwal</a>
+    <a href="shop.html">Shop</a>
+    <a href="minigames.html">Minigames</a>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      AOS.init();
-
-      const toggle = document.querySelector('.menu-toggle');
-      const nav = document.querySelector('.nav-right');
-
-      // Toggle open/close + change icon
-      toggle.addEventListener('click', function(e){
-        nav.classList.toggle('active');
-        toggle.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
-      });
-
-      // Klik di luar => tutup (hanya di mobile)
-      document.addEventListener('click', function(e){
-        if (window.innerWidth <= 768) {
-          if (!e.target.closest('.nav-right') && !e.target.closest('.menu-toggle')) {
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              toggle.innerHTML = '☰';
-            }
-          }
-        }
-      });
-
-      // Resize: pastikan state bersih saat berpindah ke desktop
-      window.addEventListener('resize', function(){
-        if (window.innerWidth > 768) {
-          nav.classList.remove('active');
-          toggle.innerHTML = '☰';
-        }
-      });
-    });
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("active");
+    }
   </script>
+
 </body>
 </html>
