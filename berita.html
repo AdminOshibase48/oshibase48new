@@ -21,23 +21,61 @@
       overflow-x: hidden;
     }
 
-   /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #1e2540;
-      z-index: 1000;
-      animation: slideDown 0.8s ease-out;
-      @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
+   //* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e2540;
+  z-index: 1000;
+  animation: slideDown 0.8s ease-out;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .nav-links li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none; /* default tidak tampil */
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Mobile Style */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: -100%;
+    flex-direction: column;
+    background-color: #1e2540;
+    width: 100%;
+    text-align: center;
+    transition: left 0.3s ease-in-out;
+    padding: 1rem 0;
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
     .logo {
       display: flex;
       align-items: center;
