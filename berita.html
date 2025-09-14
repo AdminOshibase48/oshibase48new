@@ -1,214 +1,172 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Berita | Oshibase48</title>
   <link rel="icon" href="img/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
-    :root {
-      --midnight-indigo: #242D4C;
-      --vanilla-cream: #F1EAD8;
-      --card-bg: #2f3860;
+    :root{
+      --midnight-indigo:#242D4C;
+      --vanilla-cream:#F1EAD8;
+      --card-bg:#2f3860;
     }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--midnight-indigo);
-      color: var(--vanilla-cream);
-      overflow-x: hidden;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #1e2540;
-      z-index: 1000;
-      animation: slideDown 0.8s ease-out;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:var(--midnight-indigo);
+      color:var(--vanilla-cream);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--vanilla-cream);
+    /* NAVBAR */
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:0 20px;
+      background:#1e2540;
+      z-index:1200;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+      animation:slideDown .6s ease-out;
+    }
+    .logo{display:flex;align-items:center;gap:10px;font-weight:600}
+    .logo img{height:34px; width:auto; display:block}
+
+    .nav-right{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:nowrap; /* penting: jangan pecah baris */
+      overflow:hidden;  /* jika sempit, sembunyikan yang kelebihan */
+    }
+    .nav-right a{
+      color:var(--vanilla-cream);
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 8px;
+      white-space:nowrap;
+      font-size:0.95rem;
+      display:inline-block;
+    }
+    .nav-right a.active{color:#f5d38c}
+    .nav-right a:hover{color:#f5b860}
+
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:0;
+      color:var(--vanilla-cream);
+      font-size:24px;
+      cursor:pointer;
     }
 
-    .logo img {
-      height: 30px;
-      margin-right: 10px;
+    @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    /* BERITA - offset supaya tidak tertutup navbar */
+    .berita-section{padding:100px 18px 60px;text-align:center}
+    .berita-section h2{margin-bottom:22px;font-size:2rem}
+
+    .berita-list{
+      max-width:1100px;margin:0 auto;
+      display:grid;gap:22px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+    .berita-card{
+      background:var(--card-bg);
+      border-radius:12px;overflow:hidden;
+      text-align:left;transition:transform .25s,box-shadow .25s;
+    }
+    .berita-card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .berita-card img{width:100%;height:180px;object-fit:cover;display:block}
+    .berita-content{padding:14px}
+    .berita-content h3{margin:0 0 8px;font-size:1.05rem}
+    .berita-meta{font-size:.82rem;opacity:.85;margin-bottom:10px}
+    .berita-content p{margin:0;font-size:.92rem;line-height:1.45}
+    .berita-content button{margin-top:10px;padding:8px 12px;border:0;border-radius:8px;background:#f5b860;color:#111;font-weight:600;cursor:pointer}
+
+    /* PARTNERSHIP MARQUEE */
+    #partnership{padding:50px 0;background:#1b2038;text-align:center}
+    .partner-viewport{max-width:1100px;margin:0 auto;overflow:hidden;padding:8px 6px}
+    .logo-track{
+      display:flex;gap:36px;align-items:center;
+      width:max-content;
+      animation:marquee 18s linear infinite;
+      will-change:transform;
+    }
+    .logo-track img{height:70px;display:block;transition:transform .2s}
+    .logo-track img:hover{transform:scale(1.12)}
+    .logo-track:hover{animation-play-state:paused}
+
+    @keyframes marquee{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
     }
 
-    .nav-right {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
+    /* FOOTER */
+    footer{
+      background:#1e2540;color:var(--vanilla-cream);
+      padding:20px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
     }
+    footer img{height:40px;margin-right:12px}
+    .footer-left{display:flex;align-items:center;gap:12px}
+    .footer-left span{font-weight:700}
+    .footer-right a{color:var(--vanilla-cream);text-decoration:none;margin-left:10px}
 
-    .nav-right a {
-      text-decoration: none;
-      color: var(--vanilla-cream);
-      font-weight: 600;
-      position: relative;
-    }
-
-    .nav-right a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: #f5b860;
-      transition: width 0.3s ease;
-    }
-
-    .nav-right a:hover {
-      color: #f5b860;
-    }
-    .nav-right a:hover::after {
-      width: 100%;
-    }
-
-    .nav-right a.active {
-      color: #f5d38c;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--vanilla-cream);
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Responsive */
-    @media(max-width:768px){
-      .nav-right {
-        position: absolute;
-        top: 65px;
-        right: 0;
-        background: #1b223a;
-        flex-direction: column;
-        width: 200px;
-        padding: 15px;
-        border-radius: 8px 0 0 8px;
-        display: none;
+    /* RESPONSIVE */
+    @media (max-width: 768px){
+      .menu-toggle{display:block}
+      .nav-right{
+        position:fixed;
+        top:64px;
+        right:12px;
+        width:220px;
+        max-width:72%;
+        background:#182033;
+        flex-direction:column;
+        gap:8px;
+        padding:10px;
+        border-radius:8px;
+        box-shadow:0 12px 30px rgba(0,0,0,.45);
+        transform:translateX(110%);
+        transition:transform .28s ease;
+        z-index:1300;
       }
-      .nav-right.active {
-        display: flex;
-        animation: slideDown 0.3s ease;
-      }
-      .menu-toggle {
-        display: block;
-      }
+      .nav-right.active{transform:translateX(0)}
+      .nav-right a{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);width:100%}
+      .logo img{height:30px}
+      .logo-track img{height:50px}
+      .berita-section{padding-top:110px}
     }
 
-    /* === Berita Section dst. tetap sama === */
-    .berita-section {
-      padding: 80px 20px 60px;
-      text-align: center;
-    }
-    .berita-section h2 {
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-    .berita-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .berita-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: left;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .berita-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-    .berita-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .berita-content {
-      padding: 15px;
-    }
-    .berita-content h3 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-    }
-    .berita-meta {
-      font-size: 0.8rem;
-      opacity: 0.8;
-      margin-bottom: 10px;
-    }
-    .berita-content p {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    /* Partnership & Footer tetap sama */
-    footer {
-      background-color: #1e2540;
-      color: #F1EAD8;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    footer img {
-      height: 40px;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-left span {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-right a {
-      color: #F1EAD8;
-      margin: 0 0.5rem;
-      text-decoration: none;
+    /* tiny screens */
+    @media (max-width:420px){
+      .nav-right{width:200px}
+      .logo-track{gap:18px}
+      .berita-section h2{font-size:1.6rem}
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
+  <!-- NAV -->
+  <header class="navbar" role="banner">
     <div class="logo">
-      <img src="img/logo.png" alt="Logo" />
-      Oshibase48
+      <img src="img/logo.png" alt="Logo Oshibase48" />
+      <span>Oshibase48</span>
     </div>
-    <div class="menu-toggle" onclick="document.querySelector('.nav-right').classList.toggle('active')">
-      &#9776;
-    </div>
-    <nav class="nav-right">
+
+    <nav class="nav-right" role="navigation" aria-label="Menu utama">
       <a href="index.html">Home</a>
       <a href="index.html#tentang">Tentang</a>
       <a href="berita.html" class="active">Berita</a>
@@ -217,70 +175,77 @@
       <a href="shop.html">Shop</a>
       <a href="minigames.html">Minigames</a>
     </nav>
+
+    <button class="menu-toggle" aria-label="Buka menu">☰</button>
   </header>
 
-  <!-- Berita Section -->
-  <section class="berita-section">
-    <h2 data-aos="fade-up">Berita Terbaru</h2>
-    <div class="berita-list">
-      <div class="berita-card" data-aos="fade-up" data-aos-delay="100">
-        <img src="img/eventnew.jpg" alt="JKT48 Rilis Single Baru">
-        <div class="berita-content">
-          <h3>🎤 JKT48 Rilis Single Baru "Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival"</h3>
-          <div class="berita-meta">Ditulis oleh Admin | 7 Sept 2025</div>
-          <p>Jkt48 akan mengadakan Personal Meet and Greet Festival bertajuk “SISTER REUNION”</p>
-          <button onclick="window.location.href='pengumuman-sister-reunion-2025.html'">Lihat Selengkapnya</button>
+  <!-- BERITA -->
+  <main>
+    <section class="berita-section">
+      <h2 data-aos="fade-up">Berita Terbaru</h2>
+
+      <div class="berita-list">
+        <article class="berita-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="img/eventnew.jpg" alt="Event">
+          <div class="berita-content">
+            <h3>🎤 Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival</h3>
+            <div class="berita-meta">Ditulis oleh Admin | 7 Sept 2025</div>
+            <p>JKT48 akan mengadakan Personal Meet and Greet Festival bertajuk “SISTER REUNION” — informasi lengkap dapat dibaca pada halaman pengumuman.</p>
+            <button onclick="location.href='pengumuman-sister-reunion-2025.html'">Lihat Selengkapnya</button>
+          </div>
+        </article>
+
+        <article class="berita-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="img/eventnew.jpg" alt="Timetable">
+          <div class="berita-content">
+            <h3>Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION”</h3>
+            <div class="berita-meta">Ditulis oleh Tim Oshibase | 12 Sept 2025</div>
+            <p>Pengumuman jadwal penjualan dan timetable acara M&G "SISTER REUNION".</p>
+            <button onclick="location.href='pengumuman-1954.html'">Lihat Selengkapnya</button>
+          </div>
+        </article>
+
+        <article class="berita-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="img/berita3.jpg" alt="Open Booth">
+          <div class="berita-content">
+            <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
+            <div class="berita-meta">Ditulis oleh Kontributor | 10 Sept 2025</div>
+            <p>Oshibase48 hadir di acara komunitas JKT48 fans di Semarang dan Bandung. Jangan lewatkan kesempatan bergabung...</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PARTNERSHIP -->
+    <section id="partnership">
+      <h2>Partnership</h2>
+      <div class="partner-viewport" aria-hidden="false">
+        <div class="logo-track" aria-hidden="false">
+          <!-- set asli -->
+          <img src="img/logo.png" alt="Partner 1">
+          <img src="img/Sp2.png" alt="Partner 2">
+          <img src="img/logo.png" alt="Partner 3">
+          <img src="img/logosp3.svg" alt="Partner 4">
+          <img src="img/logo.png" alt="Partner 5">
+          <!-- duplikat agar loop mulus -->
+          <img src="img/logo.png" alt="Partner 1">
+          <img src="img/Sp2.png" alt="Partner 2">
+          <img src="img/logo.png" alt="Partner 3">
+          <img src="img/logosp3.svg" alt="Partner 4">
+          <img src="img/logo.png" alt="Partner 5">
         </div>
       </div>
+    </section>
+  </main>
 
-      <div class="berita-card" data-aos="fade-up" data-aos-delay="200">
-        <img src="img/eventnew.jpg" alt="Galeri Eksklusif Behind the Stage">
-        <div class="berita-content">
-          <h3>Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION” JKT48 & AKB48 Personal Meet & Greet Festival</h3>
-          <div class="berita-meta">Ditulis oleh Tim Oshibase | 12 Sept 2025</div>
-          <p>JKT48 akan segera mengadakan kembali Personal Meet & Greet (M&G) Festival dengan tema "SISTER REUNION"</p>
-          <button onclick="window.location.href='pengumuman-1954.html'">Lihat Selengkapnya</button>
-        </div>
-      </div>
-
-      <div class="berita-card" data-aos="fade-up" data-aos-delay="300">
-        <img src="img/berita3.jpg" alt="Open Booth Event">
-        <div class="berita-content">
-          <h3>🎪 Open Booth Komunitas di Event Pop Culture!</h3>
-          <div class="berita-meta">Ditulis oleh Kontributor | 10 Sept 2025</div>
-          <p>Oshibase48 hadir di acara komunitas JKT48 fans di Semarang dan Bandung. Jangan lewatkan kesempatan bergabung...</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partnership Section -->
-  <section id="partnership">
-    <h2>Partnership</h2>
-    <div class="partner-logos">
-      <div class="logo-track">
-        <img src="img/logo.png" alt="Partner 1">
-        <img src="img/Sp2.png" alt="Partner 2">
-        <img src="img/logo.png" alt="Partner 3">
-        <img src="img/logosp3.svg" alt="Partner 4">
-        <img src="img/logo.png" alt="Partner 5">
-
-        <!-- duplikat biar looping mulus -->
-        <img src="img/logo.png" alt="Partner 1">
-        <img src="img/Sp2.png" alt="Partner 2">
-        <img src="img/logo.png" alt="Partner 3">
-        <img src="img/logosp3.svg" alt="Partner 4">
-        <img src="img/logo.png" alt="Partner 5">
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-left">
       <img src="img/logo.png" alt="Logo">
-      <span>Oshibase48</span>
-      <div>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</div>
+      <div>
+        <span>Oshibase48</span>
+        <div>Komunitas fans idol penuh semangat dan solidaritas</div>
+      </div>
     </div>
     <div class="footer-right">
       <a href="https://www.instagram.com/oshibase48._/" target="_blank">Instagram</a>
@@ -291,7 +256,38 @@
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init();
+    document.addEventListener('DOMContentLoaded', function(){
+      AOS.init();
+
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav-right');
+
+      // Toggle open/close + change icon
+      toggle.addEventListener('click', function(e){
+        nav.classList.toggle('active');
+        toggle.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
+      });
+
+      // Klik di luar => tutup (hanya di mobile)
+      document.addEventListener('click', function(e){
+        if (window.innerWidth <= 768) {
+          if (!e.target.closest('.nav-right') && !e.target.closest('.menu-toggle')) {
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              toggle.innerHTML = '☰';
+            }
+          }
+        }
+      });
+
+      // Resize: pastikan state bersih saat berpindah ke desktop
+      window.addEventListener('resize', function(){
+        if (window.innerWidth > 768) {
+          nav.classList.remove('active');
+          toggle.innerHTML = '☰';
+        }
+      });
+    });
   </script>
 </body>
 </html>
