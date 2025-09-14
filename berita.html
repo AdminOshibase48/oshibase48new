@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oshibase48</title>
+  <title>Oshibase48 - Partnership</title>
+  <link rel="icon" href="img/logo.png">
   <style>
-    :root {
-      --midnight-indigo: #242D4C;
-      --vanilla-cream: #F1EAD8;
-    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--midnight-indigo);
-      color: var(--vanilla-cream);
+      background-color: #242D4C;
+      color: #F1EAD8;
     }
 
     /* Navbar */
@@ -25,87 +22,56 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
-      background: #1e2540;
+      padding: 1rem 2rem;
+      background-color: #1e2540;
       z-index: 1000;
     }
-    .logo {
-      display: flex;
-      align-items: center;
+    .navbar .logo {
       font-weight: bold;
       font-size: 1.2rem;
     }
-    .logo img {
-      height: 28px;
-      margin-right: 10px;
-    }
-
-    /* Desktop menu */
-    .nav-links {
+    .navbar ul {
+      list-style: none;
       display: flex;
       gap: 1.5rem;
-      list-style: none;
       margin: 0;
       padding: 0;
     }
-    .nav-links a {
-      color: var(--vanilla-cream);
+    .navbar a {
+      color: #F1EAD8;
       text-decoration: none;
       font-weight: 500;
     }
 
-    /* Burger */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
+    /* Partnership Section */
+    .partnership {
+      text-align: center;
+      padding: 7rem 0 3rem; /* ada jarak biar gak ketutup navbar */
+      background-color: #1e2540;
+      overflow: hidden;
     }
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: var(--vanilla-cream);
-      margin: 4px 0;
-      border-radius: 3px;
+    .partnership h2 {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
     }
-
-    /* Mobile menu */
-    .nav-mobile {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 75%;
-      height: 100%;
-      background: #1e2540;
-      padding: 2rem;
+    .partnership-logos {
       display: flex;
-      flex-direction: column;
-      transition: right 0.4s ease;
-      z-index: 2000;
+      gap: 3rem;
+      align-items: center;
+      animation: slide-left 25s linear infinite;
+      width: max-content;
     }
-    .nav-mobile.active {
-      right: 0;
+    .partnership-logos img {
+      height: 80px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
     }
-    .nav-mobile a {
-      color: var(--vanilla-cream);
-      text-decoration: none;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(241,234,216,0.2);
+    .partnership-logos img:hover {
+      transform: scale(1.1);
     }
-    .close-btn {
-      font-size: 1.5rem;
-      align-self: flex-end;
-      cursor: pointer;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .menu-toggle {
-        display: flex;
-      }
+    @keyframes slide-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
@@ -113,46 +79,26 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="img/logo.png" alt="logo">
-      Oshibase48
-    </div>
-
-    <ul class="nav-links">
+    <div class="logo">Oshibase48</div>
+    <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="tentang.html">Tentang</a></li>
       <li><a href="berita.html">Berita</a></li>
-      <li><a href="galeri.html">Galeri</a></li>
       <li><a href="jadwal.html">Jadwal</a></li>
       <li><a href="shop.html">Shop</a></li>
-      <li><a href="minigames.html">Minigames</a></li>
     </ul>
-
-    <!-- Burger -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="nav-mobile" id="mobileMenu">
-    <div class="close-btn" onclick="toggleMenu()">✕</div>
-    <a href="index.html">Home</a>
-    <a href="tentang.html">Tentang</a>
-    <a href="berita.html">Berita</a>
-    <a href="galeri.html">Galeri</a>
-    <a href="jadwal.html">Jadwal</a>
-    <a href="shop.html">Shop</a>
-    <a href="minigames.html">Minigames</a>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById("mobileMenu").classList.toggle("active");
-    }
-  </script>
+  <!-- Partnership Section -->
+  <section class="partnership">
+    <h2>Partnership</h2>
+    <div class="partnership-logos">
+      <img src="img/logo1.png" alt="Logo 1">
+      <img src="img/logo2.png" alt="Logo 2">
+      <img src="img/logo3.png" alt="Logo 3">
+      <img src="img/logo4.png" alt="Logo 4">
+      <img src="img/logo5.png" alt="Logo 5">
+    </div>
+  </section>
 
 </body>
 </html>
