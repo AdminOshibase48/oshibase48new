@@ -78,21 +78,40 @@
     </div>
   </section>
 
-  <!-- Berita Section -->
-  <section id="berita">
-    <h2>Berita Terbaru</h2>
-    <div id="berita-list">
-      <article>
-        <h3>🎤 Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival</h3>
-        <p>JKT48 akan mengadakan Personal Meet and Greet Festival.</p>
-      </article>
-      <article>
-        <h3>Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION”</h3>
-        <p>Pengumuman jadwal penjualan dan timetable acara M&G.</p>
-      </article>
-    </div>
-     <button onclick="window.location.href='berita.html'">Lihat Selengkapnya</button>
-  </section>
+<!-- Berita Section -->
+<section id="berita" style="text-align:center; margin: 40px 0;">
+  <h2>Berita Terbaru</h2>
+  <div id="berita-list" style="text-align:left; max-width:700px; margin:20px auto;">
+    <article>
+      <h3>🎤 Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival</h3>
+      <p>JKT48 akan mengadakan Personal Meet and Greet Festival.</p>
+    </article>
+    <article>
+      <h3>Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION”</h3>
+      <p>Pengumuman jadwal penjualan dan timetable acara M&G.</p>
+    </article>
+  </div>
+
+  <!-- Tombol -->
+  <button 
+    onclick="window.location.href='berita.html'" 
+    style="
+      background-color:#F1EAD8; 
+      color:#242D4C; 
+      border:none; 
+      padding:12px 24px; 
+      border-radius:25px; 
+      font-size:16px; 
+      cursor:pointer; 
+      transition:all 0.3s ease;
+      font-weight:600;
+    "
+    onmouseover="this.style.backgroundColor='#e2d9c2'; this.style.transform='scale(1.05)'"
+    onmouseout="this.style.backgroundColor='#F1EAD8'; this.style.transform='scale(1)'"
+  >
+    Lihat Selengkapnya
+  </button>
+</section>
 
   <!-- Galeri Section -->
   <section id="galeri">
