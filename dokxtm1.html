@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dokumentasi Xtm1 | Oshibase48</title>
-  <link rel="icon" href="img/logo.png" type="image/png">
+  <title>Redirect | Oshibase48</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/logo.svg" type="image/png">
   <style>
+    :root {
+      --midnight-indigo: #242D4C;
+      --vanilla-cream: #F1EAD8;
+      --accent: #f0a500;
+    }
+
+    <style>
     :root {
       --midnight-indigo: #242D4C;
       --vanilla-cream: #F1EAD8;
@@ -182,13 +190,14 @@
   </style>
 </head>
 <body>
+
   <!-- Navbar -->
-  <nav>
-    <div class="logo">
-      <img src="img/logo.svg" alt="Logo">
-      <span>Oshibase48</span>
+  <div class="navbar">
+    <div class="brand">
+      <img src="img/logo.svg" alt="Oshibase48 Logo">
+      <h1>Oshibase48</h1>
     </div>
-    <div class="menu">
+    <div class="navbar-links">
       <a href="#home">Home</a>
       <a href="#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
@@ -197,33 +206,67 @@
       <a href="shop.html">Shop</a>
       <a href="minigames.html">Minigames</a>
     </div>
-  </nav>
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="navbar-links-mobile" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#tentang">Tentang</a>
+    <a href="berita.html">Berita</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="jadwal.html">Jadwal</a>
+    <a href="shop.html">Shop</a>
+    <a href="minigames.html">Minigames</a>
+  </div>
 
-  <!-- Hero -->
-  <header id="home">
-    <h1>Apakah kamu ingin melanjutkan ke Dokumentasi Xtm1?</h1>
-    <p>Klik tombol di bawah untuk menuju ke drive dokumentasi resmi.</p>
-    <a href="https://drive.google.com/drive/folders/1H9WEJEbN4BnxZk5dZsv4M55DpKDg-rKj?usp=sharing" target="_blank">Lanjut ke Dokumentasi</a>
-  </header>
+  <!-- Konfirmasi -->
+  <div class="confirm-box">
+    <h2>Apakah kamu ingin melanjutkan ke <br> <b>Dokumentasi Xtm1</b>?</h2>
+    <a href="https://drive.google.com/drive/folders/1H9WEJEbN4BnxZk5dZsv4M55DpKDg-rKj?usp=sharing" target="_blank">
+      <button class="btn btn-primary">Lanjutkan</button>
+    </a>
+    <a href="index.html">
+      <button class="btn btn-secondary">Batal</button>
+    </a>
+  </div>
 
   <!-- Partnership -->
-  <section class="partnership">
+  <div class="partnership">
     <h2>Partnership</h2>
     <div class="logos">
       <img src="img/logo.svg" alt="Partner 1">
-      <img src="img/logo.svg" alt="Partner 2">
+      <img src="img/Sp2.png" alt="Partner 2">
       <img src="img/Sp3.jpg" alt="Partner 3">
-      <img src="img/Sp2.png" alt="Partner 4">
-      <img src="img/logo.svg" alt="Partner 5">
+      <img src="img/logo.svg" alt="Partner 4">
     </div>
-  </section>
+  </div>
 
   <!-- Footer -->
   <footer>
-    <img src="img/logo.svg" alt="Logo">
-    <p>Oshibase48</p>
-    <p>Komunitas fans idol penuh semangat dan solidaritas</p>
-    <p>&copy; 2025 Oshibase48. All Rights Reserved.</p>
+    <div class="left">
+      <img src="img/logo.svg" alt="Oshibase48">
+      <span>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</span>
+    </div>
+    <div class="right">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">X (Twitter)</a>
+    </div>
   </footer>
+
+  <script>
+    function toggleMenu(x) {
+      const menu = document.getElementById("mobileMenu");
+      if (menu.style.display === "flex") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "flex";
+      }
+    }
+  </script>
+
 </body>
 </html>
