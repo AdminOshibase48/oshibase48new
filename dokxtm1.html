@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirect | Oshibase48</title>
-  <!-- Favicon -->
-  <link rel="icon" href="img/logo.svg" type="image/png">
+  <title>Dokumentasi Xtm1 | Oshibase48</title>
+  <link rel="icon" href="img/logo.png" type="image/png">
   <style>
     :root {
       --midnight-indigo: #242D4C;
       --vanilla-cream: #F1EAD8;
-      --accent: #f0a500;
     }
 
     body {
@@ -18,238 +16,179 @@
       font-family: 'Poppins', sans-serif;
       background-color: var(--midnight-indigo);
       color: var(--vanilla-cream);
-      text-align: center;
       overflow-x: hidden;
-      animation: fadeIn 1s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
     }
 
     /* Navbar */
-    .navbar {
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 30px;
-      background: rgba(0,0,0,0.2);
+      padding: 15px 40px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-    .navbar .brand {
+
+    nav .logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .navbar img {
-      height: 30px;
-      width: auto;
+
+    nav .logo img {
+      height: 40px;
     }
-    .navbar h1 {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 0;
-      color: var(--vanilla-cream);
+
+    nav .logo span {
+      font-size: 18px;
+      font-weight: bold;
     }
-    .navbar-links {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .navbar-links a {
-      color: var(--vanilla-cream);
-      margin-left: 20px;
+
+    nav .menu a {
+      margin: 0 15px;
       text-decoration: none;
-      font-weight: 600;
+      color: var(--vanilla-cream);
+      font-weight: 500;
       transition: 0.3s;
     }
-    .navbar-links a:hover {
-      color: var(--accent);
+
+    nav .menu a:hover {
+      color: #ffcc70;
     }
 
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: var(--vanilla-cream);
-      margin: 4px 0;
-      transition: 0.4s;
+    /* Hero */
+    header {
+      text-align: center;
+      padding: 100px 20px;
     }
 
-    /* Mobile Menu */
-    .navbar-links-mobile {
-      display: none;
-      flex-direction: column;
-      background: rgba(0,0,0,0.95);
-      position: absolute;
-      top: 60px;
-      right: 0;
-      width: 220px;
-      border-radius: 0 0 8px 8px;
-      overflow: hidden;
-      animation: slideDown 0.3s ease forwards;
-    }
-    .navbar-links-mobile a {
-      padding: 15px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: var(--vanilla-cream);
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .navbar-links-mobile a:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--accent);
-    }
-
-    @keyframes slideDown {
-      from {opacity: 0; transform: translateY(-10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar-links {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* Konfirmasi Section */
-    .confirm-box {
-      margin: 100px auto 50px;
-      max-width: 600px;
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      animation: slideUp 0.8s ease-out;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .confirm-box h2 {
+    header h1 {
+      font-size: 2.5rem;
       margin-bottom: 20px;
+      animation: fadeIn 2s ease;
     }
 
-    .btn {
-      display: inline-block;
-      margin: 15px;
-      padding: 12px 25px;
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeIn 2.5s ease;
     }
-    .btn-primary {
-      background: var(--accent);
+
+    header a {
+      background: #ffcc70;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
       color: #242D4C;
+      font-weight: bold;
+      transition: 0.3s;
+      animation: fadeIn 3s ease;
     }
-    .btn-primary:hover {
-      background: #ffbe40;
-      transform: scale(1.05);
-    }
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--vanilla-cream);
-      color: var(--vanilla-cream);
-    }
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
+
+    header a:hover {
+      background: #ffd891;
     }
 
     /* Partnership Section */
     .partnership {
-      margin: 80px 0;
+      padding: 60px 20px;
+      text-align: center;
     }
+
     .partnership h2 {
-      margin-bottom: 30px;
+      font-size: 2rem;
+      margin-bottom: 40px;
     }
+
     .logos {
       display: flex;
       gap: 60px;
       justify-content: center;
       align-items: center;
-      flex-wrap: nowrap;
-      overflow: hidden;
       animation: slideLogos 20s linear infinite;
     }
+
     .logos img {
       height: 80px;
       width: auto;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
     }
+
+    .logos img:nth-child(1) { animation-delay: 0.2s; }
+    .logos img:nth-child(2) { animation-delay: 0.4s; }
+    .logos img:nth-child(3) { animation-delay: 0.6s; }
+    .logos img:nth-child(4) { animation-delay: 0.8s; }
+    .logos img:nth-child(5) { animation-delay: 1s; }
 
     @keyframes slideLogos {
-      from { transform: translateX(100%); }
-      to { transform: translateX(-100%); }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
-    /* Responsive Partnership */
-    @media (max-width: 768px) {
-      .logos {
-        animation: none;
-        flex-wrap: wrap;
-        gap: 30px;
-      }
-      .logos img {
-        height: 60px;
-      }
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     /* Footer */
     footer {
-      margin-top: 80px;
-      padding: 20px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      flex-wrap: wrap;
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.4);
+      margin-top: 60px;
     }
-    footer .left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+
     footer img {
-      height: 25px;
+      height: 50px;
+      margin-bottom: 10px;
     }
-    footer .right a {
-      color: var(--vanilla-cream);
-      margin-left: 15px;
-      text-decoration: none;
-      transition: 0.3s;
+
+    footer p {
+      margin: 5px 0;
     }
-    footer .right a:hover {
-      color: var(--accent);
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .menu a {
+        margin: 8px;
+      }
+
+      .logos {
+        animation: none;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .logos img {
+        height: 60px;
+        animation: fadeIn 1.5s ease forwards;
+      }
     }
   </style>
 </head>
 <body>
-
   <!-- Navbar -->
-  <div class="navbar">
-    <div class="brand">
-      <img src="img/logo.svg" alt="Oshibase48 Logo">
-      <h1>Oshibase48</h1>
+  <nav>
+    <div class="logo">
+      <img src="img/logo.svg" alt="Logo">
+      <span>Oshibase48</span>
     </div>
-    <div class="navbar-links">
+    <div class="menu">
       <a href="#home">Home</a>
       <a href="#tentang">Tentang</a>
       <a href="berita.html">Berita</a>
@@ -258,67 +197,33 @@
       <a href="shop.html">Shop</a>
       <a href="minigames.html">Minigames</a>
     </div>
-    <div class="hamburger" onclick="toggleMenu(this)">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <div class="navbar-links-mobile" id="mobileMenu">
-    <a href="#home">Home</a>
-    <a href="#tentang">Tentang</a>
-    <a href="berita.html">Berita</a>
-    <a href="galeri.html">Galeri</a>
-    <a href="jadwal.html">Jadwal</a>
-    <a href="shop.html">Shop</a>
-    <a href="minigames.html">Minigames</a>
-  </div>
+  </nav>
 
-  <!-- Konfirmasi -->
-  <div class="confirm-box">
-    <h2>Apakah kamu ingin melanjutkan ke <br> <b>Dokumentasi Xtm1</b>?</h2>
-    <a href="https://drive.google.com/drive/folders/1H9WEJEbN4BnxZk5dZsv4M55DpKDg-rKj?usp=sharing" target="_blank">
-      <button class="btn btn-primary">Lanjutkan</button>
-    </a>
-    <a href="index.html">
-      <button class="btn btn-secondary">Batal</button>
-    </a>
-  </div>
+  <!-- Hero -->
+  <header id="home">
+    <h1>Apakah kamu ingin melanjutkan ke Dokumentasi Xtm1?</h1>
+    <p>Klik tombol di bawah untuk menuju ke drive dokumentasi resmi.</p>
+    <a href="https://drive.google.com/drive/folders/1H9WEJEbN4BnxZk5dZsv4M55DpKDg-rKj?usp=sharing" target="_blank">Lanjut ke Dokumentasi</a>
+  </header>
 
   <!-- Partnership -->
-  <div class="partnership">
+  <section class="partnership">
     <h2>Partnership</h2>
     <div class="logos">
       <img src="img/logo.svg" alt="Partner 1">
-      <img src="img/Sp2.png" alt="Partner 2">
+      <img src="img/logo.svg" alt="Partner 2">
       <img src="img/Sp3.jpg" alt="Partner 3">
-      <img src="img/logo.svg" alt="Partner 4">
+      <img src="img/Sp2.png" alt="Partner 4">
+      <img src="img/logo.svg" alt="Partner 5">
     </div>
-  </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <div class="left">
-      <img src="img/logo.svg" alt="Oshibase48">
-      <span>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</span>
-    </div>
-    <div class="right">
-      <a href="#">Instagram</a>
-      <a href="#">YouTube</a>
-      <a href="#">X (Twitter)</a>
-    </div>
+    <img src="img/logo.svg" alt="Logo">
+    <p>Oshibase48</p>
+    <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+    <p>&copy; 2025 Oshibase48. All Rights Reserved.</p>
   </footer>
-
-  <script>
-    function toggleMenu(x) {
-      const menu = document.getElementById("mobileMenu");
-      if (menu.style.display === "flex") {
-        menu.style.display = "none";
-      } else {
-        menu.style.display = "flex";
-      }
-    }
-  </script>
-
 </body>
 </html>
