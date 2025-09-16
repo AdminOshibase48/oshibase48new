@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect | Oshibase48</title>
+  <style>
+    :root {
+      --midnight-indigo: #242D4C;
+      --vanilla-cream: #F1EAD8;
+      --accent: #f0a500;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--midnight-indigo);
+      color: var(--vanilla-cream);
+      text-align: center;
+      overflow-x: hidden;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+    }
+    .navbar h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .navbar a {
+      color: var(--vanilla-cream);
+      margin-left: 20px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .navbar a:hover {
+      color: var(--accent);
+    }
+
+    /* Konfirmasi Section */
+    .confirm-box {
+      margin: 100px auto 50px;
+      max-width: 600px;
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .confirm-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #242D4C;
+    }
+    .btn-primary:hover {
+      background: #ffbe40;
+      transform: scale(1.05);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--vanilla-cream);
+      color: var(--vanilla-cream);
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.05);
+    }
+
+    /* Partnership Section */
+    .partnership {
+      margin: 80px 0;
+    }
+    .partnership h2 {
+      margin-bottom: 30px;
+    }
+    .logos {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      animation: slideLogos 20s linear infinite;
+    }
+    .logos img {
+      height: 80px;
+      width: auto;
+    }
+
+    @keyframes slideLogos {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    footer .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    footer img {
+      height: 25px;
+    }
+    footer .right a {
+      color: var(--vanilla-cream);
+      margin-left: 15px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    footer .right a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>Oshibase48</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="berita.html">Berita</a>
+      <a href="shop.html">Shop</a>
+    </div>
+  </div>
+
+  <!-- Konfirmasi -->
+  <div class="confirm-box">
+    <h2>Apakah kamu ingin melanjutkan ke <br> <b>Dokumentasi Xtm1</b>?</h2>
+    <a href="https://drive.google.com/drive/folders/1H9WEJEbN4BnxZk5dZsv4M55DpKDg-rKj?usp=sharing" target="_blank">
+      <button class="btn btn-primary">Lanjutkan</button>
+    </a>
+    <a href="index.html">
+      <button class="btn btn-secondary">Batal</button>
+    </a>
+  </div>
+
+  <!-- Partnership -->
+  <div class="partnership">
+    <h2>Partnership</h2>
+    <div class="logos">
+      <img src="img/logo1.svg" alt="Partner 1">
+      <img src="img/logo.svg" alt="Partner 2">
+      <img src="img/sp2.png" alt="Partner 3">
+      <img src="img/sp3.jpg" alt="Partner 4">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="left">
+      <img src="img/logo.svg" alt="Oshibase48">
+      <span>Oshibase48 | Komunitas fans idol penuh semangat dan solidaritas</span>
+    </div>
+    <div class="right">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">X (Twitter)</a>
+    </div>
+  </footer>
+
+</body>
+</html>
