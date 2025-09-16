@@ -52,6 +52,7 @@
       font-size: 20px;
       font-weight: 600;
       margin: 0;
+      color: var(--vanilla-cream);
     }
     .navbar-links {
       display: flex;
@@ -60,6 +61,7 @@
       color: var(--vanilla-cream);
       margin-left: 20px;
       text-decoration: none;
+      font-weight: 600;
       transition: 0.3s;
     }
     .navbar-links a:hover {
@@ -98,6 +100,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
       color: var(--vanilla-cream);
       text-decoration: none;
+      font-weight: 600;
       transition: 0.3s;
     }
     .navbar-links-mobile a:hover {
@@ -286,7 +289,6 @@
 
   <script>
     function toggleMenu(x) {
-      x.classList.toggle("change");
       const menu = document.getElementById("mobileMenu");
       if (menu.style.display === "flex") {
         menu.style.display = "none";
