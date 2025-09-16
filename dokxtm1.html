@@ -55,10 +55,10 @@
     }
     .navbar-links {
       display: flex;
-      gap: 20px;
     }
     .navbar-links a {
       color: var(--vanilla-cream);
+      margin-left: 20px;
       text-decoration: none;
       transition: 0.3s;
     }
@@ -66,31 +66,21 @@
       color: var(--accent);
     }
 
-    /* Burger button */
-    .burger {
+    /* Hamburger */
+    .hamburger {
       display: none;
       flex-direction: column;
       cursor: pointer;
-      gap: 5px;
     }
-    .burger span {
-      width: 25px;
+    .hamburger span {
       height: 3px;
+      width: 25px;
       background: var(--vanilla-cream);
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
-    .burger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .burger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .burger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      margin: 4px 0;
+      transition: 0.4s;
     }
 
-    /* Mobile menu */
+    /* Mobile Menu */
     .navbar-links-mobile {
       display: none;
       flex-direction: column;
@@ -99,24 +89,35 @@
       top: 60px;
       right: 0;
       width: 200px;
-      border-radius: 0 0 0 10px;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
       animation: slideDown 0.3s ease forwards;
     }
     .navbar-links-mobile a {
       padding: 15px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .navbar-links-mobile a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--accent);
     }
 
     @keyframes slideDown {
-      from {opacity: 0; transform: translateY(-20px);}
+      from {opacity: 0; transform: translateY(-10px);}
       to {opacity: 1; transform: translateY(0);}
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .navbar-links { display: none; }
-      .burger { display: flex; }
-      .navbar-links-mobile { display: flex; }
+      .navbar-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
     }
 
     /* Konfirmasi Section */
@@ -236,13 +237,13 @@
       <a href="berita.html">Berita</a>
       <a href="shop.html">Shop</a>
     </div>
-    <div class="burger" onclick="toggleMenu(this)">
+    <div class="hamburger" onclick="toggleMenu(this)">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </div>
-  <div id="mobileMenu" class="navbar-links-mobile" style="display:none;">
+  <div class="navbar-links-mobile" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="berita.html">Berita</a>
     <a href="shop.html">Shop</a>
@@ -284,8 +285,8 @@
   </footer>
 
   <script>
-    function toggleMenu(burger) {
-      burger.classList.toggle("active");
+    function toggleMenu(x) {
+      x.classList.toggle("change");
       const menu = document.getElementById("mobileMenu");
       if (menu.style.display === "flex") {
         menu.style.display = "none";
