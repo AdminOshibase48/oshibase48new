@@ -37,6 +37,7 @@
       background: rgba(0,0,0,0.2);
       position: sticky;
       top: 0;
+      z-index: 1000;
     }
     .navbar .brand {
       display: flex;
@@ -52,14 +53,70 @@
       font-weight: 600;
       margin: 0;
     }
-    .navbar a {
+    .navbar-links {
+      display: flex;
+      gap: 20px;
+    }
+    .navbar-links a {
       color: var(--vanilla-cream);
-      margin-left: 20px;
       text-decoration: none;
       transition: 0.3s;
     }
-    .navbar a:hover {
+    .navbar-links a:hover {
       color: var(--accent);
+    }
+
+    /* Burger button */
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .burger span {
+      width: 25px;
+      height: 3px;
+      background: var(--vanilla-cream);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Mobile menu */
+    .navbar-links-mobile {
+      display: none;
+      flex-direction: column;
+      background: rgba(0,0,0,0.9);
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 200px;
+      border-radius: 0 0 0 10px;
+      animation: slideDown 0.3s ease forwards;
+    }
+    .navbar-links-mobile a {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @keyframes slideDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .burger { display: flex; }
+      .navbar-links-mobile { display: flex; }
     }
 
     /* Konfirmasi Section */
@@ -174,11 +231,21 @@
       <img src="img/logo.svg" alt="Oshibase48 Logo">
       <h1>Oshibase48</h1>
     </div>
-    <div>
+    <div class="navbar-links">
       <a href="index.html">Home</a>
       <a href="berita.html">Berita</a>
       <a href="shop.html">Shop</a>
     </div>
+    <div class="burger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div id="mobileMenu" class="navbar-links-mobile" style="display:none;">
+    <a href="index.html">Home</a>
+    <a href="berita.html">Berita</a>
+    <a href="shop.html">Shop</a>
   </div>
 
   <!-- Konfirmasi -->
@@ -215,6 +282,18 @@
       <a href="#">X (Twitter)</a>
     </div>
   </footer>
+
+  <script>
+    function toggleMenu(burger) {
+      burger.classList.toggle("active");
+      const menu = document.getElementById("mobileMenu");
+      if (menu.style.display === "flex") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "flex";
+      }
+    }
+  </script>
 
 </body>
 </html>
