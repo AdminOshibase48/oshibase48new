@@ -86,14 +86,15 @@
     .navbar-links-mobile {
       display: none;
       flex-direction: column;
-      background: rgba(0,0,0,0.9);
+      background: var(--midnight-indigo);
       position: absolute;
       top: 60px;
       right: 0;
-      width: 200px;
+      width: 220px;
       border-radius: 0 0 8px 8px;
       overflow: hidden;
       animation: slideDown 0.3s ease forwards;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     }
     .navbar-links-mobile a {
       padding: 15px;
@@ -104,7 +105,7 @@
       transition: 0.3s;
     }
     .navbar-links-mobile a:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       color: var(--accent);
     }
 
@@ -241,7 +242,7 @@
       <a href="berita.html">Berita</a>
       <a href="galeri.html">Galeri</a>
       <a href="jadwal.html">Jadwal</a>
-      <a href="shop.html">shop</a>
+      <a href="shop.html">Shop</a>
       <a href="minigames.html">Minigames</a>
     </div>
     <div class="hamburger" onclick="toggleMenu(this)">
@@ -251,9 +252,13 @@
     </div>
   </div>
   <div class="navbar-links-mobile" id="mobileMenu">
-    <a href="index.html">Home</a>
+    <a href="#home">Home</a>
+    <a href="#tentang">Tentang</a>
     <a href="berita.html">Berita</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="jadwal.html">Jadwal</a>
     <a href="shop.html">Shop</a>
+    <a href="minigames.html">Minigames</a>
   </div>
 
   <!-- Konfirmasi -->
