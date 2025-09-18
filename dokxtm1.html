@@ -19,45 +19,55 @@
       overflow-x: hidden;
     }
 
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(6px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      /* NAVBAR */
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:0 20px;
+      background:#1e2540;
+      z-index:1200;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+      animation:slideDown .6s ease-out;
+    }
+    .logo{display:flex;align-items:center;gap:10px;font-weight:600}
+    .logo img{height:34px; width:auto; display:block}
+
+    .nav-right{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:nowrap; /* penting: jangan pecah baris */
+      overflow:hidden;  /* jika sempit, sembunyikan yang kelebihan */
+    }
+    .nav-right a{
+      color:var(--vanilla-cream);
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 8px;
+      white-space:nowrap;
+      font-size:0.95rem;
+      display:inline-block;
+    }
+    .nav-right a.active{color:#f5d38c}
+    .nav-right a:hover{color:#f5b860}
+
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:0;
+      color:var(--vanilla-cream);
+      font-size:24px;
+      cursor:pointer;
     }
 
-    nav .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    nav .logo img {
-      height: 40px;
-    }
-
-    nav .logo span {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    nav .menu a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: var(--vanilla-cream);
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    nav .menu a:hover {
-      color: #ffcc70;
-    }
+    @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 
     /* Hero */
     header {
