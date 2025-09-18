@@ -19,221 +19,151 @@
       overflow-x: hidden;
     }
 
-      /* NAVBAR */
-    .navbar{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:64px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      padding:0 20px;
-      background:#1e2540;
-      z-index:1200;
-      box-shadow:0 2px 8px rgba(0,0,0,0.2);
-      animation:slideDown .6s ease-out;
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 20px;
+      background: #1e2540;
+      z-index: 1200;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      animation: slideDown .6s ease-out;
     }
-    .logo{display:flex;align-items:center;gap:10px;font-weight:600}
-    .logo img{height:34px; width:auto; display:block}
-
-    .nav-right{
-      margin-left:auto;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:nowrap; /* penting: jangan pecah baris */
-      overflow:hidden;  /* jika sempit, sembunyikan yang kelebihan */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
     }
-    .nav-right a{
-      color:var(--vanilla-cream);
-      text-decoration:none;
-      font-weight:600;
-      padding:6px 8px;
-      white-space:nowrap;
-      font-size:0.95rem;
-      display:inline-block;
+    .logo img {height: 34px; width: auto;}
+
+    .menu {
+      margin-left: auto;
+      display: flex;
+      gap: 14px;
+      align-items: center;
     }
-    .nav-right a.active{color:#f5d38c}
-    .nav-right a:hover{color:#f5b860}
+    .menu a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 8px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .menu a:hover {color: #f5b860;}
 
-    .menu-toggle{
-      display:none;
-      background:none;
-      border:0;
-      color:var(--vanilla-cream);
-      font-size:24px;
-      cursor:pointer;
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--vanilla-cream);
+      font-size: 26px;
+      cursor: pointer;
+      margin-left: auto;
     }
 
-    @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+    @keyframes slideDown {
+      from {transform: translateY(-100%); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
 
-    /* Hero */
+    /* HERO */
     header {
       text-align: center;
-      padding: 100px 20px;
+      padding: 110px 20px 80px;
     }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      animation: fadeIn 2.5s ease;
-    }
-
+    header h1 {font-size: 2.2rem; margin-bottom: 20px;}
+    header p {font-size: 1.1rem; margin-bottom: 25px;}
     header a {
       background: #ffcc70;
-      padding: 12px 24px;
-      border-radius: 30px;
+      padding: 10px 20px;
+      border-radius: 25px;
       text-decoration: none;
       color: #242D4C;
       font-weight: bold;
       transition: 0.3s;
-      animation: fadeIn 3s ease;
     }
+    header a:hover {background: #ffd891;}
 
-    header a:hover {
-      background: #ffd891;
-    }
-
-    /* Partnership Section */
+    /* PARTNERSHIP */
     .partnership {
-      padding: 60px 20px;
+      padding: 50px 20px;
       text-align: center;
     }
-
     .partnership h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
     }
-
     .logos {
       display: flex;
-      gap: 60px;
+      gap: 40px;
       justify-content: center;
       align-items: center;
-      animation: slideLogos 20s linear infinite;
+      flex-wrap: wrap;
     }
-
     .logos img {
-      height: 80px;
+      height: 70px;
       width: auto;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
     }
 
-    .logos img:nth-child(1) { animation-delay: 0.2s; }
-    .logos img:nth-child(2) { animation-delay: 0.4s; }
-    .logos img:nth-child(3) { animation-delay: 0.6s; }
-    .logos img:nth-child(4) { animation-delay: 0.8s; }
-    .logos img:nth-child(5) { animation-delay: 1s; }
-
-    @keyframes slideLogos {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Footer */
+    /* FOOTER */
     footer {
       text-align: center;
-      padding: 40px 20px;
+      padding: 35px 20px;
       background: rgba(0,0,0,0.4);
-      margin-top: 60px;
+      margin-top: 50px;
     }
+    footer img {height: 45px; margin-bottom: 8px;}
+    footer p {margin: 4px 0;}
 
-    footer img {
-      height: 50px;
-      margin-bottom: 10px;
-    }
-
-    footer p {
-      margin: 5px 0;
-    }
-
-    /* Mobile */
+    /* MOBILE NAV */
     @media (max-width: 768px) {
-      nav {
+      .menu { 
+        position: fixed;
+        top: 64px;
+        right: 0;
         flex-direction: column;
-        gap: 10px;
+        background: #182033;
+        width: 220px;
+        transform: translateX(110%);
+        transition: transform .3s ease;
+        padding: 12px;
+        border-radius: 8px 0 0 8px;
+        box-shadow: -6px 6px 15px rgba(0,0,0,0.4);
       }
-
-      .menu {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
       .menu a {
-        margin: 8px;
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        text-align: left;
       }
+      .menu.active {transform: translateX(0);}
+      .menu-toggle {display: block;}
+      .logo img {height: 30px;}
+      .logos img {height: 55px;}
+    }
 
-      .logos {
-        animation: none;
-        flex-wrap: wrap;
-        gap: 30px;
-        justify-content: center;
-      }
-
-      .logos img {
-        height: 60px;
-        animation: fadeIn 1.5s ease forwards;
-      }
+    @media (max-width: 420px) {
+      header h1 {font-size: 1.6rem;}
+      header p {font-size: 1rem;}
+      .logos {gap: 20px;}
+      .logos img {height: 45px;}
     }
   </style>
 </head>
 <body>
-    /* RESPONSIVE */
-    @media (max-width: 768px){
-      .menu-toggle{display:block}
-      .nav-right{
-        position:fixed;
-        top:64px;
-        right:12px;
-        width:220px;
-        max-width:72%;
-        background:#182033;
-        flex-direction:column;
-        gap:8px;
-        padding:10px;
-        border-radius:8px;
-        box-shadow:0 12px 30px rgba(0,0,0,.45);
-        transform:translateX(110%);
-        transition:transform .28s ease;
-        z-index:1300;
-      }
-      .nav-right.active{transform:translateX(0)}
-      .nav-right a{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);width:100%}
-      .logo img{height:30px}
-      .logo-track img{height:50px}
-      .berita-section{padding-top:110px}
-    }
-
-    /* tiny screens */
-    @media (max-width:420px){
-      .nav-right{width:200px}
-      .logo-track{gap:18px}
-      .berita-section h2{font-size:1.6rem}
-    }
-  </style>
-</head>
-<body>
-
   <!-- Navbar -->
   <nav>
     <div class="logo">
       <img src="img/logo.svg" alt="Logo">
       <span>Oshibase48</span>
     </div>
+    <button class="menu-toggle">☰</button>
     <div class="menu">
       <a href="#home">Home</a>
       <a href="#tentang">Tentang</a>
@@ -247,7 +177,7 @@
 
   <!-- Hero -->
   <header id="home">
-    <h1>404 Maaf Server Terjadi Maintenance </h1>
+    <h1>404 Maaf Server Terjadi Maintenance</h1>
     <p>Klik tombol di bawah untuk menuju ke drive dokumentasi resmi.</p>
     <a href="#" target="_blank">Lanjut ke Dokumentasi yawww</a>
   </header>
@@ -271,42 +201,23 @@
     <p>Komunitas fans idol penuh semangat dan solidaritas</p>
     <p>&copy; 2025 Oshibase48. All Rights Reserved.</p>
   </footer>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Script Toggle Navbar -->
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      AOS.init();
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
 
-      const toggle = document.querySelector('.menu-toggle');
-      const nav = document.querySelector('.nav-right');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      toggle.textContent = menu.classList.contains('active') ? '✕' : '☰';
+    });
 
-      // Toggle open/close + change icon
-      toggle.addEventListener('click', function(e){
-        nav.classList.toggle('active');
-        toggle.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
-      });
-
-      // Klik di luar => tutup (hanya di mobile)
-      document.addEventListener('click', function(e){
-        if (window.innerWidth <= 768) {
-          if (!e.target.closest('.nav-right') && !e.target.closest('.menu-toggle')) {
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              toggle.innerHTML = '☰';
-            }
-          }
-        }
-      });
-
-      // Resize: pastikan state bersih saat berpindah ke desktop
-      window.addEventListener('resize', function(){
-        if (window.innerWidth > 768) {
-          nav.classList.remove('active');
-          toggle.innerHTML = '☰';
-        }
-      });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.menu') && !e.target.closest('.menu-toggle')) {
+        menu.classList.remove('active');
+        toggle.textContent = '☰';
+      }
     });
   </script>
 </body>
 </html>
-
-
