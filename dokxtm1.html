@@ -192,6 +192,42 @@
   </style>
 </head>
 <body>
+    /* RESPONSIVE */
+    @media (max-width: 768px){
+      .menu-toggle{display:block}
+      .nav-right{
+        position:fixed;
+        top:64px;
+        right:12px;
+        width:220px;
+        max-width:72%;
+        background:#182033;
+        flex-direction:column;
+        gap:8px;
+        padding:10px;
+        border-radius:8px;
+        box-shadow:0 12px 30px rgba(0,0,0,.45);
+        transform:translateX(110%);
+        transition:transform .28s ease;
+        z-index:1300;
+      }
+      .nav-right.active{transform:translateX(0)}
+      .nav-right a{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);width:100%}
+      .logo img{height:30px}
+      .logo-track img{height:50px}
+      .berita-section{padding-top:110px}
+    }
+
+    /* tiny screens */
+    @media (max-width:420px){
+      .nav-right{width:200px}
+      .logo-track{gap:18px}
+      .berita-section h2{font-size:1.6rem}
+    }
+  </style>
+</head>
+<body>
+
   <!-- Navbar -->
   <nav>
     <div class="logo">
