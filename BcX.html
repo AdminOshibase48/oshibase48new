@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XTm1| Oshibase48</title>
+  <link rel="icon" href="img/logo.svg" type="image/png">
+  <style>
+    :root {
+      --midnight-indigo: #242D4C;
+      --vanilla-cream: #F1EAD8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--midnight-indigo);
+      color: var(--vanilla-cream);
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 20px;
+      background: #1e2540;
+      z-index: 1200;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      animation: slideDown .6s ease-out;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .logo img {height: 34px; width: auto;}
+
+    .menu {
+      margin-left: auto;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .menu a {
+      color: var(--vanilla-cream);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 8px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .menu a:hover {color: #f5b860;}
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--vanilla-cream);
+      font-size: 26px;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    @keyframes slideDown {
+      from {transform: translateY(-100%); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    /* HERO */
+    header {
+      text-align: center;
+      padding: 110px 20px 80px;
+    }
+    header h1 {font-size: 2.2rem; margin-bottom: 20px;}
+    header p {font-size: 1.1rem; margin-bottom: 25px;}
+    header a {
+      background: #ffcc70;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #242D4C;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header a:hover {background: #ffd891;}
+
+    /* PARTNERSHIP */
+    .partnership {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .partnership h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+    .logos {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logos img {
+      height: 70px;
+      width: auto;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      background: rgba(0,0,0,0.4);
+      margin-top: 50px;
+    }
+    footer img {height: 45px; margin-bottom: 8px;}
+    footer p {margin: 4px 0;}
+
+    /* MOBILE NAV */
+    @media (max-width: 768px) {
+      .menu { 
+        position: fixed;
+        top: 64px;
+        right: 0;
+        flex-direction: column;
+        background: #182033;
+        width: 220px;
+        transform: translateX(110%);
+        transition: transform .3s ease;
+        padding: 12px;
+        border-radius: 8px 0 0 8px;
+        box-shadow: -6px 6px 15px rgba(0,0,0,0.4);
+      }
+      .menu a {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        text-align: left;
+      }
+      .menu.active {transform: translateX(0);}
+      .menu-toggle {display: block;}
+      .logo img {height: 30px;}
+      .logos img {height: 55px;}
+    }
+
+    @media (max-width: 420px) {
+      header h1 {font-size: 1.6rem;}
+      header p {font-size: 1rem;}
+      .logos {gap: 20px;}
+      .logos img {height: 45px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="img/logo.svg" alt="Logo">
+      <span>Oshibase48</span>
+    </div>
+    <button class="menu-toggle">☰</button>
+    <div class="menu">
+      <a href="index">Home</a>
+      <a href="index#tentang">Tentang</a>
+      <a href="berita.html">Berita</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="shop.html">Shop</a>
+      <a href="minigames.html">Minigames</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home">
+    <h1> Apakah Ingin Melanjutkan ke Drive Dokumentasi Brodcasting X?</h1>
+    <p>Klik tombol di bawah untuk menuju ke drive dokumentasi resmi.</p>
+    <a href="https://drive.google.com/drive/folders/1dSBDlmCbYQ7xl5iXPVdx8uOolXWSBRtD?usp=sharing" target="_blank">Lanjut ke Dokumentasi yaw</a>
+  </header>
+
+  <!-- Partnership -->
+  <section class="partnership">
+    <h2>Partnership</h2>
+    <div class="logos">
+      <img src="img/logo.svg" alt="Partner 1">
+      <img src="img/logo.svg" alt="Partner 2">
+      <img src="img/Sp2.png" alt="Partner 3">
+      <img src="img/Sp3.jpg" alt="Partner 4">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <img src="img/logo.svg" alt="Logo">
+    <p>Oshibase48</p>
+    <p>Komunitas fans idol penuh semangat dan solidaritas</p>
+    <p>&copy; 2025 Oshibase48. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Script Toggle Navbar -->
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      toggle.textContent = menu.classList.contains('active') ? '✕' : '☰';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.menu') && !e.target.closest('.menu-toggle')) {
+        menu.classList.remove('active');
+        toggle.textContent = '☰';
+      }
+    });
+  </script>
+</body>
+</html>
