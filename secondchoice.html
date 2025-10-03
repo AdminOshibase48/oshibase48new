@@ -103,12 +103,75 @@
       display: flex;
       gap: 40px;
       justify-content: center;
-      align-items: center;
+        align-items: center;
       flex-wrap: wrap;
     }
     .logos img {
       height: 70px;
       width: auto;
+    }
+
+    /* MUSIC PLAYER */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(30, 37, 64, 0.9);
+      padding: 15px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .music-btn {
+      background: #ffcc70;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #242D4C;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .music-btn:hover {
+      background: #ffd891;
+      transform: scale(1.1);
+    }
+
+    .music-info {
+      font-size: 0.8rem;
+      max-width: 150px;
+      text-align: center;
+    }
+
+    .music-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .music-artist {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    .volume-control {
+      width: 80px;
     }
 
     /* FOOTER */
@@ -146,6 +209,18 @@
       .menu-toggle {display: block;}
       .logo img {height: 30px;}
       .logos img {height: 55px;}
+      
+      .music-player {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        border-radius: 25px;
+        justify-content: center;
+      }
+      
+      .music-info {
+        max-width: 100px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -153,6 +228,17 @@
       header p {font-size: 1rem;}
       .logos {gap: 20px;}
       .logos img {height: 45px;}
+      
+      .music-player {
+        padding: 10px;
+        gap: 8px;
+      }
+      
+      .music-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -177,7 +263,7 @@
 
   <!-- Hero -->
   <header id="home">
-    <h1> Apakah Ingin Melanjutkan ke Drive Sono Nohh Pada kagak sabar apa</h1>
+    <h1>Apakah Ingin Melanjutkan ke Drive Sono Nohh Pada kagak sabar apa</h1>
     <p>Klik tombol di bawah untuk menuju ke drive dokumentasi resmi.</p>
     <a href="https://drive.google.com/drive/folders/1WKmmAKFkK4fGmPWB7Eh6yYWSMsbi8oZP?usp=sharing" target="_blank">Lanjut ke drive aja sono</a>
   </header>
@@ -201,8 +287,73 @@
     <p>&copy; 2025 Oshibase48. All Rights Reserved.</p>
   </footer>
 
-  <!-- Script Toggle Navbar -->
+  <!-- Music Player -->
+  <div class="music-player">
+    <div class="music-info">
+      <div class="music-title">elevision / So Far So Good </div>
+      <div class="music-artist">Rex Orange County</div>
+    </div>
+    <div class="music-controls">
+      <button class="music-btn" id="prevBtn">⏮</button>
+      <button class="music-btn" id="playPauseBtn">⏸</button>
+      <button class="music-btn" id="nextBtn">⏭</button>
+    </div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="bgMusic" loop>
+    <source src="sound/tvbgm.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung elemen audio.
+  </audio>
+
   <script>
+    // Music Player Functionality
+    const audio = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    // Play music automatically when page loads (with user interaction)
+    document.addEventListener('click', function initAudio() {
+      audio.play().catch(e => {
+        console.log('Autoplay prevented:', e);
+      });
+      document.removeEventListener('click', initAudio);
+    }, { once: true });
+
+    // Play/Pause functionality
+    playPauseBtn.addEventListener('click', function() {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.innerHTML = '⏸';
+      } else {
+        audio.pause();
+        playPauseBtn.innerHTML = '▶';
+      }
+    });
+
+    // Update button text when audio ends
+    audio.addEventListener('ended', function() {
+      playPauseBtn.innerHTML = '▶';
+    });
+
+    // Simple next/previous functionality (you can add more songs later)
+    let currentSong = 0;
+    
+    nextBtn.addEventListener('click', function() {
+      playPauseBtn.innerHTML = '⏸';
+      // For now, just restart current song as example
+      audio.currentTime = 0;
+      audio.play();
+    });
+    
+    prevBtn.addEventListener('click', function() {
+      playPauseBtn.innerHTML = '⏸';
+      audio.currentTime = 0;
+      audio.play();
+    });
+
+    // Navbar Toggle
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
 
