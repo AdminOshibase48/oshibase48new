@@ -170,8 +170,10 @@
       opacity: 0.8;
     }
 
-    .volume-control {
-      width: 80px;
+    .song-progress {
+      font-size: 0.6rem;
+      opacity: 0.7;
+      margin-top: 2px;
     }
 
     /* FOOTER */
@@ -290,8 +292,9 @@
   <!-- Music Player -->
   <div class="music-player">
     <div class="music-info">
-      <div class="music-title">elevision / So Far So Good </div>
-      <div class="music-artist">Rex Orange County</div>
+      <div class="music-title" id="songTitle">Television / So Far So Good</div>
+      <div class="music-artist" id="songArtist">Rex Orange County</div>
+      <div class="song-progress" id="songProgress">1/2</div>
     </div>
     <div class="music-controls">
       <button class="music-btn" id="prevBtn">⏮</button>
@@ -301,10 +304,7 @@
   </div>
 
   <!-- Audio Element -->
-  <audio id="bgMusic" loop>
-    <source src="assets/sound/tvbgm.mp3" type="audio/mpeg">
-    Browser Anda tidak mendukung elemen audio.
-  </audio>
+  <audio id="bgMusic"></audio>
 
   <script>
     // Music Player Functionality
@@ -312,10 +312,74 @@
     const playPauseBtn = document.getElementById('playPauseBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    
+    const songTitle = document.getElementById('songTitle');
+    const songArtist = document.getElementById('songArtist');
+    const songProgress = document.getElementById('songProgress');
+
+    // Daftar lagu
+    const songs = [
+      {
+        title: "Television / So Far So Good",
+        artist: "Rex Orange County",
+        src: "assets/sound/tvbgm.mp3"
+      },
+      {
+        title: "Untitled",
+        artist: "Rex Orange County",
+        src: "assets/sound/untiled.mp3" // Ganti dengan path lagu kedua kamu
+      }
+    ];
+
+    let currentSongIndex = 0;
+    let isPlaying = false;
+
+    // Load lagu pertama
+    function loadSong(index) {
+      const song = songs[index];
+      audio.src = song.src;
+      songTitle.textContent = song.title;
+      songArtist.textContent = song.artist;
+      songProgress.textContent = `${index + 1}/${songs.length}`;
+    }
+
+    // Play music
+    function playSong() {
+      audio.play();
+      isPlaying = true;
+      playPauseBtn.innerHTML = '⏸';
+    }
+
+    // Pause music
+    function pauseSong() {
+      audio.pause();
+      isPlaying = false;
+      playPauseBtn.innerHTML = '▶';
+    }
+
+    // Next song
+    function nextSong() {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      if (isPlaying) {
+        playSong();
+      }
+    }
+
+    // Previous song
+    function prevSong() {
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      loadSong(currentSongIndex);
+      if (isPlaying) {
+        playSong();
+      }
+    }
+
+    // Initialize
+    loadSong(currentSongIndex);
+
     // Play music automatically when page loads (with user interaction)
     document.addEventListener('click', function initAudio() {
-      audio.play().catch(e => {
+      playSong().catch(e => {
         console.log('Autoplay prevented:', e);
       });
       document.removeEventListener('click', initAudio);
@@ -323,35 +387,19 @@
 
     // Play/Pause functionality
     playPauseBtn.addEventListener('click', function() {
-      if (audio.paused) {
-        audio.play();
-        playPauseBtn.innerHTML = '⏸';
+      if (isPlaying) {
+        pauseSong();
       } else {
-        audio.pause();
-        playPauseBtn.innerHTML = '▶';
+        playSong();
       }
     });
 
-    // Update button text when audio ends
-    audio.addEventListener('ended', function() {
-      playPauseBtn.innerHTML = '▶';
-    });
+    // Next/Previous buttons
+    nextBtn.addEventListener('click', nextSong);
+    prevBtn.addEventListener('click', prevSong);
 
-    // Simple next/previous functionality (you can add more songs later)
-    let currentSong = 0;
-    
-    nextBtn.addEventListener('click', function() {
-      playPauseBtn.innerHTML = '⏸';
-      // For now, just restart current song as example
-      audio.currentTime = 0;
-      audio.play();
-    });
-    
-    prevBtn.addEventListener('click', function() {
-      playPauseBtn.innerHTML = '⏸';
-      audio.currentTime = 0;
-      audio.play();
-    });
+    // Auto play next song when current ends
+    audio.addEventListener('ended', nextSong);
 
     // Navbar Toggle
     const toggle = document.querySelector('.menu-toggle');
